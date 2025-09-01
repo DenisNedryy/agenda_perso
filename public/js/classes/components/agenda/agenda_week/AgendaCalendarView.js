@@ -71,10 +71,14 @@ export class AgendaCalendarView {
                             headerAvatar.setAttribute("src", `${HOST}/api/images/avatars/${data[index].tasksByDay[i].author_img_url}`);
                             taskHeader.appendChild(headerAvatar);
                         }
-                        const headerSubject = document.createElement("img");
-                        headerSubject.className="agendaTask__header__headerSubject";
-                        headerSubject.src = `/public/assets/images/subjects/js.png`;
-                        taskHeader.appendChild(headerSubject);
+                        // console.log(data[index].tasksByDay[i].subject); 
+                        if (data[index].tasksByDay[i].subject !== "unspecified") {
+                            const headerSubject = document.createElement("img");
+                            headerSubject.className = "agendaTask__header__headerSubject";
+                            headerSubject.src = `/public/assets/images/subjects/${data[index].tasksByDay[i].subject}.png`;
+                            taskHeader.appendChild(headerSubject);
+                        }
+
                         const taskBody = document.createElement("div");
                         taskBody.className = "agendaTask__body";
                         taskBody.textContent = data[index].tasksByDay[i].name;

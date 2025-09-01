@@ -90,6 +90,7 @@ export class CalendarModel {
                         author_id: task.author_id || null,
                         owner_id: task.owner_id || null,
                         type: task.type,
+                        subject: task.subject,
                         name: task.name,
                         description: task.description,
                         date,
@@ -162,6 +163,10 @@ export class CalendarModel {
 
     getBgColor(type) {
         switch (type) {
+            case 'spaced_repetition':
+                return 'bgTasks';
+                break;
+
             case 'tasks':
                 return 'bgTasks';
                 break;

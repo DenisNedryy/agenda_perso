@@ -204,12 +204,15 @@
 }
 
 .agendaTask__header__avatar {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     position: absolute;
     border-radius: 50%;
-    top: -7px;
+    top: -14px;
     left: 47px;
+    border: 1px solid white;
+    padding: 1px;
+    background-color: white;
 }
 
 .dayFiche ul li:first-child {
@@ -304,8 +307,8 @@
 
 
 /* addModal */
-.hidden{
-    display:none!important;
+.hidden {
+    display: none !important;
 }
 
 

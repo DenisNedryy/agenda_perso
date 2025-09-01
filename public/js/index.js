@@ -25,7 +25,6 @@ import { SEOManager } from "./classes/core/SEOManager.js";
 // models
 import { AuthModel } from "./classes/models/AuthModel.js";
 import { PlanningModel } from "./classes/models/agenda/PlanningModel.js";
-import { AgendaWeek } from "./classes/models/AgendaWeek.js";
 import { AgendaYear } from "./classes/models/AgendaYear.js";
 import { TaskModel } from "./classes/models/agenda/TaskModel.js";
 import { DateModel } from "./classes/models/agenda/DateModel.js";
@@ -106,8 +105,6 @@ const agendaCalendarView = new AgendaCalendarView(dateModel);
 
 const yearView = new YearView();
 const planningView = new PlanningView();
-const agendaWeek = new AgendaWeek(dateModel, birthDaysServices);
-const agendaYearModel = new AgendaYear(dateModel);
 
 // eventBinders instances
 const agendaEventBinder = new AgendaEventBinder();

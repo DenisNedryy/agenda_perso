@@ -44,6 +44,7 @@ export class AddModelView {
       <div class="subjectContainer hidden">
         <label for="subjectSelect">Subject</label>
         <select id="subjectSelect" name="subject">
+        <option value="" disabled selected hidden>Select a subject</option>
           <option value="english">English</option>
           <option value="js">Js</option>
           <option value="nodejs">NodeJs</option>

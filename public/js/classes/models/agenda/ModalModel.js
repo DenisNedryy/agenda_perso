@@ -20,7 +20,6 @@ export class ModalModel {
             date: date,
             owner_id: userIdSelected
         };
-        console.log(task);
         // check if auth!==current 
         if (auth.id !== userIdSelected) {
             task.author_id = auth.id;

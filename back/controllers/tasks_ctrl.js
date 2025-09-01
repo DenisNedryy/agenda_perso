@@ -83,8 +83,6 @@ exports.createTask = async (req, res, next) => {
             author_img_url: author_img_url
         }
 
-        console.log(data);
-
         data.user_id = owner_id;
 
         const keys = Object.keys(data).filter((key) => data[key] !== null);
