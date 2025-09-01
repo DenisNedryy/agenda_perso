@@ -70,17 +70,20 @@ exports.readTasksByAuth = async (req, res, next) => {
 
 exports.createTask = async (req, res, next) => {
     try {
-        const { name, description, date, type, author_id, owner_id, author_img_url } = req.body;
+        const { name, description, date, type, subject, author_id, owner_id, author_img_url } = req.body;
         const data = {
             id: uuidv4(),
             name: name || null,
             description: description || null,
             date: date || null,
             type: type || null,
+            subject: subject || null,
             author_id: author_id || null,
             owner_id: owner_id || null,
             author_img_url: author_img_url
         }
+
+        console.log(data);
 
         data.user_id = owner_id;
 

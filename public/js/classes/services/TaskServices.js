@@ -97,6 +97,7 @@ export class TaskServices {
                     description: data.description,
                     date: data.date,
                     type: data.type,
+                    subject: data.subject,
                     author_id: data.author_id || null,
                     owner_id: data.owner_id || null,
                     author_img_url: data.author_img_url || null

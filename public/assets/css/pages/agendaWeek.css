@@ -303,7 +303,10 @@
 }
 
 
-
+/* addModal */
+.hidden{
+    display:none!important;
+}
 
 
 

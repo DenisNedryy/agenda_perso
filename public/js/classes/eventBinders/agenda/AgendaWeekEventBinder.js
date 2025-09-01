@@ -5,6 +5,7 @@ export class AgendaWeekEventBinder {
 
     constructor() {
         this.boundHandleClickTask = this.handleClickTask.bind(this);
+        this.boundHandleChangeTask = this.handleChangeTask.bind(this);
     }
 
     setController(controller) {
@@ -14,6 +15,22 @@ export class AgendaWeekEventBinder {
     addEventListeners() {
         document.removeEventListener('click', this.boundHandleClickTask);
         document.addEventListener('click', this.boundHandleClickTask);
+        document.removeEventListener('change', this.boundHandleChangeTask);
+        document.addEventListener('change', this.boundHandleChangeTask);
+    }
+
+    async handleChangeTask(e) {
+        // toggle subject
+        const subContainer = document.querySelector(".subjectContainer");
+        const subSelect = document.getElementById("subjectSelect");
+        const typeSelect = document.getElementById("typeSelect");
+        const selectEl = e.target;
+        console.log(subSelect.value);
+        if (typeSelect.value === "spaced_repetition") {
+            subContainer.classList.remove("hidden");
+        } else {
+            subContainer.classList.add("hidden");
+        }
     }
 
     async handleClickTask(e) {
@@ -73,6 +90,8 @@ export class AgendaWeekEventBinder {
             modal.classList.remove("hidden");
         }
 
+
+
         else if (e.target.classList.contains("leaveModal")) {
             const modal = document.querySelector(".modalAddContainer .modal");
             modal.classList.add("hidden");
@@ -80,7 +99,7 @@ export class AgendaWeekEventBinder {
 
         else if (e.target.classList.contains("btn-submit-addTask")) {
             e.preventDefault();
-            const form = e.target.closest("form");
+            const form = e.target.closest("form"); 
             const userIdSelected = this.controller.authServices.userIdSelected;
             const auth = await this.controller.authServices.getAuth();
             const task = this.controller.modalModel.getTaskObj(form, userIdSelected, auth);

@@ -10,14 +10,17 @@ export class ModalModel {
         const name = form.elements['name'].value;
         const description = form.elements['description'].value;
         const type = form.elements['type'].value;
+        const subject = form.elements['subject'].value;
         form.reset();
         const task = {
             name: name || null,
             description: description || null,
             type: type || null,
+            subject: subject || null,
             date: date,
             owner_id: userIdSelected
         };
+        console.log(task);
         // check if auth!==current 
         if (auth.id !== userIdSelected) {
             task.author_id = auth.id;
