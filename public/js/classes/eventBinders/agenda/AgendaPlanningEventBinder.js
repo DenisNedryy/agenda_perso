@@ -89,12 +89,16 @@ export class AgendaPlanningEventBinder {
             const tasksByUser = await this.controller.agendaWeekModel.getTasksFiltered(auth, userSelected, tasks);
             const tasksByUserSorted = await this.controller.agendaPlanning.getPlanningProjets(tasksByUser);
             this.controller.planningView.render(tasksByUserSorted);
-            this.controller.planningView.renderAll(tasksByUserSorted);
+            this.controller.planningView.renderAll(tasksByUserSorted); 
             this.addEventListeners();
         }
 
-
-
+        // spaced_Repetition
+        if(e.target.classList.contains("btn-nextStep")){
+            const taskId = e.target.closest(".modalContent").getAttribute("data-id");
+            const res = await this.controller.spaceRepService.updateSpaceRepetition(taskId);
+            console.log(res);
+        }
     }
 
 

@@ -108,7 +108,7 @@ exports.createTask = async (req, res, next) => {
                 const arrayForSubject = [
                     data.id,
                     date,
-                    1
+                    0
                 ];
                 await pool.execute(`INSERT INTO spacedRepetitionCard (task_id, review_date, step) VALUES(?,?,?)`, arrayForSubject);
             } catch (err) {

@@ -15,6 +15,7 @@ import { UserServices } from "./classes/services/UserServices.js";
 import { TaskServices } from "./classes/services/TaskServices.js";
 import { AuthServices } from "./classes/services/AuthServices.js";
 import { BirthDaysServices } from "./classes/services/BirthDaysServices.js";
+import { SpaceRepService } from "./classes/services/SpaceRepService.js";
 
 // core
 import { NavHighLighter } from "./classes/core/NavHighLighter.js";
@@ -64,6 +65,7 @@ const userServices = new UserServices();
 const authServices = new AuthServices(userServices);
 const taskServices = new TaskServices();
 const birthDaysServices = new BirthDaysServices();
+const spaceRepService = new SpaceRepService();
 
 // models instances
 const dateModel = new DateModel();
@@ -141,7 +143,8 @@ const agendaModels = Object.freeze({
 const agendaServices = Object.freeze({
     authServices: authServices,
     taskServices: taskServices,
-    birthDaysServices: birthDaysServices
+    birthDaysServices: birthDaysServices,
+    spaceRepService: spaceRepService
 });
 
 const agendaEventBinders = Object.freeze({

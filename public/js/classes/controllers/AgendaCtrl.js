@@ -25,6 +25,7 @@ export class AgendaCtrl {
         this.authServices = agendaServices.authServices;
         this.taskServices = agendaServices.taskServices;
         this.birthDaysServices = agendaServices.birthDaysServices;
+        this.spaceRepService = agendaServices.spaceRepService;
 
         this.agendaEventBinder = agendaEventBinders.agendaEventBinder;
         this.agendaWeekEventBinder = agendaEventBinders.agendaWeekEventBinder;

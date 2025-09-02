@@ -103,32 +103,36 @@ export class DateModel {
 
     convertStep(step) {
         switch (step) {
-            case 1:
+            case 0:
                 return 1;
                 break;
 
-            case 2:
+            case 1:
                 return 3;
                 break;
 
-            case 3:
+            case 2:
                 return 7;
                 break;
 
-            case 4:
+            case 3:
                 return 15;
                 break;
 
-            case 5:
+            case 4:
                 return 30;
                 break;
 
-            case 6:
+            case 5:
                 return 90;
                 break;
 
-            case 7:
+            case 6:
                 return 180;
+                break;
+
+            case 7:
+                return 365;
                 break;
 
             case 8:
