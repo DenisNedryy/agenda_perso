@@ -26,14 +26,14 @@ export class FocusModalView {
                                   <p>${task.name} [${task.type}]</p>
                                   <p> ${day} ${this.dateModel.yearMonth[month - 1]} ${year}</p>             
                                 </div>
-                     </div>
+                            </div>
 
                   ${task.description ? `<div class="modalContent__body__description">
     <i class="fa-solid fa-bars"></i>
     <p>${task.description}</p>
 </div>` : ''}
 
-                     
+                     <div class="modalContent__body__spaceRepetition"></div>
                     </div>
                     <div class="modalContent__footer hidden">
                         <form>
@@ -61,5 +61,16 @@ export class FocusModalView {
                 </div>
               `;
         }
+        if(task.type==="spaced_repetition") this.renderSpaceRepetition(task);
+    }
+
+    renderSpaceRepetition(task){
+        console.log(task);
+        const el = document.querySelector(".modalContent__body__spaceRepetition");
+        el.innerHTML = `
+            <button class="btn-mini btn-nextStep">Next Step (${this.dateModel.convertStep(task.step)} jours)</button>
+            <button class="btn-mini btn-reviewTomorow">Review Tomorrow</button>
+            <button class="btn-mini btn-resetCard">Reset</button> 
+        `;
     }
 }

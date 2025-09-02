@@ -24,8 +24,6 @@ export class AgendaWeekEventBinder {
         const subContainer = document.querySelector(".subjectContainer");
         const subSelect = document.getElementById("subjectSelect");
         const typeSelect = document.getElementById("typeSelect");
-        const selectEl = e.target;
-        console.log(subSelect.value);
         if (typeSelect.value === "spaced_repetition") {
             subContainer.classList.remove("hidden");
         } else {
@@ -116,6 +114,7 @@ export class AgendaWeekEventBinder {
             if (taskId !== undefined && (!el.classList.contains("bgJaune") && !el.classList.contains("bgBlack")) && !el.classList.contains("bgBanksHollidays") && !el.classList.contains("birthDayBg")) {
                 const taskRes = await this.controller.taskServices.readOneTask(taskId);
                 const task = taskRes.data.tasks;
+                console.log(task);
                 this.controller.focusModalView.render(task);
                 document.querySelector(".modalFocus").classList.remove("hidden");
             }

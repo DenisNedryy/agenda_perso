@@ -20,7 +20,7 @@ export class CalendarModel {
         const currentMonth = this.dateModel.getFormatForNumbersWidhtZeroBefore(date.getMonth() + 1);
         const currentDay = this.dateModel.getFormatForNumbersWidhtZeroBefore(date.getDate());
 
-        const joursFeries = this.bankHolidays.getbankHolidays();
+        const joursFeries = this.bankHolidays.getbankHolidays(currentYear);
         const weeklySchedule = []; // agenda pour la semaine 
 
         for (let i = 0; i < 7; i++) {

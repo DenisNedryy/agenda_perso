@@ -44,35 +44,22 @@ export class AgendaCalendarView {
                     if (data[index].tasksByDay[i]) {
                         li.className = `${data[index].tasksByDay[i].bg} task`;
                         li.setAttribute("data-id", data[index].tasksByDay[i].id);
-                        // const para = document.createElement("p");
-                        // para.className = "taskPara";
-                        // para.textContent = data[index].tasksByDay[i].name;
-                        // if (data[index].tasksByDay[i].type === "birthDays") {
-                        //     // calcul de l'age + affichage
-                        //     const date = data[index].tasksByDay[i].date;
-                        //     const age = this.dateModel.calculAge(date, cell.dayInfo.year);
-                        //     para.innerHTML = `<p>Anniversaire</br>🥳🎂🎈🍾</br> ${data[index].tasksByDay[i].name} ${data[index].tasksByDay[i].last_name}</br> ${age} ans</p>`;
-                        //     li.className = `birthDayBg task`;
-                        // }
-                        // if (data[index].tasksByDay[i].author_id) {
-                        //     const img = document.createElement("img");
-                        //     img.className = "taskImg"
-                        //     img.setAttribute("src", `${HOST}/api/images/avatars/${data[index].tasksByDay[i].author_img_url}`);
-                        //     li.appendChild(img);
-                        // }
-                        // li.appendChild(para);
+
                         const task = document.createElement("div");
                         task.className = "agendaTask";
                         const taskHeader = document.createElement("div");
                         taskHeader.className = "agendaTask__header";
+
+                        // author
                         if (data[index].tasksByDay[i].author_id) {
                             const headerAvatar = document.createElement("img");
                             headerAvatar.className = "agendaTask__header__avatar"
                             headerAvatar.setAttribute("src", `${HOST}/api/images/avatars/${data[index].tasksByDay[i].author_img_url}`);
                             taskHeader.appendChild(headerAvatar);
                         }
-                        // console.log(data[index].tasksByDay[i].subject); 
-                        if (data[index].tasksByDay[i].subject !== "unspecified") {
+
+                        // subject
+                        if (data[index].tasksByDay[i].subject !== "unspecified" && data[index].tasksByDay[i].subject !== undefined) {
                             const headerSubject = document.createElement("img");
                             headerSubject.className = "agendaTask__header__headerSubject";
                             headerSubject.src = `/public/assets/images/subjects/${data[index].tasksByDay[i].subject}.png`;
@@ -81,12 +68,20 @@ export class AgendaCalendarView {
 
                         const taskBody = document.createElement("div");
                         taskBody.className = "agendaTask__body";
-                        taskBody.textContent = data[index].tasksByDay[i].name;
+
+                        // birthday
+                        if (data[index].tasksByDay[i].type === "birthDays") {
+                            // calcul de l'age + affichage
+                            const date = data[index].tasksByDay[i].date;
+                            const age = this.dateModel.calculAge(date, cell.dayInfo.year);
+                            taskBody.innerHTML = `<p>Anniversaire</br>🎈🎈🍾🍾🎈🎈</br> ${data[index].tasksByDay[i].name} ${data[index].tasksByDay[i].last_name}</br> ${age} ans</p>`;
+                            li.className = `birthDayBg task`;
+                        } else {
+                            taskBody.textContent = data[index].tasksByDay[i].name;
+                        }
 
                         const taskFooter = document.createElement("div");
                         taskFooter.className = "agendaTask__footer";
-
-
 
                         task.appendChild(taskHeader);
                         task.appendChild(taskBody);

@@ -49,7 +49,18 @@ exports.readOneTask = async (req, res, next) => {
         if (tasks.length === 0) {
             return res.status(200).json({ tasks: [] });
         }
-        return res.status(200).json({ tasks: tasks[0] });
+        const [spacedRepetitionAddOn] = await pool.execute('SELECT * FROM spacedRepetitionCard WHERE task_id = ?', [tasks[0].id])
+        const task = tasks[0];
+
+        const spaceRep = spacedRepetitionAddOn[0];
+
+        if (spacedRepetitionAddOn.length > 0) {
+            task.review_date = spaceRep.review_date;
+            task.step = spaceRep.step;
+        }
+
+
+        return res.status(200).json({ tasks: task });
     } catch (err) {
         return res.status(500).json({ err });
     }
@@ -71,6 +82,7 @@ exports.readTasksByAuth = async (req, res, next) => {
 exports.createTask = async (req, res, next) => {
     try {
         const { name, description, date, type, subject, author_id, owner_id, author_img_url } = req.body;
+
         const data = {
             id: uuidv4(),
             name: name || null,
@@ -90,6 +102,19 @@ exports.createTask = async (req, res, next) => {
         const placeholder = keys.map(() => "?").join(", ");
 
         await pool.execute(`INSERT INTO tasks (${keys.join(", ")}) VALUES(${placeholder})`, values);
+
+        if (subject) {
+            try {
+                const arrayForSubject = [
+                    data.id,
+                    date,
+                    1
+                ];
+                await pool.execute(`INSERT INTO spacedRepetitionCard (task_id, review_date, step) VALUES(?,?,?)`, arrayForSubject);
+            } catch (err) {
+                console.log(err);
+            }
+        };
         return res.status(200).json({ msg: "task created" })
 
     } catch (err) {

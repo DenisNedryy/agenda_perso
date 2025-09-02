@@ -9,6 +9,18 @@
     cursor: pointer;
 }
 
+.btn-mini {
+    padding: 5px;
+    border: none;
+    background-color: rgb(0, 95, 242);
+    border-radius: 3px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 5px;
+}
+
 .box {
     background-color: rgb(29, 29, 31);
     color: white;
