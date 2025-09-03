@@ -1,17 +1,24 @@
 export class PlanningView {
 
+    constructor(dateModel) {
+        this.dateModel = dateModel;
+    }
 
-    render(tasks) {
+
+    render(tasks, type = "all") {
         const el = document.querySelector(".agendaContent");
         if (el) {
             el.innerHTML = `
             <div class="tasksFilters">
-                <p class="taskFilter--all">All</p>
-                <p class="taskFilter--tasks">Tasks</p>
-                <p class="taskFilter--courses">Courses</p>
-                <p class="taskFilter--rdvs">Rdvs</p>
-                <p class="taskFilter--events">Events</p>
-                <p class="taskFilter--projects">Projects</p> 
+                <p class="taskFilter--all ${type === "all" ? 'taskFilter--active' : ''}">All</p>
+                <p class="taskFilter--tasks ${type === "tasks" ? 'taskFilter--active' : ''}">Tasks</p>
+                <p class="taskFilter--courses ${type === "courses" ? 'taskFilter--active' : ''}">Courses</p>
+                <p class="taskFilter--rdvs ${type === "rdvs" ? 'taskFilter--active' : ''}">Rdvs</p>
+                <p class="taskFilter--events ${type === "events" ? 'taskFilter--active' : ''}">Events</p>
+                <p class="taskFilter--projects ${type === "projects" ? 'taskFilter--active' : ''}">Projects</p> 
+                <p class="taskFilter--spacedRepetition ${type === "spacedRepetition" ? 'taskFilter--active' : ''}">Spaced repetition</p> 
+                <p class="taskFilter--alerts ${type === "alerts" ? 'taskFilter--active' : ''}">Alerts</p> 
+                <p class="taskFilter--dayOff ${type === "dayOff" ? 'taskFilter--active' : ''}">Days off</p> 
             </div>
             <div class="tasksKeys">
                   <p class="tasksKeys--type">Type</p>
@@ -24,6 +31,8 @@ export class PlanningView {
         }
 
     }
+
+
 
     renderAll(tasks) {
         const el = document.querySelector(".tasksContent");
@@ -54,9 +63,9 @@ export class PlanningView {
 
                 const taskDate = document.createElement("p");
                 taskDate.className = "task--date";
-                taskDate.textContent = tasks[i].date;
+                taskDate.textContent =this.dateModel.convertDateIntoBeautifulDate(tasks[i].date);
                 taskContainer.appendChild(taskDate);
-
+                
                 setTimeout(() => {
                     el.appendChild(taskContainer);
                 }, cpt);

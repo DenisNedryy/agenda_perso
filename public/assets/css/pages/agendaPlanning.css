@@ -76,3 +76,8 @@
     border-radius: 3px;
     text-align: center;
 }
+
+.taskFilter--active {
+    color: rgb(15, 76, 203);
+    border-bottom: 2px solid rgb(15, 76, 203);
+}

@@ -65,7 +65,6 @@ export class FocusModalView {
     }
 
     renderSpaceRepetition(task){
-        console.log(task);
         const el = document.querySelector(".modalContent__body__spaceRepetition");
         el.innerHTML = `
             <button class="btn-mini btn-nextStep">Next Step (${this.dateModel.convertStep(task.step)} jours)</button>

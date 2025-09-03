@@ -182,6 +182,8 @@
     height: 89px;
     font-size: 13px;
     position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* .dayFiche ul li img {
@@ -231,7 +233,8 @@
 /* === Thème personnalisé pour fond #121415 === */
 
 .birthDayBg {
-    background-color: #4D4AB0;;
+    background-color: #4D4AB0;
+    ;
     /* Pêche doux festif */
     color: #121415;
     cursor: pointer;

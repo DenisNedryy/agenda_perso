@@ -97,7 +97,7 @@ export class AgendaWeekEventBinder {
 
         else if (e.target.classList.contains("btn-submit-addTask")) {
             e.preventDefault();
-            const form = e.target.closest("form"); 
+            const form = e.target.closest("form");
             const userIdSelected = this.controller.authServices.userIdSelected;
             const auth = await this.controller.authServices.getAuth();
             const task = this.controller.modalModel.getTaskObj(form, userIdSelected, auth);
@@ -114,7 +114,6 @@ export class AgendaWeekEventBinder {
             if (taskId !== undefined && (!el.classList.contains("bgJaune") && !el.classList.contains("bgBlack")) && !el.classList.contains("bgBanksHollidays") && !el.classList.contains("birthDayBg")) {
                 const taskRes = await this.controller.taskServices.readOneTask(taskId);
                 const task = taskRes.data.tasks;
-                console.log(task);
                 this.controller.focusModalView.render(task);
                 document.querySelector(".modalFocus").classList.remove("hidden");
             }
@@ -148,17 +147,8 @@ export class AgendaWeekEventBinder {
             await this.controller.taskServices.updateTask(data, taskId);
             this.controller.show();
         }
+
         // focus modal 
-        // else if (e.target.classList.contains("task") || e.target.classList.contains("taskPara") || e.target.classList.contains("taskImg")) {
-        //     const el = e.target.closest(".task");
-        //     const taskId = el.getAttribute("data-id");
-        //     if (taskId !== undefined && (!el.classList.contains("bgJaune") && !el.classList.contains("bgBlack")) && !el.classList.contains("bgBanksHollidays") && !el.classList.contains("birthDayBg")) {
-        //         const taskRes = await this.controller.taskServices.readOneTask(taskId);
-        //         const task = taskRes.data.tasks;
-        //         this.controller.focusModalView.render(task);
-        //         document.querySelector(".modalFocus").classList.remove("hidden");
-        //     }
-        // }
         const taskEl = e.target.closest(".task");
         if (e.target.closest(".task")) {
             const taskId = taskEl.getAttribute("data-id");
@@ -168,6 +158,27 @@ export class AgendaWeekEventBinder {
                 this.controller.focusModalView.render(task);
                 document.querySelector(".modalFocus").classList.remove("hidden");
             }
+        }
+
+        // spaced_Repetition next step
+        if (e.target.classList.contains("btn-nextStep")) {
+            const taskId = e.target.closest(".modalContent").getAttribute("data-id");
+            const res = await this.controller.spaceRepService.updateSpaceRepetition(taskId);
+            this.controller.show();
+        }
+
+        // spaced_Repetition review Tomorow
+        if (e.target.classList.contains("btn-reviewTomorow")) {
+            const taskId = e.target.closest(".modalContent").getAttribute("data-id");
+            const res = await this.controller.spaceRepService.reviewTomorow(taskId);
+            this.controller.show();
+        }
+
+        // spaced_Repetition reset
+        if (e.target.classList.contains("btn-resetCard")) {
+            const taskId = e.target.closest(".modalContent").getAttribute("data-id");
+            const res = await this.controller.spaceRepService.reset(taskId);
+            this.controller.show();
         }
     }
 

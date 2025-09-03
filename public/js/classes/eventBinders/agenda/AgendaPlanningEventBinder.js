@@ -21,9 +21,9 @@ export class AgendaPlanningEventBinder {
             const userSelected = userSelectedRes.data.user;
             const tasksRes = await this.controller.taskServices.getTasks();
             const tasks = tasksRes.data.tasks;
-            const tasksByUser = await this.controller.agendaWeekModel.getTasksFiltered(auth, userSelected, tasks);
-            const tasksByUserSorted = await this.controller.agendaPlanning.getPlanningTasks(tasksByUser);
-            this.controller.planningView.render(tasksByUserSorted);
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanningTasks(tasksByUser);
+            this.controller.planningView.render(tasksByUserSorted, "tasks");
             this.controller.planningView.renderAll(tasksByUserSorted);
             this.addEventListeners();
         }
@@ -34,8 +34,8 @@ export class AgendaPlanningEventBinder {
             const userSelected = userSelectedRes.data.user;
             const tasksRes = await this.controller.taskServices.getTasks();
             const tasks = tasksRes.data.tasks;
-            const tasksByUser = await this.controller.agendaWeekModel.getTasksFiltered(auth, userSelected, tasks);
-            const tasksByUserSorted = await this.controller.agendaPlanning.getPlanning(tasksByUser);
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanning(tasksByUser);
             this.controller.planningView.render(tasksByUserSorted);
             this.controller.planningView.renderAll(tasksByUserSorted);
             this.addEventListeners();
@@ -47,9 +47,9 @@ export class AgendaPlanningEventBinder {
             const userSelected = userSelectedRes.data.user;
             const tasksRes = await this.controller.taskServices.getTasks();
             const tasks = tasksRes.data.tasks;
-            const tasksByUser = await this.controller.agendaWeekModel.getTasksFiltered(auth, userSelected, tasks);
-            const tasksByUserSorted = await this.controller.agendaPlanning.getPlanningCourses(tasksByUser);
-            this.controller.planningView.render(tasksByUserSorted);
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanningCourses(tasksByUser);
+            this.controller.planningView.render(tasksByUserSorted, "courses");
             this.controller.planningView.renderAll(tasksByUserSorted);
             this.addEventListeners();
         }
@@ -60,9 +60,9 @@ export class AgendaPlanningEventBinder {
             const userSelected = userSelectedRes.data.user;
             const tasksRes = await this.controller.taskServices.getTasks();
             const tasks = tasksRes.data.tasks;
-            const tasksByUser = await this.controller.agendaWeekModel.getTasksFiltered(auth, userSelected, tasks);
-            const tasksByUserSorted = await this.controller.agendaPlanning.getPlanningRdvs(tasksByUser);
-            this.controller.planningView.render(tasksByUserSorted);
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanningRdvs(tasksByUser);
+            this.controller.planningView.render(tasksByUserSorted, "rdvs");
             this.controller.planningView.renderAll(tasksByUserSorted);
             this.addEventListeners();
         }
@@ -73,9 +73,9 @@ export class AgendaPlanningEventBinder {
             const userSelected = userSelectedRes.data.user;
             const tasksRes = await this.controller.taskServices.getTasks();
             const tasks = tasksRes.data.tasks;
-            const tasksByUser = await this.controller.agendaWeekModel.getTasksFiltered(auth, userSelected, tasks);
-            const tasksByUserSorted = await this.controller.agendaPlanning.getPlanningEvents(tasksByUser);
-            this.controller.planningView.render(tasksByUserSorted);
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanningEvents(tasksByUser);
+            this.controller.planningView.render(tasksByUserSorted, "events");
             this.controller.planningView.renderAll(tasksByUserSorted);
             this.addEventListeners();
         }
@@ -86,19 +86,61 @@ export class AgendaPlanningEventBinder {
             const userSelected = userSelectedRes.data.user;
             const tasksRes = await this.controller.taskServices.getTasks();
             const tasks = tasksRes.data.tasks;
-            const tasksByUser = await this.controller.agendaWeekModel.getTasksFiltered(auth, userSelected, tasks);
-            const tasksByUserSorted = await this.controller.agendaPlanning.getPlanningProjets(tasksByUser);
-            this.controller.planningView.render(tasksByUserSorted);
-            this.controller.planningView.renderAll(tasksByUserSorted); 
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanningProjets(tasksByUser);
+            this.controller.planningView.render(tasksByUserSorted, "projects");
+            this.controller.planningView.renderAll(tasksByUserSorted);
             this.addEventListeners();
         }
 
-        // spaced_Repetition
-        if(e.target.classList.contains("btn-nextStep")){
-            const taskId = e.target.closest(".modalContent").getAttribute("data-id");
-            const res = await this.controller.spaceRepService.updateSpaceRepetition(taskId);
-            console.log(res);
+        else if (e.target.classList.contains("taskFilter--spacedRepetition")) {
+            const auth = await this.controller.authServices.getAuth();
+            const userSelectedRes = await this.controller.authServices.getUserById(this.controller.authServices.userIdSelected);
+            const userSelected = userSelectedRes.data.user;
+            const tasksRes = await this.controller.taskServices.getTasks();
+            const tasks = tasksRes.data.tasks;
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanningSpaceRepetition(tasksByUser);
+            this.controller.planningView.render(tasksByUserSorted, "spacedRepetition");
+            this.controller.planningView.renderAll(tasksByUserSorted);
+            this.addEventListeners();
         }
+
+        else if (e.target.classList.contains("taskFilter--alerts")) {
+            const auth = await this.controller.authServices.getAuth();
+            const userSelectedRes = await this.controller.authServices.getUserById(this.controller.authServices.userIdSelected);
+            const userSelected = userSelectedRes.data.user;
+            const tasksRes = await this.controller.taskServices.getTasks();
+            const tasks = tasksRes.data.tasks;
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanningAlerts(tasksByUser);
+            this.controller.planningView.render(tasksByUserSorted, "alerts");
+            this.controller.planningView.renderAll(tasksByUserSorted);
+            this.addEventListeners();
+        }
+
+        else if (e.target.classList.contains("taskFilter--dayOff")) {
+            const auth = await this.controller.authServices.getAuth();
+            const userSelectedRes = await this.controller.authServices.getUserById(this.controller.authServices.userIdSelected);
+            const userSelected = userSelectedRes.data.user;
+            const tasksRes = await this.controller.taskServices.getTasks();
+            const tasks = tasksRes.data.tasks;
+            const tasksByUser = await this.controller.userModel.getUserSelectedTasks(auth, userSelected, tasks);
+            const tasksByUserSorted = await this.controller.planningModel.getPlanningDayOff(tasksByUser);
+            this.controller.planningView.render(tasksByUserSorted, "dayOff");
+            this.controller.planningView.renderAll(tasksByUserSorted);
+            this.addEventListeners();
+        }
+
+        // naviger vers agenda depuis planning task
+        const taskContainerEl = e.target.closest(".tasksContent__container");
+        if (taskContainerEl) {
+            const dateStr = taskContainerEl.getAttribute("data-date");
+            const date = new Date(dateStr);
+            this.controller.dateNavigationModel.dateSelected = date.getTime();
+            this.controller.show();
+        }
+
     }
 
 

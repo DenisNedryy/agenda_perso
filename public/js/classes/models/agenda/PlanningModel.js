@@ -24,8 +24,17 @@ export class PlanningModel {
     async getPlanningEvents(tasks) {
         return this.dateModel.sortTasksByDate(tasks.filter((task) => task.type === "events"));
     }
-    
+
     async getPlanningProjets(tasks) {
         return this.dateModel.sortTasksByDate(tasks.filter((task) => task.type === "projets"));
+    }
+    async getPlanningAlerts(tasks) {
+        return this.dateModel.sortTasksByDate(tasks.filter((task) => task.type === "alert"));
+    }
+    async getPlanningDayOff(tasks) {
+        return this.dateModel.sortTasksByDate(tasks.filter((task) => task.type === "dayOff"));
+    }
+    async getPlanningSpaceRepetition(tasks) {
+        return this.dateModel.sortTasksByDate(tasks.filter((task) => task.type === "spaced_repetition"));
     }
 }

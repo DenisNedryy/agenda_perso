@@ -40,15 +40,6 @@ export class AgendaEventBinder {
             this.addEventListeners();
         }
 
-        else if (e.target.classList.contains("tasksContent__container") || e.target.classList.contains("task--type") || e.target.classList.contains("task--name") || e.target.classList.contains("task--status") || e.target.classList.contains("task--date") || e.target.classList.contains("border--green") || e.target.classList.contains("border--red")) {
-            const el = e.target.closest(".tasksContent__container");
-
-            const dateStr = el.getAttribute("data-date");
-            const date = new Date(dateStr);
-            this.controller.agendaWeekModel.stateDateMs = date.getTime();
-            this.controller.show();
-        }
-
     }
 
 

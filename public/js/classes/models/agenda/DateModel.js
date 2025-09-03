@@ -23,8 +23,9 @@ export class DateModel {
             "jeudi",
             "vendredi",
             "samedi",
-            "dimanche",
-        ]
+            "dimanche"
+        ];
+
     }
 
     calculAge(date, year) {
@@ -80,6 +81,15 @@ export class DateModel {
         return `${year}-${month}-${day}`;
     }
 
+    convertDateIntoBeautifulDate(date) {
+        const newDate = new Date(date);
+        const dayLetter = this.weekDays[newDate.getDay() === 0 ? 6 : newDate.getDay()-1];
+        const day = newDate.getDate();
+        const month = this.yearMonth[newDate.getMonth()];
+        const year = newDate.getFullYear();
+        return `${dayLetter} ${day} ${month} ${year}`;
+    }
+
 
     // changer le nom et ne marche probablement plus car un peu diff (month+1 ou month+2)
     async fetchTasksFromApi(tasks, userIdSelected, auth) {
@@ -132,10 +142,6 @@ export class DateModel {
                 break;
 
             case 7:
-                return 365;
-                break;
-
-            case 8:
                 return 365;
                 break;
 

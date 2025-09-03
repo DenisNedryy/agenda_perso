@@ -106,7 +106,7 @@ const agendaCalendarView = new AgendaCalendarView(dateModel);
 
 
 const yearView = new YearView();
-const planningView = new PlanningView();
+const planningView = new PlanningView(dateModel);
 
 // eventBinders instances
 const agendaEventBinder = new AgendaEventBinder();
