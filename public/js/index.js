@@ -9,6 +9,9 @@ import { MiseAJourAuth } from "./classes/components/MiseAJourAuth.js";
 import { ProfilFormView } from "./classes/components/ProfilFormView.js";
 import { AddModelView } from "./classes/components/agenda/agenda_week/AddModelView.js";
 import { FocusModalView } from "./classes/components/agenda/agenda_week/FocusModelView.js";
+import { DayOffView } from "./classes/components/home/DayOffView.js";
+import { ProjetsView } from "./classes/components/home/ProjetsView.js";
+import { EnglishView } from "./classes/components/home/EnglishView.js";
 
 // services
 import { UserServices } from "./classes/services/UserServices.js";
@@ -79,6 +82,7 @@ const planningModel = new PlanningModel(dateModel);
 const modalModel = new ModalModel();
 
 // components instances
+
 const addModelView = new AddModelView();
 const focusModalView = new FocusModalView(dateModel);
 
@@ -89,9 +93,23 @@ const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
 const headerCtrl = new HeaderCtrl(headerEventBinder);
 headerCtrl.init();
 
+// home instance
+const dayOffView = new DayOffView(dateModel);
+const projetsView = new ProjetsView();
+const englishView = new EnglishView();
 const homeView = new HomeView();
-const homeEventBinder = new HomeEventBinder(homeView);
-const homeCtrl = new HomeCtrl(homeView, seoManager, homeEventBinder, dateModel, taskModel, planningModel, taskServices);
+const homeViews = Object.freeze({
+    homeView: homeView,
+    dayOffView: dayOffView,
+    projetsView: projetsView,
+    englishView: englishView
+});
+const homeModels = Object.freeze({
+    dateModel: dateModel,
+    taskModel: taskModel,
+})
+const homeEventBinder = new HomeEventBinder();
+const homeCtrl = new HomeCtrl({ homeViews, homeModels }, seoManager, homeEventBinder, taskServices);
 
 const authView = new AuthView();
 const authModel = new AuthModel(userServices);

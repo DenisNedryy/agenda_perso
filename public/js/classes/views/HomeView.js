@@ -82,8 +82,36 @@ export class HomeView {
                 </div>
 
                 <div class="home__bodyContainer">
-   
-                   
+                    <div class="home__bodyContainer__left">
+                      <div class="home__bodyContainer__left__dayOff box">
+                      <h2>Prochain jour fériés</h2>
+                      <div class="home__bodyContainer__left__dayOff__dateOff"> 
+                        <p>20 janvier 1989</p> 
+                        <div>
+                            <p>Dans 14 jours</p>
+                            <p>2 jours</p>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="home__bodyContainer__left__projets box">
+                        <h2>Projets</h2>
+                        <div class="home__bodyContainer__left__projets__projetsContainer">
+                            <div>
+                            <p>1 - Apprendre le JS</p>
+                            </div>
+                               <div>
+                            <p>1 - Apprendre le PHP</p>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                   <div class="home__bodyContainer__right">
+                    <div class="home__bodyContainer__right__englishMap box">
+                    <h2>Progression</h2>
+                     <img src="/public/assets/images/bordel/uk.png"/>
+                    </div>
+                   </div>
+                    
                 </div>
             </div>
             `;

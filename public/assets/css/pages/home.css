@@ -145,195 +145,28 @@ body .home__bodyContainer__plannings__rdvs {
     height: 100%;
 }
 
-/* --------decompte events--------- */
 
-.decompte {
+.home__bodyContainer__left__projets__projetsContainer div p {
+    display: flex;
+    align-items: center;
+    background-color: rgb(20, 21, 21);
+    border: 1px solid rgba(255, 255, 255, .3);
+    padding: 15px;
+    font-size: 15px;
+    margin: 6px;
+}
+
+.home__bodyContainer__left {
+    width: 60%;
+}
+
+.home__bodyContainer__left__dayOff__dateOff {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin: 25px;
 }
 
-.circle {
-    padding: 15px;
-    background-color: rgb(0, 95, 242);
-    margin: 5px;
-    min-width: 50px;
-    text-align: center;
-}
-
-.decompte {
-    margin: 30px 15px;
-}
-
-.decompte>div {
-    display: flex;
-}
-
-.decompte div p {
-    text-align: center;
-    font-size: 12px;
-}
-
-.eventName {
-    margin-top: 15px;
-    font-size: 20px;
-    letter-spacing: 1px;
-}
-
-.deleteEvent {
-    margin-left: 15px;
-    color: orangered;
-    filter: brightness(.3);
-    cursor: pointer;
-}
-
-.deleteEvent:hover {
-    color: orange;
-    filter: brightness(1);
-}
-
-.meteo {
-    margin-right: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.meteo p:nth-child(1) {
-    font-size: 15px;
-}
-
-.meteo p:nth-child(2) {
-    font-size: 35px;
-    color: rgb(0, 95, 242);
-    margin: 5px 0px;
-}
-
-.meteo p:nth-child(3) {
-    font-size: 15px;
-    text-transform: capitalize;
-}
-
-/* --------rdvs-------- */
-
-.home__bodyContainer__plannings__rdvs__container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 19px;
-}
-
-.home__bodyContainer__plannings__rdvs__container li {
-    display: flex;
-}
-
-.home__bodyContainer__plannings__rdvs__container li p:first-child {
-    margin-right: 15px;
-}
-
-.home__bodyContainer__plannings__rdvs__container li p:last-child {
-    color: rgb(0, 95, 242);
-    font-weight: 600;
-}
-
-.home__bodyContainer__plannings__rdvs__container li {
-    border: 1px solid rgba(108, 102, 102, 0.2);
-    border-radius: 3px;
-    padding: 16px;
-    margin: 7px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.deleteRDV {
-    margin-left: 15px;
-    color: orangered;
-    filter: brightness(.5);
-    cursor: pointer;
-}
-
-.deleteRDV:hover {
-    color: orange;
-    filter: brightness(1);
-}
-
-
-/* --------alerts--------  */
-
-.alert {
-    display: flex;
-    padding: 15px;
-    margin: 15px 0px;
-    border: 1px solid rgba(255, 255, 255, .1);
-}
-
-.alert-red {
-    margin-right: 15px;
-}
-
-.courses-green {
-    margin-right: 15px;
-}
-
-.alert p:nth-child(2) {
-    text-transform: uppercase;
-}
-
-.alert p:nth-child(3) {
-    margin-left: 15px;
-    color: #bfbfbf;
-}
-
-.alert p:last-child {
-    margin: 0px 15px;
-    color: rgb(0, 95, 242);
-}
-
-.alert-red {
-    color: red;
-}
-
-.alertContainer {
-    margin-top: 15px;
-}
-
-.deleteAlert {
-    margin-left: 15px;
-    color: orangered;
-    filter: brightness(.3);
-    cursor: pointer;
-}
-
-.deleteAlert:hover {
-    color: orange;
-    filter: brightness(1);
-}
-
-
-/* -----courses----- */
-.courses-green {
-    color: #21a821;
-}
-
-.home__bodyContainer__alarmes__alerts,
-.home__bodyContainer__alarmes__courses {
-    overflow: scroll;
-    height: 237px;
-}
-
-.home__bodyContainer__alarmes__alerts {
-    margin-bottom: 37px;
-}
-
-.deleteCourse {
-    margin-left: 15px;
-    color: orangered;
-    filter: brightness(.3);
-    cursor: pointer;
-}
-
-.deleteCourse:hover {
-    color: orange;
-    filter: brightness(1);
+.home__bodyContainer__right__englishMap img {
+    width: 370px;
+    padding: 37px;
 }

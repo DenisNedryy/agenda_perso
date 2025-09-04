@@ -1,35 +1,35 @@
 export class HomeCtrl {
 
-    constructor(homeView, seoManager, homeEventBinder, dateHelper, taskHelper, modelAgendaPlanning, taskServices) {
-        this.homeView = homeView;
+    constructor({ homeViews, homeModels }, seoManager, homeEventBinder, taskServices) {
+        this.homeView = homeViews.homeView;
+        this.dayOffView = homeViews.dayOffView;
+        this.englishView = homeViews.englishView;
+        this.projetsView = homeViews.projetsView;
+
+        this.dateModel = homeModels.dateModel;
+        this.taskModel = homeModels.taskModel;
+
         this.seoManager = seoManager;
         this.homeEventBinder = homeEventBinder;
-        this.dateHelper = dateHelper;
-        this.taskHelper = taskHelper;
-        this.modelAgendaPlanning = modelAgendaPlanning;
+
+
+
         this.taskServices = taskServices;
 
         this.homeEventBinder.setController(this);
     }
 
-    async show() {
+    async show() { 
         this.homeView.render();
+        this.renderDayOff();
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Accueil');
         this.homeEventBinder.addEventListeners();
     }
 
-    async getTasks() {
-        const res = await this.taskServices.getTasks();
-        return res.data.tasks;
-    }
-
-    async getTasksByAuth() {
-        const res = await this.taskServices.getTasksByAuth();
-        return res.data.tasks;
-    }
-
-    async getAlerts() {
-        const res = await this.taskServices.getAlerts();
-        return res.data.alerts;
+    async renderDayOff() {
+        const myTasks = await this.taskModel.getTasksByAuth();
+        const daysOff = this.taskModel.getDaysOff(myTasks);
+        const nextConsecutiveDaysOff = this.taskModel.getNextConsecutiveDaysOff(daysOff);
+        this.dayOffView.render(nextConsecutiveDaysOff);
     }
 }

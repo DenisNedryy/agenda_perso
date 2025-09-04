@@ -73,7 +73,6 @@ export class DateModel {
         if (date === false) {
             date = new Date();
         }
-
         date = new Date(date);
         const year = date.getFullYear();
         const month = this.getFormatForNumbersWidhtZeroBefore(date.getMonth());
@@ -83,13 +82,12 @@ export class DateModel {
 
     convertDateIntoBeautifulDate(date) {
         const newDate = new Date(date);
-        const dayLetter = this.weekDays[newDate.getDay() === 0 ? 6 : newDate.getDay()-1];
+        const dayLetter = this.weekDays[newDate.getDay() === 0 ? 6 : newDate.getDay() - 1];
         const day = newDate.getDate();
         const month = this.yearMonth[newDate.getMonth()];
         const year = newDate.getFullYear();
         return `${dayLetter} ${day} ${month} ${year}`;
     }
-
 
     // changer le nom et ne marche probablement plus car un peu diff (month+1 ou month+2)
     async fetchTasksFromApi(tasks, userIdSelected, auth) {
@@ -109,6 +107,14 @@ export class DateModel {
             return taskYear === year && taskMonth === month && taskDay === day;
         });
         return matchedTasks.length ? matchedTasks : null;
+    }
+
+    calculateNbDaysBewteen2Dates(a) {
+        const dateDayOff = new Date(a);
+        const currentDate = new Date();
+        const diff = dateDayOff - currentDate;
+        const dayDiff = diff / (1000 * 60 * 60 * 24);
+        return Math.ceil(dayDiff);
     }
 
     convertStep(step) {

@@ -9,6 +9,16 @@ export class TaskModel {
         return this.taskService.getTasks();
     }
 
+    async getTasksByAuth() {
+        const res = await this.taskService.getTasksByAuth();
+        return res.data.tasks;
+    }
+
+    getDaysOff(tasks) {
+        if (tasks)
+            return tasks.filter((task) => task.type === "dayOff");
+    }
+
     getEvents(tasks) {
         if (tasks)
             return tasks.filter((task) => task.type === "events");
@@ -37,5 +47,31 @@ export class TaskModel {
         return arr;
     }
 
+    getNextConsecutiveDaysOff(arr) {
+        let isStarted = false;
+        let previousDate = null;
+        const nextConsecutiveDaysOff = [];
+        const daysOff = arr.sort((a, b) => new Date(a.date) - new Date(b.date));
+        for (let i = 0; i < daysOff.length; i++) {
+            if (!isStarted && daysOff.length > 0) {
+                const date = new Date(daysOff[i].date);
+                nextConsecutiveDaysOff.push(daysOff[i]);
+                isStarted = true;
+                previousDate = date;
+            } else if (isStarted) {
+                const currentDate = new Date(daysOff[i].date);
+                const diff = currentDate - previousDate;
+                const dayDiff = diff / (1000 * 60 * 60 * 24);
+                previousDate = currentDate;
+                if (dayDiff > 1) {
+                    break;
+                } else {
+                    previousDate = new Date(daysOff[i].date);
+                    nextConsecutiveDaysOff.push(daysOff[i]);
+                }
+            }
+        }
+        return nextConsecutiveDaysOff;
+    }
 
 }

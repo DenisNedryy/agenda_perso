@@ -29,6 +29,11 @@
     margin: 20px 15px;
 }
 
+.box h2 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
 .paraGrey {
     color: #bfbfbf;
 }
