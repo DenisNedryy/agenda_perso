@@ -86,22 +86,13 @@ export class HomeView {
                       <div class="home__bodyContainer__left__dayOff box">
                       <h2>Prochain jour fériés</h2>
                       <div class="home__bodyContainer__left__dayOff__dateOff"> 
-                        <p>20 janvier 1989</p> 
-                        <div>
-                            <p>Dans 14 jours</p>
-                            <p>2 jours</p>
-                        </div>
+                       
                       </div>
                       </div>
                       <div class="home__bodyContainer__left__projets box">
                         <h2>Projets</h2>
                         <div class="home__bodyContainer__left__projets__projetsContainer">
-                            <div>
-                            <p>1 - Apprendre le JS</p>
-                            </div>
-                               <div>
-                            <p>1 - Apprendre le PHP</p>
-                            </div>
+                   
                         </div>
                       </div>
                     </div>

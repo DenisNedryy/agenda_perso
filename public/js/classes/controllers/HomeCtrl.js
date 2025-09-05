@@ -19,9 +19,10 @@ export class HomeCtrl {
         this.homeEventBinder.setController(this);
     }
 
-    async show() { 
+    async show() {
         this.homeView.render();
         this.renderDayOff();
+        this.renderProjets();
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Accueil');
         this.homeEventBinder.addEventListeners();
     }
@@ -31,5 +32,12 @@ export class HomeCtrl {
         const daysOff = this.taskModel.getDaysOff(myTasks);
         const nextConsecutiveDaysOff = this.taskModel.getNextConsecutiveDaysOff(daysOff);
         this.dayOffView.render(nextConsecutiveDaysOff);
+    }
+
+    async renderProjets() {
+        const projects = await this.taskModel.getTasksByTypeSorted("projets");
+        // const projectsWithNewIndexes = this.taskModel.resetIndexes(projects);
+        this.projetsView.render(projects);
+        this.homeEventBinder.initDragAndDrop();
     }
 }

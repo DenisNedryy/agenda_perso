@@ -13,7 +13,34 @@ export class HomeEventBinder {
     }
 
     async handleClickTask(e) {
-  
+
+    }
+
+    initDragAndDrop() {
+        const el = document.getElementById("todo");
+        if (!el) return;
+
+        new Sortable(el, {
+            animation: 150,
+            ghostClass: "ghost",
+
+            onEnd: (evt) => this.handleOnEndTask(evt),
+        });
+    }
+
+    async handleOnEndTask(evt) {
+
+        const order = [...evt.to.querySelectorAll("li")].map((li, index) => ({
+            id: li.dataset.id,
+            sort_order: index + 1,
+        }));
+
+        await this.updateOrder(order);
+
+    }
+
+    async updateOrder(order) {
+        this.controller.taskServices.updateOrder(order)
     }
 
 

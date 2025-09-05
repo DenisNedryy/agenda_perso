@@ -82,7 +82,7 @@ export class TaskServices {
             console.error(err);
         }
     }
-    
+
 
     async createTask(data) {
         try {
@@ -159,14 +159,59 @@ export class TaskServices {
         }
     }
 
-        async getTasksByAuth() {
+    async getTasksByAuth() {
         try {
             const preRes = await fetch(`${HOST}/api/tasks/authTasks`, {
-                method: "GET", 
+                method: "GET",
                 headers: {
                     'Content-Type': "application/json"
                 },
                 credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async readTasksByAuthAndType(type) {
+        try {
+            const preRes = await fetch(`${HOST}/api/tasks/tasksSortedByType/${type}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+
+
+    async updateOrder(data) {
+        try {
+            const preRes = await fetch(`${HOST}/api/tasks/order`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    orderArr: data
+                }),
             });
             const res = await preRes.json();
             return {

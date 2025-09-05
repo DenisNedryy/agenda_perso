@@ -44,6 +44,7 @@ import { HomeView } from "./classes/views/HomeView.js";
 import { AuthView } from "./classes/views/AuthView.js";
 import { AgendaView } from "./classes/views/AgendaView.js";
 import { ProfilView } from "./classes/views/ProfilView.js";
+import { VocabularyView } from "./classes/views/VocabularyView.js";
 
 // ctrls
 import { HomeCtrl } from "/public/js/classes/controllers/HomeCtrl.js";
@@ -51,6 +52,7 @@ import { AuthCtrl } from "./classes/controllers/AuthCtrl.js";
 import { AgendaCtrl } from "./classes/controllers/AgendaCtrl.js";
 import { HeaderCtrl } from "./classes/controllers/HeaderCtrl.js";
 import { ProfilCtrl } from "./classes/controllers/ProfilCtrl.js";
+import { VocabularyCtrl } from "./classes/controllers/VocabularyCtrl.js";
 
 // eventBinder
 import { HomeEventBinder } from "./classes/eventBinders/homeEventBinder.js";
@@ -61,6 +63,7 @@ import { AgendaYearEventBinder } from "./classes/eventBinders/agenda/AgendaYearE
 import { AgendaPlanningEventBinder } from "./classes/eventBinders/agenda/AgendaPlanningEventBinder.js";
 import { HeaderEventBinder } from "./classes/eventBinders/HeaderEventBinder.js";
 import { ProfilEventBinder } from "./classes/eventBinders/ProfilEventBinder.js";
+import { VocabularyEventBinder } from "./classes/eventBinders/VocabularyEventBinder.js";
 
 // services instances
 const seoManager = new SEOManager();
@@ -180,10 +183,17 @@ const profilEventBinder = new ProfilEventBinder(profilView);
 const profilCtrl = new ProfilCtrl(profilView, seoManager, profilEventBinder, authServices, miseAJourAuth, profilFormView, birthDaysServices);
 
 
+// vocabulary instances
+const vocabularyView = new VocabularyView();
+const vocabularyEventBinder = new VocabularyEventBinder();
+const vocabularyCtrl = new VocabularyCtrl(vocabularyView, vocabularyEventBinder, seoManager);
+
+
 const routes = {
     "home": homeCtrl,
     "auth": authCtrl,
     "agenda": agendaCtrl,
+    "vocabulary": vocabularyCtrl,
     "profil": profilCtrl,
 };
 

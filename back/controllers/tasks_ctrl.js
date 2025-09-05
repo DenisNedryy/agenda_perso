@@ -16,6 +16,29 @@ exports.readTasks = async (req, res, next) => {
     }
 };
 
+exports.readTasksByAuthAndType = async (req, res, next) => {
+    try {
+        const userId = req.auth.userId;
+        const type = req.params.type;
+        const [tasks] = await pool.execute(
+            `SELECT id, user_id, author_id, owner_id, status, name, description, date,
+              type, subject, sort_order, _index, author_img_url
+       FROM tasks
+       WHERE user_id = ? AND type = ?
+       ORDER BY sort_order IS NULL, sort_order, _index`,
+            [userId, type]
+        );
+        if (tasks.length === 0) {
+            return res.status(200).json({ tasks: [] });
+        }
+        return res.status(200).json({ tasks: tasks });
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+}
+
+
+
 
 exports.readCourses = async (req, res, next) => {
     try {
@@ -82,6 +105,9 @@ exports.readTasksByAuth = async (req, res, next) => {
 exports.createTask = async (req, res, next) => {
     try {
         const { name, description, date, type, subject, author_id, owner_id, author_img_url } = req.body;
+        const [tasks] = await pool.execute("SELECT _index FROM tasks",);
+        const newIndex = tasks[tasks.length - 1]._index + 1;
+
 
         const data = {
             id: uuidv4(),
@@ -92,7 +118,8 @@ exports.createTask = async (req, res, next) => {
             subject: subject || null,
             author_id: author_id || null,
             owner_id: owner_id || null,
-            author_img_url: author_img_url
+            author_img_url: author_img_url,
+            sort_order: newIndex
         }
 
         data.user_id = owner_id;
@@ -163,4 +190,33 @@ exports.deleteTask = async (req, res, next) => {
         return res.status(500).json({ err });
     }
 };
+
+exports.updateOrder = async (req, res, next) => {
+  try {
+    const orderArr = req.body.orderArr; 
+
+    const whenClauses = orderArr.map(() => "WHEN ? THEN ?").join(" ");
+    const ids = orderArr.map(it => it.id);
+
+    const sql = `
+      UPDATE tasks
+      SET sort_order = CASE id ${whenClauses} END
+      WHERE id IN (${ids.map(() => "?").join(",")})
+    `;
+
+    const params = [];
+    for (const { id, sort_order } of orderArr) {
+      params.push(id, sort_order);
+    }
+    params.push(...ids);
+
+    await pool.execute(sql, params);
+
+    return res.status(200).json({ msg: "Tasks order updated." });
+  } catch (err) {
+    console.error("updateOrder error:", err);
+    return res.status(500).json({ err: "Erreur lors de la mise à jour" });
+  }
+};
+
 

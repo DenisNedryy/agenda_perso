@@ -24,8 +24,25 @@ export class TaskModel {
             return tasks.filter((task) => task.type === "events");
     }
 
+    getProjects(tasks) {
+        if (tasks)
+            return tasks.filter((task) => task.type === "projets");
+    }
+
     getRdvs(tasks) {
         return tasks.filter((task) => task.type === "rdvs");
+    }
+
+    async getTasksByTypeSorted(type){
+        const res = await this.taskService.readTasksByAuthAndType(type);
+        return res.data.tasks;
+    }
+
+    resetIndexes(tasks){
+        for(let i=0;i<tasks.length;i++){
+            tasks[i].sort_order = i+1;
+        }
+        return tasks;
     }
 
     getNextEvent(events) {

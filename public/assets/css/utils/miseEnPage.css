@@ -28,6 +28,8 @@ header {
 }
 
 .home,
-.agenda {
-    padding: 20px 40px;
+.agenda,
+.vocabulary,
+.auth {
+    margin: 20px 40px;
 }
