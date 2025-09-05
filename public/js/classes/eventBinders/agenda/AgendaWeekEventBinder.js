@@ -87,14 +87,10 @@ export class AgendaWeekEventBinder {
             const modal = document.querySelector(".modalAddContainer .modal");
             modal.classList.remove("hidden");
         }
-
-
-
         else if (e.target.classList.contains("leaveModal")) {
             const modal = document.querySelector(".modalAddContainer .modal");
             modal.classList.add("hidden");
         }
-
         else if (e.target.classList.contains("btn-submit-addTask")) {
             e.preventDefault();
             const form = e.target.closest("form");
@@ -102,6 +98,7 @@ export class AgendaWeekEventBinder {
             const auth = await this.controller.authServices.getAuth();
             const task = this.controller.modalModel.getTaskObj(form, userIdSelected, auth);
             if (task) {
+                console.log(task);
                 await this.controller.taskServices.createTask(task);
             }
             this.controller.show();

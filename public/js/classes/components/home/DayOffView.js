@@ -7,6 +7,7 @@ export class DayOffView {
     render(data) {
         const el = document.querySelector(".home__bodyContainer__left__dayOff__dateOff");
         if (el) {
+            if (data.length === 0) return;
             el.innerHTML = data.length > 1 ? (
                 `
                 <div>

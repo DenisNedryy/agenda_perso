@@ -106,7 +106,9 @@ exports.createTask = async (req, res, next) => {
     try {
         const { name, description, date, type, subject, author_id, owner_id, author_img_url } = req.body;
         const [tasks] = await pool.execute("SELECT _index FROM tasks",);
-        const newIndex = tasks[tasks.length - 1]._index + 1;
+
+       
+        const newIndex = (tasks && tasks.length===0)? 1 : (tasks[tasks.length - 1]._index + 1);
 
 
         const data = {
