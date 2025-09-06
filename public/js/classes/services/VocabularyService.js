@@ -1,0 +1,91 @@
+import { HOST } from "../../host.js";
+
+export class VocabularyService {
+
+    async init(data) {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/init`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    vocabulary: data
+                }),
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async addVocabulary(data) {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/add`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    vocabulary: data
+                }),
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async getVocabulary() {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+
+    async getVocabularyByCategories() {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/byCategories`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+}

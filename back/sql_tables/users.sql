@@ -5,5 +5,5 @@ CREATE TABLE users(
     img_url VARCHAR(500),
     _isAdmin BOOLEAN DEFAULT FALSE,
     isConnected BOOLEAN DEFAULT FALSE,
-    role VARCHAR(100) DEFAULT 'Employe'
+    role VARCHAR(100) DEFAULT 'Employe' 
 )ENGINE=InnoDB;

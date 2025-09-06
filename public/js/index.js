@@ -1,3 +1,5 @@
+
+
 // composants
 import { AgendaWeekView } from "./classes/components/agenda/agenda_week/AgendaWeekView.js";
 import { AgendaNavView } from "./classes/components/agenda/agenda_week/AgendaNavView.js";
@@ -19,6 +21,7 @@ import { TaskServices } from "./classes/services/TaskServices.js";
 import { AuthServices } from "./classes/services/AuthServices.js";
 import { BirthDaysServices } from "./classes/services/BirthDaysServices.js";
 import { SpaceRepService } from "./classes/services/SpaceRepService.js";
+import { VocabularyService } from "./classes/services/VocabularyService.js";
 
 // core
 import { NavHighLighter } from "./classes/core/NavHighLighter.js";
@@ -38,6 +41,7 @@ import { CalendarModel } from "./classes/models/agenda/CalendarModel.js";
 import { DateNavigationModel } from "./classes/models/agenda/DateNavigationModel.js";
 import { UserModel } from "./classes/models/agenda/UserModel.js";
 import { ModalModel } from "./classes/models/agenda/ModalModel.js";
+import { VocabularyModel } from "./classes/models/vocabulary/vocabularyModel.js";
 
 // views
 import { HomeView } from "./classes/views/HomeView.js";
@@ -72,6 +76,7 @@ const authServices = new AuthServices(userServices);
 const taskServices = new TaskServices();
 const birthDaysServices = new BirthDaysServices();
 const spaceRepService = new SpaceRepService();
+const vocabularyService = new VocabularyService();
 
 // models instances
 const dateModel = new DateModel();
@@ -83,6 +88,7 @@ const dateNavigationModel = new DateNavigationModel(dateModel);
 const userModel = new UserModel(userServices, dateModel);
 const planningModel = new PlanningModel(dateModel);
 const modalModel = new ModalModel();
+const vocabularyModel = new VocabularyModel(vocabularyService);
 
 // components instances
 
@@ -182,11 +188,15 @@ const profilFormView = new ProfilFormView();
 const profilEventBinder = new ProfilEventBinder(profilView);
 const profilCtrl = new ProfilCtrl(profilView, seoManager, profilEventBinder, authServices, miseAJourAuth, profilFormView, birthDaysServices);
 
-
+// petit programme pour ajouter du vocabulaire
+import { data } from "./data/vocabulary/vocabulary.js"
+import { AddVocabulary } from "./AddVocabulary.js";
+const addVocabulary = new AddVocabulary();
+addVocabulary.init(data);
 // vocabulary instances
 const vocabularyView = new VocabularyView();
 const vocabularyEventBinder = new VocabularyEventBinder();
-const vocabularyCtrl = new VocabularyCtrl(vocabularyView, vocabularyEventBinder, seoManager);
+const vocabularyCtrl = new VocabularyCtrl(vocabularyView, vocabularyEventBinder,vocabularyService,vocabularyModel, seoManager);
 
 
 const routes = {
@@ -203,4 +213,6 @@ navigationManager.init();
 
 const navigationEventBinder = new NavigationEventBinder(navigationManager);
 navigationEventBinder.bindClickLinks();
+
+
 

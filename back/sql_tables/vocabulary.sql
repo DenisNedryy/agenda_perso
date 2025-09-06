@@ -1,0 +1,7 @@
+CREATE TABLE vocabulary (
+    uuid VARCHAR(36) PRIMARY KEY,
+    index_id INT AUTO_INCREMENT UNIQUE KEY ,
+    fr_name VARCHAR(200) NOT NULL,
+    uk_name VARCHAR(200) NOT NULL,
+    category VARCHAR(200) NOT NULL
+) ENGINE=InnoDB;

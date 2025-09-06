@@ -9,32 +9,22 @@ export class VocabularyView {
             <div class="vocabulary">
                 <h2>Vocabulary page</h2>
                 <div class="vocabulary__content box">
-                    <div class="select-vocabulary">
-                       
-                    </div>
-                    <div class="display-vocabulary">
-                        <p>sdfsdf</p>
-                            <p>sdfsdf</p>
-
-                                <p>sdfsdf</p>
-
-                                    <p>sdfsdf</p>
-                                        <p>sdfsdf</p>
-                                            <p>sdfsdf</p>
-                                                        <p>sdfsdf</p>
-
-                                    <p>sdfsdf</p>
-                                        <p>sdfsdf</p>
-                                            <p>sdfsdf</p>
-                                                        <p>sdfsdf</p>
-
-                                    <p>sdfsdf</p>
-                                        <p>sdfsdf</p>
-                                            <p>sdfsdf</p>
-                    </div>        
+                    <div class="select-vocabulary"></div>
+                    <div class="display-vocabulary"></div>   
                 </div>
             </div>
             `;
+        }
+    }
+
+    renderVocabulary(data){
+        console.log(data);
+        const el = document.querySelector(".select-vocabulary");
+        if(el){
+            const ul = document.createElement("ul");
+            for(let category in data){
+                console.log(category);
+            }
         }
     }
 }
