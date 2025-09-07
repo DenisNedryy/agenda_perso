@@ -13,8 +13,10 @@ export class VocabularyCtrl {
     async show() {
         const vocabulary = await this.vocabularyModel.getVocabulary();
         const vocabularyByCategories = await this.vocabularyModel.getVocabularyByCategories();
+        const vocabularyByFamily = await this.vocabularyModel.getVocabularyByFamily();
+        console.log(vocabularyByFamily);
         this.view.render();
-        this.view.renderVocabulary(vocabularyByCategories);
+        this.view.renderVocabulary(vocabularyByFamily);
 
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Profil');
         this.eventBinder.addEventListeners();

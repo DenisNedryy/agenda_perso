@@ -1,6 +1,6 @@
 export const data = {
 
-    bodyPartsData: [
+    bodyParts: [
         { "id": 13620, "frName": "tête", "ukName": "head" },
         { "id": 13621, "frName": "bras", "ukName": "arm" },
         { "id": 13622, "frName": "jambe", "ukName": "leg" },
@@ -49,7 +49,7 @@ export const data = {
         { "id": 13668, "frName": "mollet", "ukName": "calf" },
         { "id": 13669, "frName": "hanche", "ukName": "hip" }
     ],
-    connectivesData: [
+    connectives: [
         { "id": 13400, "frName": "tout d'abord", "ukName": "first" },
         { "id": 13401, "frName": "puis", "ukName": "then" },
         { "id": 13402, "frName": "finalement", "ukName": "finally" },
@@ -84,7 +84,7 @@ export const data = {
         { "id": 13446, "frName": "en d'autres termes", "ukName": "in other words" },
         { "id": 13448, "frName": "au contraire", "ukName": "on the contrary" }
     ],
-    emotionsData: [
+    emotions: [
         { "id": 13751, "frName": "joie", "ukName": "joy" },
         { "id": 13752, "frName": "tristesse", "ukName": "sadness" },
         { "id": 13753, "frName": "colère", "ukName": "anger" },
@@ -126,7 +126,7 @@ export const data = {
         { "id": 13790, "frName": "fascination", "ukName": "fascination" },
         { "id": 13791, "frName": "plaisir", "ukName": "pleasure" }
     ],
-    internalBodyPartsData: [
+    internalBodyParts: [
         { "id": 20000, "frName": "cerveau", "ukName": "brain" },
         { "id": 20001, "frName": "cœur", "ukName": "heart" },
         { "id": 20002, "frName": "poumon", "ukName": "lung" },
@@ -149,7 +149,7 @@ export const data = {
         { "id": 20019, "frName": "prostate", "ukName": "prostate" }
     ],
 
-    orientationData: [
+    orientation: [
         // Au-dessus / En dessous
         { "id": 13300, "frName": "au-dessus de (statique ou abstraction)", "ukName": "above" },
         { "id": 13301, "frName": "au-dessus (rang/mouvement/couverture)", "ukName": "over" },
@@ -240,7 +240,7 @@ export const data = {
         { "id": 13371, "frName": "sur la route de", "ukName": "on the way to" },
         { "id": 13372, "frName": "sur la limite de", "ukName": "on the boundary of" }
     ],
-    artsData: [
+    arts: [
         { "id": 14000, "frName": "peinture", "ukName": "painting" },
         { "id": 14001, "frName": "sculpture", "ukName": "sculpture" },
         { "id": 14002, "frName": "musique", "ukName": "music" },
@@ -293,7 +293,7 @@ export const data = {
         { "id": 14049, "frName": "médias", "ukName": "media" },
         { "id": 14050, "frName": "curateur", "ukName": "curator" }
     ],
-    cinemaData: [
+    cinema: [
         { "id": 13521, "frName": "festival de cinéma", "ukName": "film festival" },
         { "id": 13522, "frName": "long métrage", "ukName": "feature film" },
         { "id": 13523, "frName": "court métrage", "ukName": "short film" },
@@ -374,7 +374,7 @@ export const data = {
         { "id": 13598, "frName": "évaluer", "ukName": "to assess" },
         { "id": 13599, "frName": "souligner", "ukName": "to emphasize" },
     ],
-    educationData: [
+    education: [
         { "id": 13800, "frName": "école", "ukName": "school" },
         { "id": 13801, "frName": "université", "ukName": "university" },
         { "id": 13802, "frName": "collège", "ukName": "college" },
@@ -458,7 +458,7 @@ export const data = {
     ],
 
 
-    irregularVerbsData: [
+    irregularVerbs: [
         { "id": 11050, "frName": "être", "ukName": "be/was/were/been" },
         { "id": 11051, "frName": "devenir", "ukName": "become/became/become" },
         { "id": 11052, "frName": "commencer", "ukName": "begin/began/begun" },
@@ -548,7 +548,7 @@ export const data = {
         { "id": 11138, "frName": "parler", "ukName": "speak/spoke/spoken" },
     ],
 
-    bedroomData: [
+    bedroom: [
         { "id": 6000, "frName": "lit", "ukName": "bed" },
         { "id": 6001, "frName": "matelas", "ukName": "mattress" },
         { "id": 6002, "frName": "oreiller", "ukName": "pillow" },
@@ -586,7 +586,7 @@ export const data = {
         { "id": 6034, "frName": "panier à linge", "ukName": "laundry basket" },
         { "id": 6035, "frName": "serviette", "ukName": "towel" }
     ],
-    clothingData: [
+    clothing: [
         { "id": 7000, "frName": "chemise", "ukName": "shirt" },
         { "id": 7001, "frName": "pantalon", "ukName": "pants" },
         { "id": 7002, "frName": "jupe", "ukName": "skirt" },
@@ -638,7 +638,7 @@ export const data = {
         { "id": 7048, "frName": "tunique", "ukName": "tunic" },
         { "id": 7049, "frName": "robe de chambre", "ukName": "dressing gown" }
     ],
-    kitchenData: [
+    kitchen: [
         { "id": 8000, "frName": "couteau", "ukName": "knife" },
         { "id": 8001, "frName": "fourchette", "ukName": "fork" },
         { "id": 8002, "frName": "cuillère", "ukName": "spoon" },
@@ -690,7 +690,7 @@ export const data = {
         { "id": 8048, "frName": "cocotte-minute", "ukName": "pressure cooker" },
         { "id": 8049, "frName": "sous-plat", "ukName": "trivet" }
     ],
-    houseData: [
+    house: [
         { "id": 9050, "frName": "canapé", "ukName": "Couch" },
         { "id": 9051, "frName": "fauteuil", "ukName": "armchair" },
         { "id": 9082, "frName": "appartement", "ukName": "apartment" },
@@ -743,7 +743,7 @@ export const data = {
         { "id": 9099, "frName": "évier", "ukName": "sink" }
     ],
 
-    kitchenData: [
+    kitchen: [
         { "id": 8000, "frName": "couteau", "ukName": "knife" },
         { "id": 8001, "frName": "fourchette", "ukName": "fork" },
         { "id": 8002, "frName": "cuillère", "ukName": "spoon" },
@@ -795,7 +795,7 @@ export const data = {
         { "id": 8048, "frName": "cocotte-minute", "ukName": "pressure cooker" },
         { "id": 8049, "frName": "sous-plat", "ukName": "trivet" }
     ],
-    toolsData: [
+    tools: [
         { "id": 20100, "frName": "marteau", "ukName": "hammer" },
         { "id": 20101, "frName": "tournevis", "ukName": "screwdriver" },
         { "id": 20102, "frName": "clé à molette", "ukName": "wrench" },
@@ -851,7 +851,7 @@ export const data = {
         { "id": 20152, "frName": "fil métallique (électrique)", "ukName": "wire" },
     ],
 
-    animalsData: [
+    animals: [
         { "id": 5000, "frName": "chien", "ukName": "dog" },
         { "id": 5001, "frName": "chat", "ukName": "cat" },
         { "id": 5002, "frName": "oiseau", "ukName": "bird" },
@@ -904,7 +904,7 @@ export const data = {
         { "id": 5049, "frName": "léopard", "ukName": "leopard" }
     ],
 
-    fruitData: [
+    fruits: [
         { "id": 9000, "frName": "pomme", "ukName": "apple" },
         { "id": 9001, "frName": "banane", "ukName": "banana" },
         { "id": 9002, "frName": "cerise", "ukName": "cherry" },
@@ -954,7 +954,7 @@ export const data = {
         { "id": 9048, "frName": "pomme grenade", "ukName": "pomegranate" },
         { "id": 9049, "frName": "pomelo", "ukName": "pomelo" }
     ],
-    vegetableData: [
+    vegetable: [
         { "id": 11000, "frName": "carotte", "ukName": "carrot" },
         { "id": 11001, "frName": "pomme de terre", "ukName": "potato" },
         { "id": 11002, "frName": "tomate", "ukName": "tomato" },
@@ -1008,7 +1008,7 @@ export const data = {
     ],
 
 
-    vegetationData: [
+    vegetation: [
         { "id": 13450, "frName": "arbre", "ukName": "tree" },
         { "id": 13451, "frName": "plante", "ukName": "plant" },
         { "id": 13452, "frName": "fleur", "ukName": "flower" },
@@ -1073,7 +1073,7 @@ export const data = {
         { "id": 13511, "frName": "labourer", "ukName": "to till" },
 
     ],
-    weatherData: [
+    weather: [
         { "id": 13700, "frName": "soleil", "ukName": "sun" },
         { "id": 13701, "frName": "pluie", "ukName": "rain" },
         { "id": 13702, "frName": "neige", "ukName": "snow" },
@@ -1127,7 +1127,7 @@ export const data = {
         { "id": 13750, "frName": "rafraîchir", "ukName": "to cool" }
     ],
 
-    workData: [
+    work: [
         { "id": 13550, "frName": "emploi", "ukName": "job" },
         { "id": 13551, "frName": "travail", "ukName": "work" },
         { "id": 13552, "frName": "carrière", "ukName": "career" },
@@ -1196,7 +1196,7 @@ export const data = {
         { "id": 13615, "frName": "contribuer", "ukName": "to contribute" }
     ],
 
-    cityData: [
+    city: [
         { "id": 13200, "frName": "mairie", "ukName": "town hall" },
         { "id": 13201, "frName": "rue", "ukName": "street" },
         { "id": 13202, "frName": "boulevard", "ukName": "boulevard" },
@@ -1279,7 +1279,7 @@ export const data = {
         { "id": 13279, "frName": "ligne de tram", "ukName": "tram line" },
         { "id": 13280, "frName": "plan d'eau", "ukName": "waterfront" }
     ],
-    placesData: [
+    places: [
         { "id": 13000, "frName": "déchetterie", "ukName": "recycling center" },
         { "id": 13001, "frName": "piscine", "ukName": "swimming pool" },
         { "id": 13002, "frName": "parc", "ukName": "park" },
@@ -1383,7 +1383,7 @@ export const data = {
         { "id": 13100, "frName": "panneau d'information", "ukName": "information board" }
     ],
 
-    transportData: [
+    transport: [
         { "id": 10050, "frName": "voiture", "ukName": "car" },
         { "id": 10051, "frName": "vélo", "ukName": "bicycle" },
         { "id": 10052, "frName": "moto", "ukName": "motorcycle" },
@@ -1436,7 +1436,7 @@ export const data = {
         { "id": 10099, "frName": "camion de pompier", "ukName": "fire truck" }
     ],
 
-    travelData: [
+    travel: [
         { "id": 13900, "frName": "avion", "ukName": "plane" },
         { "id": 13901, "frName": "bagages", "ukName": "luggage" },
         { "id": 13902, "frName": "passport", "ukName": "passport" },
@@ -1504,7 +1504,7 @@ export const data = {
         { "id": 13964, "frName": "partir", "ukName": "leave" }
     ],
 
-    travelTermsData: [
+    travelTerms: [
         { "id": 13676, "frName": "destination", "ukName": "destination" },
         { "id": 13677, "frName": "billet", "ukName": "ticket" },
         { "id": 13678, "frName": "réservation", "ukName": "reservation" },
@@ -1556,8 +1556,167 @@ export const data = {
         { "id": 13724, "frName": "voyage d'affaires", "ukName": "business trip" },
         { "id": 13725, "frName": "escapade", "ukName": "getaway" },
         { "id": 13726, "frName": "caravane", "ukName": "caravan" }
-    ]
+    ],
 
+    sport: [
+        { "id": 10000, "frName": "football", "ukName": "soccer" },
+        { "id": 10001, "frName": "basketball", "ukName": "basketball" },
+        { "id": 10002, "frName": "tennis", "ukName": "tennis" },
+        { "id": 10003, "frName": "natation", "ukName": "swimming" },
+        { "id": 10004, "frName": "course à pied", "ukName": "running" },
+        { "id": 10005, "frName": "cyclisme", "ukName": "cycling" },
+        { "id": 10006, "frName": "rugby", "ukName": "rugby" },
+        { "id": 10007, "frName": "golf", "ukName": "golf" },
+        { "id": 10008, "frName": "volleyball", "ukName": "volleyball" },
+        { "id": 10009, "frName": "badminton", "ukName": "badminton" },
+        { "id": 10010, "frName": "ski", "ukName": "skiing" },
+        { "id": 10011, "frName": "snowboard", "ukName": "snowboarding" },
+        { "id": 10012, "frName": "escalade", "ukName": "climbing" },
+        { "id": 10013, "frName": "boxe", "ukName": "boxing" },
+        { "id": 10014, "frName": "arts martiaux", "ukName": "martial arts" },
+        { "id": 10015, "frName": "équitation", "ukName": "horse riding" },
+        { "id": 10016, "frName": "gymnastique", "ukName": "gymnastics" },
+        { "id": 10017, "frName": "haltérophilie", "ukName": "weightlifting" },
+        { "id": 10018, "frName": "yoga", "ukName": "yoga" },
+        { "id": 10019, "frName": "danse", "ukName": "dancing" },
+        { "id": 10020, "frName": "aviron", "ukName": "rowing" },
+        { "id": 10021, "frName": "canoë-kayak", "ukName": "canoeing" },
+        { "id": 10022, "frName": "tir à l'arc", "ukName": "archery" },
+        { "id": 10023, "frName": "escrime", "ukName": "fencing" },
+        { "id": 10024, "frName": "handball", "ukName": "handball" },
+        { "id": 10025, "frName": "baseball", "ukName": "baseball" },
+        { "id": 10026, "frName": "softball", "ukName": "softball" },
+        { "id": 10027, "frName": "cricket", "ukName": "cricket" },
+        { "id": 10028, "frName": "hockey sur glace", "ukName": "ice hockey" },
+        { "id": 10029, "frName": "hockey sur gazon", "ukName": "field hockey" },
+        { "id": 10030, "frName": "surf", "ukName": "surfing" },
+        { "id": 10031, "frName": "plongée", "ukName": "diving" },
+        { "id": 10032, "frName": "triathlon", "ukName": "triathlon" },
+        { "id": 10033, "frName": "marathon", "ukName": "marathon" },
+        { "id": 10034, "frName": "judo", "ukName": "judo" },
+        { "id": 10035, "frName": "karaté", "ukName": "karate" },
+        { "id": 10036, "frName": "taekwondo", "ukName": "taekwondo" },
+        { "id": 10037, "frName": "ping-pong", "ukName": "table tennis" },
+        { "id": 10038, "frName": "squash", "ukName": "squash" },
+        { "id": 10039, "frName": "water-polo", "ukName": "water polo" },
+        { "id": 10040, "frName": "patinage artistique", "ukName": "figure skating" },
+        { "id": 10041, "frName": "lutte", "ukName": "wrestling" },
+        { "id": 10042, "frName": "bobsleigh", "ukName": "bobsledding" },
+        { "id": 10043, "frName": "tir", "ukName": "shooting" },
+        { "id": 10044, "frName": "motocross", "ukName": "motocross" },
+        { "id": 10045, "frName": "formule 1", "ukName": "Formula 1" },
+        { "id": 10046, "frName": "football américain", "ukName": "American football" },
+        { "id": 10047, "frName": "cheerleading", "ukName": "cheerleading" },
+        { "id": 10048, "frName": "e-sport", "ukName": "e-sport" },
+        { "id": 10049, "frName": "ballet", "ukName": "ballet" }
+    ],
+
+
+    entertainment: [
+        { "id": 14100, "frName": "jeu", "ukName": "game" },
+        { "id": 14101, "frName": "joueur", "ukName": "player" },
+        { "id": 14102, "frName": "équipe", "ukName": "team" },
+        { "id": 14103, "frName": "règles", "ukName": "rules" },
+        { "id": 14104, "frName": "gagner", "ukName": "win" },
+        { "id": 14105, "frName": "perdre", "ukName": "lose" },
+        { "id": 14106, "frName": "compétition", "ukName": "competition" },
+        { "id": 14107, "frName": "match", "ukName": "match" },
+        { "id": 14108, "frName": "tournoi", "ukName": "tournament" },
+        { "id": 14109, "frName": "score", "ukName": "score" },
+        { "id": 14110, "frName": "champion", "ukName": "champion" },
+        { "id": 14111, "frName": "loisir", "ukName": "hobby" },
+        { "id": 14112, "frName": "activité", "ukName": "activity" },
+        { "id": 14113, "frName": "spectacle", "ukName": "show" },
+        { "id": 14114, "frName": "concert", "ukName": "concert" },
+        { "id": 14115, "frName": "film", "ukName": "movie" },
+        { "id": 14116, "frName": "série", "ukName": "series" },
+        { "id": 14117, "frName": "théâtre", "ukName": "theater" },
+        { "id": 14118, "frName": "danse", "ukName": "dance" },
+        { "id": 14119, "frName": "musique", "ukName": "music" },
+        { "id": 14120, "frName": "chant", "ukName": "singing" },
+        { "id": 14121, "frName": "fête", "ukName": "party" },
+        { "id": 14122, "frName": "amis", "ukName": "friends" },
+        { "id": 14123, "frName": "collation", "ukName": "snack" },
+        { "id": 14124, "frName": "dessin", "ukName": "drawing" },
+        { "id": 14125, "frName": "peinture", "ukName": "painting" },
+        { "id": 14126, "frName": "lecture", "ukName": "reading" },
+        { "id": 14127, "frName": "puzzle", "ukName": "puzzle" },
+        { "id": 14128, "frName": "casse-tête", "ukName": "brain teaser" },
+        { "id": 14129, "frName": "jeu de société", "ukName": "board game" },
+        { "id": 14130, "frName": "vidéo", "ukName": "video" },
+        { "id": 14131, "frName": "télévision", "ukName": "television" },
+        { "id": 14132, "frName": "jeux vidéo", "ukName": "video games" },
+        { "id": 14133, "frName": "réalité virtuelle", "ukName": "virtual reality" },
+        { "id": 14134, "frName": "société", "ukName": "society" },
+        { "id": 14135, "frName": "interactivité", "ukName": "interactivity" },
+        { "id": 14136, "frName": "challenge", "ukName": "challenge" },
+        { "id": 14137, "frName": "satisfaction", "ukName": "satisfaction" },
+        { "id": 14138, "frName": "divertissement", "ukName": "entertainment" },
+        { "id": 14139, "frName": "évasion", "ukName": "escape" },
+        { "id": 14140, "frName": "exploration", "ukName": "exploration" },
+        { "id": 14141, "frName": "créativité", "ukName": "creativity" },
+        { "id": 14142, "frName": "aventure", "ukName": "adventure" },
+        { "id": 14143, "frName": "équipe", "ukName": "crew" },
+        { "id": 14144, "frName": "récompense", "ukName": "reward" },
+        { "id": 14145, "frName": "stratégie", "ukName": "strategy" },
+        { "id": 14146, "frName": "immersion", "ukName": "immersion" },
+        { "id": 14147, "frName": "suspense", "ukName": "suspense" },
+        { "id": 14148, "frName": "loisirs", "ukName": "leisure" },
+        { "id": 14149, "frName": "spectateur", "ukName": "audience" }
+    ]
+    ,
+    informatique: [
+        { "frName": "ordinateur", "ukName": "computer" },
+        { "frName": "portable", "ukName": "laptop" },
+        { "frName": "clavier", "ukName": "keyboard" },
+        { "frName": "souris", "ukName": "mouse" },
+        { "frName": "écran", "ukName": "screen" },
+        { "frName": "imprimante", "ukName": "printer" },
+        { "frName": "serveur", "ukName": "server" },
+        { "frName": "réseau", "ukName": "network" },
+        { "frName": "internet", "ukName": "internet" },
+        { "frName": "logiciel", "ukName": "software" },
+        { "frName": "matériel", "ukName": "hardware" },
+        { "frName": "programme", "ukName": "program" },
+        { "frName": "application", "ukName": "application" },
+        { "frName": "système d'exploitation", "ukName": "operating system" },
+        { "frName": "base de données", "ukName": "database" },
+        { "frName": "nuage", "ukName": "cloud" },
+        { "frName": "cybersécurité", "ukName": "cybersecurity" },
+        { "frName": "piratage", "ukName": "hacking" },
+        { "frName": "mot de passe", "ukName": "password" },
+        { "frName": "fichier", "ukName": "file" },
+        { "frName": "dossier", "ukName": "folder" },
+        { "frName": "disque dur", "ukName": "hard drive" },
+        { "frName": "mémoire", "ukName": "memory" },
+        { "frName": "carte mère", "ukName": "motherboard" },
+        { "frName": "processeur", "ukName": "processor" },
+        { "frName": "programmeur", "ukName": "programmer" },
+        { "frName": "développeur", "ukName": "developer" },
+        { "frName": "ingénieur logiciel", "ukName": "software engineer" },
+        { "frName": "site web", "ukName": "website" },
+        { "frName": "navigateur", "ukName": "browser" },
+        { "frName": "moteur de recherche", "ukName": "search engine" },
+        { "frName": "courriel", "ukName": "email" },
+        { "frName": "adresse IP", "ukName": "IP address" },
+        { "frName": "algorithme", "ukName": "algorithm" },
+        { "frName": "données", "ukName": "data" },
+        { "frName": "intelligence artificielle", "ukName": "artificial intelligence" },
+        { "frName": "apprentissage automatique", "ukName": "machine learning" },
+        { "frName": "réalité virtuelle", "ukName": "virtual reality" },
+        { "frName": "code", "ukName": "code" },
+        { "frName": "coder", "ukName": "to code" },
+        { "frName": "programmer", "ukName": "to program" },
+        { "frName": "installer", "ukName": "to install" },
+        { "frName": "configurer", "ukName": "to configure" },
+        { "frName": "déboguer", "ukName": "to debug" },
+        { "frName": "télécharger", "ukName": "to download" },
+        { "frName": "téléverser", "ukName": "to upload" },
+        { "frName": "naviguer", "ukName": "to browse" },
+        { "frName": "cliquer", "ukName": "to click" },
+        { "frName": "sauvegarder", "ukName": "to save" },
+        { "frName": "effacer", "ukName": "to delete" }
+    ]
 
 
 

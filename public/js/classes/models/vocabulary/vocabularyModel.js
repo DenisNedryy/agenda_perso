@@ -9,8 +9,12 @@ export class VocabularyModel {
         return res.data.vocabulary;
     }
 
-    async getVocabularyByCategories(){
+    async getVocabularyByCategories() {
         const res = await this.vocabularyService.getVocabularyByCategories();
+        return res.data.vocabulary;
+    }
+    async getVocabularyByFamily(family="nature et environnement") {
+        const res = await this.vocabularyService.getVocabularyByFamily(family);
         return res.data.vocabulary;
     }
 }

@@ -33,6 +33,7 @@ app.use("/api/spaced_repetition", spaceRoutes);
 app.use("/api/vocabulary", vocabularyRoutes);
 
 app.use("/api/images/avatars", express.static(path.join(__dirname, "uploads/pictures/avatars")));
+app.use("/api/images/categories", express.static(path.join(__dirname, "uploads/pictures/categories")));
 
 startTaskStatusCron();
 

@@ -88,4 +88,24 @@ export class VocabularyService {
             console.error(err);
         }
     }
+
+    async getVocabularyByFamily(family) {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/byFamily/${family}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
 }

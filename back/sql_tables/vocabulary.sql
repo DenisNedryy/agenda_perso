@@ -3,5 +3,7 @@ CREATE TABLE vocabulary (
     index_id INT AUTO_INCREMENT UNIQUE KEY ,
     fr_name VARCHAR(200) NOT NULL,
     uk_name VARCHAR(200) NOT NULL,
-    category VARCHAR(200) NOT NULL
+    category VARCHAR(200) NOT NULL,
+    family VARCHAR(200) NOT NULL,
+    img_url VARCHAR(500) NOT NULL
 ) ENGINE=InnoDB;

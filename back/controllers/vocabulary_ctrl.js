@@ -2,7 +2,6 @@ const { v4: uuidv4 } = require("uuid");
 const pool = require("../connection/sqlConnection");
 
 const CHUNK_SIZE = 1000;
-
 exports.initVocabulary = async (req, res) => {
   try {
     const vocabulary = req.body.vocabulary;
@@ -10,25 +9,47 @@ exports.initVocabulary = async (req, res) => {
       return res.status(400).json({ error: "Invalid vocabulary format" });
     }
 
+    const families = [
+      { name: "maison et vie quotidienne", data: ["house", "bedroom", "kitchen", "tools", "clothing"] },
+      { name: "nature et environnement", data: ["animals", "vegetation", "fruits", "vegetable", "weather"] },
+      { name: "culture, arts et divertissements", data: ["arts", "cinema", "entertainment", "education", "sport"] },
+      { name: "voyages et lieux", data: ["places", "city", "transport", "travel", "travelTerms"] },
+      { name: "corps et émotions", data: ["bodyParts", "internalBodyParts", "emotions", "orientation", "connectives"] },
+      { name: "langue et grammaire", data: ["irregularVerbs"] },
+      { name: "travail et vie professionnelle", data: ["work", "informatique"] }
+    ];
+
+    function getFamily(category) {
+      for (const f of families) {
+        if (f.data.includes(category)) return f.name;
+      }
+      return null; // <- valeur par défaut
+    }
+
     const categories = Object.keys(vocabulary);
     const conn = await pool.getConnection();
+
     try {
       for (const category of categories) {
-        const rows = (vocabulary[category] || []).map(item => [
+        const items = Array.isArray(vocabulary[category]) ? vocabulary[category] : [];
+        if (items.length === 0) continue;
+
+        const family = getFamily(category); // <- calculée une fois
+        const rows = items.map(item => [
           uuidv4(),
-          item.frName,
-          item.ukName,
+          item.frName ?? null,
+          item.ukName ?? null,
           category,
+          family,
+          imgUrl
         ]);
 
-        // insert en chunks
         for (let i = 0; i < rows.length; i += CHUNK_SIZE) {
           const chunk = rows.slice(i, i + CHUNK_SIZE);
           await conn.beginTransaction();
           try {
-            // INSERT multi-values
             await conn.query(
-              `INSERT INTO vocabulary (uuid, fr_name, uk_name, category) VALUES ?`,
+              `INSERT INTO vocabulary (uuid, fr_name, uk_name, category, family, img_url) VALUES ?`,
               [chunk]
             );
             await conn.commit();
@@ -55,6 +76,22 @@ exports.getVocabulary = async (req, res, next) => {
     if (vocabulary.length === 0) {
       return res.status(200).json({ vocabulary: [] });
     }
+    // a suppr
+    console.log("starting");
+
+    const missingFamilies = [];
+    for (let i = 0; i < vocabulary.length; i++) {
+
+      if (!vocabulary[i].family && !missingFamilies.includes(vocabulary[i].category)) {
+        missingFamilies.push(vocabulary[i].category);
+      }
+    }
+    if (missingFamilies.length === 0) {
+      console.log("Toutes les catégories ont une famille");
+    } else {
+      console.log("Certaines catégories n'ont pas de famille : " + missingFamilies)
+    }
+    // up
     return res.status(200).json({ vocabulary: vocabulary });
 
   } catch (err) {
@@ -65,7 +102,7 @@ exports.getVocabulary = async (req, res, next) => {
 exports.getVocabularyByCategories = async (req, res, next) => {
   try {
     const [rows] = await pool.query(
-      `SELECT uuid, fr_name AS frName, uk_name AS ukName, category 
+      `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family 
        FROM vocabulary`
     );
 
@@ -75,6 +112,32 @@ exports.getVocabularyByCategories = async (req, res, next) => {
         data[rows[i].category] = [];
       }
       data[rows[i].category].push(rows[i]);
+    }
+
+    return res.status(200).json({ vocabulary: data });
+
+  } catch (err) {
+    return res.status(500).json({ error: "DataBase error" + err });
+  }
+
+}
+
+exports.getVocabularyByFamily = async (req, res, next) => {
+  try {
+
+    const family = req.params.family;
+
+    const [rows] = await pool.query(
+      `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family 
+       FROM vocabulary WHERE family = ?`,[family]
+    );
+
+    const data = {};
+    for (let i = 0; i < rows.length; i++) {
+        if(!data[rows[i].category]){
+          data[rows[i].category] = [];
+        }
+        data[rows[i].category].push(rows[i]);
     }
 
     return res.status(200).json({ vocabulary: data });
