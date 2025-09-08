@@ -41,7 +41,7 @@ exports.initVocabulary = async (req, res) => {
           item.ukName ?? null,
           category,
           family,
-          imgUrl
+          `${category}.png`?? null
         ]);
 
         for (let i = 0; i < rows.length; i += CHUNK_SIZE) {
@@ -128,7 +128,7 @@ exports.getVocabularyByFamily = async (req, res, next) => {
     const family = req.params.family;
 
     const [rows] = await pool.query(
-      `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family 
+      `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family, img_url 
        FROM vocabulary WHERE family = ?`,[family]
     );
 

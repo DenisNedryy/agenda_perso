@@ -14,7 +14,6 @@ export class VocabularyCtrl {
         const vocabulary = await this.vocabularyModel.getVocabulary();
         const vocabularyByCategories = await this.vocabularyModel.getVocabularyByCategories();
         const vocabularyByFamily = await this.vocabularyModel.getVocabularyByFamily();
-        console.log(vocabularyByFamily);
         this.view.render();
         this.view.renderVocabulary(vocabularyByFamily);
 

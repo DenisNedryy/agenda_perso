@@ -9,5 +9,4 @@ router.get("/byFamily/:family", auth, vocabularyCtrl.getVocabularyByFamily);
 router.post("/init", auth, vocabularyCtrl.initVocabulary);
 router.post("/add", auth, vocabularyCtrl.addVocabulary); 
 
-
 module.exports = router; 
