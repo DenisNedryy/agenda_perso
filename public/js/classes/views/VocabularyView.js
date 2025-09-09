@@ -85,7 +85,9 @@ export class VocabularyView {
             vocBodyRight.className = "vocabulary__content__left__body__right";
             for (let i = 0; i < keys.length; i++) {
                 const fiche = document.createElement("div");
+                fiche.className="vocFiche";
                 const ficheTop = document.createElement("div");
+                ficheTop.className="vocFiche__top";
                 const img = document.createElement("img");
                 img.setAttribute("src", `${HOST}/api/images/categories/${data[keys[i]][0].img_url}`);
                 ficheTop.appendChild(img);
@@ -95,8 +97,12 @@ export class VocabularyView {
                 fiche.appendChild(ficheTop);
 
                 const ficheBottom = document.createElement("div");
+                ficheBottom.className="vocFiche__bottom";
                 const progressBar = document.createElement("div");
-                progressBar.textContent = "progressBar";
+                progressBar.className="progress-bar";
+                const rectangle = document.createElement("div");
+                rectangle.className="rectangle";
+                progressBar.appendChild(rectangle);
                 ficheBottom.appendChild(progressBar);
                 const percentage = document.createElement("p");
                 percentage.textContent = "24 %";
