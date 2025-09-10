@@ -67,7 +67,8 @@ import { AgendaYearEventBinder } from "./classes/eventBinders/agenda/AgendaYearE
 import { AgendaPlanningEventBinder } from "./classes/eventBinders/agenda/AgendaPlanningEventBinder.js";
 import { HeaderEventBinder } from "./classes/eventBinders/HeaderEventBinder.js";
 import { ProfilEventBinder } from "./classes/eventBinders/ProfilEventBinder.js";
-import { VocabularyEventBinder } from "./classes/eventBinders/VocabularyEventBinder.js";
+import { VocabularyEventBinder } from "./classes/eventBinders/vocabulary/VocabularyEventBinder.js";
+
 
 // services instances
 const seoManager = new SEOManager();
@@ -140,6 +141,7 @@ const agendaEventBinder = new AgendaEventBinder();
 const agendaWeekEventBinder = new AgendaWeekEventBinder();
 const agendaYearEventBinder = new AgendaYearEventBinder();
 const agendaPlanningEventBinder = new AgendaPlanningEventBinder();
+const vocabularyEventBinder = new VocabularyEventBinder();
 
 // AGENDA CTRL
 // création d'objets pour ne pas encombrer le constructeur
@@ -195,8 +197,11 @@ const addVocabulary = new AddVocabulary();
 addVocabulary.init(data);
 // vocabulary instances
 const vocabularyView = new VocabularyView();
-const vocabularyEventBinder = new VocabularyEventBinder();
-const vocabularyCtrl = new VocabularyCtrl(vocabularyView, vocabularyEventBinder,vocabularyService,vocabularyModel, seoManager);
+
+const vocabularyEventBinders = Object.freeze({
+    vocabularyEventBinder: vocabularyEventBinder
+});
+const vocabularyCtrl = new VocabularyCtrl(vocabularyView, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager);
 
 
 const routes = {

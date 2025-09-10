@@ -13,7 +13,7 @@ export class VocabularyModel {
         const res = await this.vocabularyService.getVocabularyByCategories();
         return res.data.vocabulary;
     }
-    async getVocabularyByFamily(family="nature et environnement") {
+    async getVocabularyByFamily(family) {
         const res = await this.vocabularyService.getVocabularyByFamily(family);
         return res.data.vocabulary;
     }

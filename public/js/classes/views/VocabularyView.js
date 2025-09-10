@@ -29,7 +29,9 @@ export class VocabularyView {
     renderFilter(data) {
         const el = document.querySelector(".vocabulary__content__right__body");
         if (el) {
+            // tags
             const tags = document.createElement("div");
+            tags.className = "vocabulary__tags";
             const titleTags = document.createElement("p");
             titleTags.textContent = "tags";
             tags.appendChild(titleTags);
@@ -42,13 +44,16 @@ export class VocabularyView {
             frToUk.textContent = "fr to uk";
             tags.appendChild(frToUk);
             el.appendChild(tags);
+            // families
             const families = document.createElement("div");
+            families.className = "vocabulary__families";
             const titleFamilies = document.createElement("p");
             titleFamilies.textContent = "families";
             families.appendChild(titleFamilies);
             for (let i = 0; i < data.length; i++) {
                 const btn = document.createElement("button");
                 btn.className = "btn-mini";
+                btn.setAttribute("data-name", data[i]);
                 btn.textContent = data[i];
                 families.appendChild(btn);
             }
@@ -104,6 +109,7 @@ export class VocabularyView {
             vocBodyRight.className = "vocabulary__content__left__body__right";
             for (let i = 0; i < keys.length; i++) {
                 const fiche = document.createElement("div");
+                fiche.setAttribute("data-name", keys[i]);
                 fiche.className = "vocFiche";
                 const ficheTop = document.createElement("div");
                 ficheTop.className = "vocFiche__top";
@@ -127,7 +133,10 @@ export class VocabularyView {
                 percentage.textContent = "24 %";
                 ficheBottom.appendChild(percentage);
                 fiche.appendChild(ficheBottom);
-                vocBodyRight.appendChild(fiche);
+         
+                    vocBodyRight.appendChild(fiche);
+           
+
             }
 
             vocBody.appendChild(vocBodyRight);
@@ -138,77 +147,6 @@ export class VocabularyView {
     }
 
 
-    // render uniquement les familles
-    renderVocabulary0(data) {
 
-        const el = document.querySelector(".vocabulary__content__left");
-        if (el) {
-            const ficheKeys = document.createElement("div");
-            ficheKeys.className = "vocabulary-keys";
-            ficheKeys.innerHTML = `
-            <p>Check</p>
-            <p>Avatar</p>
-            <p>Category</p>
-            <p>Family</p>
-            <p>Rate</p>
-            `;
-            el.appendChild(ficheKeys);
-            let cpt = 0;
-
-            const ul = document.createElement("ul");
-            for (let category in data) {
-                const li = document.createElement("li");
-                li.className = "fade-in";
-
-                const checkContainer = document.createElement("div");
-                const check = document.createElement("div");
-                check.className = "vocabulary-check";
-                checkContainer.appendChild(check);
-
-                const avatarContainer = document.createElement("div");
-                const avatar = document.createElement("img");
-                avatar.className = "vocabulary-avatar";
-                console.log(data[category]);
-                avatar.setAttribute("src", `${HOST}/api/images/categories/${data[category][0].img_url ? data[category][0].img_url : "smiley.png"}`);
-                avatarContainer.appendChild(avatar);
-
-                const nameContainer = document.createElement("div");
-                const name = document.createElement("p");
-                name.className = "vocabulary-category";
-                name.textContent = category;
-                nameContainer.appendChild(name);
-
-                const familyContainer = document.createElement("div");
-                const family = document.createElement("p");
-                family.className = "vocabulary-family";
-                family.textContent = data[category][0].family;
-                familyContainer.appendChild(family);
-
-                const rateContainer = document.createElement("div");
-                const rate = document.createElement("div");
-                rate.className = "vocabulary-rate";
-                const rateIco = document.createElement("i");
-                rateIco.className = "fa-solid fa-star";
-                const ratePercentil = document.createElement("p");
-                ratePercentil.textContent = "12 %";
-                rate.appendChild(rateIco);
-                rate.appendChild(ratePercentil);
-                rateContainer.appendChild(rate);
-
-                li.appendChild(checkContainer);
-                li.appendChild(avatarContainer);
-                li.appendChild(nameContainer);
-                li.appendChild(familyContainer);
-                li.appendChild(rateContainer);
-
-                setTimeout(() => {
-                    ul.appendChild(li);
-                }, cpt);
-                cpt += 100;
-            }
-            el.appendChild(ul);
-
-        }
-    }
 }
 

@@ -15,7 +15,11 @@ export class VocabularyEventBinder {
     }
 
     async handleClick(e) {
-
+        const familyContainer = e.target.closest(".vocabulary__families");
+        if (familyContainer && e.target.classList.contains("btn-mini")) {
+            const family = e.target.getAttribute("data-name");
+            this.controller.show(family);
+        }
     }
 
 }
