@@ -41,7 +41,7 @@ exports.initVocabulary = async (req, res) => {
           item.ukName ?? null,
           category,
           family,
-          `${category}.png`?? null
+          `${category}.png` ?? null
         ]);
 
         for (let i = 0; i < rows.length; i += CHUNK_SIZE) {
@@ -129,15 +129,15 @@ exports.getVocabularyByFamily = async (req, res, next) => {
 
     const [rows] = await pool.query(
       `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family, img_url 
-       FROM vocabulary WHERE family = ?`,[family]
+       FROM vocabulary WHERE family = ?`, [family]
     );
 
     const data = {};
     for (let i = 0; i < rows.length; i++) {
-        if(!data[rows[i].category]){
-          data[rows[i].category] = [];
-        }
-        data[rows[i].category].push(rows[i]);
+      if (!data[rows[i].category]) {
+        data[rows[i].category] = [];
+      }
+      data[rows[i].category].push(rows[i]);
     }
 
     return res.status(200).json({ vocabulary: data });
@@ -146,6 +146,31 @@ exports.getVocabularyByFamily = async (req, res, next) => {
     return res.status(500).json({ error: "DataBase error" + err });
   }
 
+}
+
+exports.getFamilies = async (req, res, next) => {
+  try {
+
+    const [rows] = await pool.query(
+      `SELECT family 
+       FROM vocabulary`,
+    );
+
+
+    const data = [];
+    if (!rows || rows.length === 0) return res.status(404).json({ msg: "Empty array" });
+    for (let i = 0; i < rows.length; i++) {
+      if (!data.includes(rows[i].family)) {
+        data.push(rows[i].family);
+      }
+    }
+
+
+    return res.status(200).json({ families: data });
+
+  } catch (err) {
+    return res.status(500).json({ error: "DataBase error" + err });
+  }
 }
 
 exports.addVocabulary = async (req, res, next) => {

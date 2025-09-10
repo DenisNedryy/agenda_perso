@@ -13,31 +13,50 @@ export class VocabularyView {
                     
                     </div>
                     </div>
-                    <div class="vocabulary__content__right">
+                </div>
+                         <div class="vocabulary__content__right box">
                         <div class="vocabulary__content__right__header">
                             <p class="">Filter</p>
                             <p class="">Display</p>
                         </div>
                         <div class="vocabulary__content__right__body"></div>
                     </div>   
-                </div>
             </div>
             `;
         }
     }
 
-    renderFilter() {
+    renderFilter(data) {
         const el = document.querySelector(".vocabulary__content__right__body");
         if (el) {
+            const tags = document.createElement("div");
+            const titleTags = document.createElement("p");
+            titleTags.textContent = "tags";
+            tags.appendChild(titleTags);
+            const sorted = document.createElement("button");
+            sorted.className = "btn-mini";
+            sorted.textContent = "sorted";
+            tags.appendChild(sorted);
+            const frToUk = document.createElement("button");
+            frToUk.className = "btn-mini";
+            frToUk.textContent = "fr to uk";
+            tags.appendChild(frToUk);
+            el.appendChild(tags);
+            const families = document.createElement("div");
+            const titleFamilies = document.createElement("p");
+            titleFamilies.textContent = "families";
+            families.appendChild(titleFamilies);
+            for (let i = 0; i < data.length; i++) {
+                const btn = document.createElement("button");
+                btn.className = "btn-mini";
+                btn.textContent = data[i];
+                families.appendChild(btn);
+            }
 
+            el.appendChild(families);
         }
     }
-    renderDisplay() {
-        const el = document.querySelector(".vocabulary__content__right__body");
-        if (el) {
 
-        }
-    }
 
     // render uniquement les familles
     renderVocabulary(data) {
@@ -85,9 +104,9 @@ export class VocabularyView {
             vocBodyRight.className = "vocabulary__content__left__body__right";
             for (let i = 0; i < keys.length; i++) {
                 const fiche = document.createElement("div");
-                fiche.className="vocFiche";
+                fiche.className = "vocFiche";
                 const ficheTop = document.createElement("div");
-                ficheTop.className="vocFiche__top";
+                ficheTop.className = "vocFiche__top";
                 const img = document.createElement("img");
                 img.setAttribute("src", `${HOST}/api/images/categories/${data[keys[i]][0].img_url}`);
                 ficheTop.appendChild(img);
@@ -97,11 +116,11 @@ export class VocabularyView {
                 fiche.appendChild(ficheTop);
 
                 const ficheBottom = document.createElement("div");
-                ficheBottom.className="vocFiche__bottom";
+                ficheBottom.className = "vocFiche__bottom";
                 const progressBar = document.createElement("div");
-                progressBar.className="progress-bar";
+                progressBar.className = "progress-bar";
                 const rectangle = document.createElement("div");
-                rectangle.className="rectangle";
+                rectangle.className = "rectangle";
                 progressBar.appendChild(rectangle);
                 ficheBottom.appendChild(progressBar);
                 const percentage = document.createElement("p");

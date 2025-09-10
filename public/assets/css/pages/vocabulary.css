@@ -1,3 +1,7 @@
+.vocabulary {
+    display: flex;
+}
+
 .vocabulary__content {}
 
 /* .display-vocabulary,
@@ -105,15 +109,24 @@
 
 .vocabulary__content {
     display: flex;
-
+    width: 100%;
+    max-width: 885px;
 }
 
 .vocabulary__content__left {
-    width: 80%;
+    width: 100%;
 }
 
 .select-vocabulary__content__right {
-    width: 20%;
+    width: 100%;
+}
+
+.vocabulary__content__right {
+    width: 27%;
+}
+
+.vocabulary__content__right__body p {
+    margin: 15px 0px 5px 0px;
 }
 
 .vocabulary__content__right__header {
@@ -150,13 +163,6 @@
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.08);
 }
 
-.vocabulary__content__left__body__left {
-    width: 20%;
-}
-
-.vocabulary__content__left__body__right {
-    width: 60%;
-}
 
 .vocabulary__content__left__body__left p {
     margin: 0;
@@ -181,6 +187,8 @@
 .vocabulary__content__left__body__right {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    padding: 0px 83px;
 }
 
 .vocFiche__top {
@@ -199,7 +207,7 @@
     padding: 15px;
     margin: 7px;
     width: 240px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .progress-circle {

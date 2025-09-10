@@ -17,4 +17,9 @@ export class VocabularyModel {
         const res = await this.vocabularyService.getVocabularyByFamily(family);
         return res.data.vocabulary;
     }
+    async getFamilies() {
+        const res = await this.vocabularyService.getFamilies();
+        return res.data.families;
+    }
+
 }
