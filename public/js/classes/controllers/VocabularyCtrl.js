@@ -10,17 +10,17 @@ export class VocabularyCtrl {
         this.vocabularyEventBinder.setController(this);
     }
 
-    async show(family="nature et environnement") {
+    async show(family = "nature et environnement") { 
         const vocabulary = await this.vocabularyModel.getVocabulary();
         const vocabularyByCategories = await this.vocabularyModel.getVocabularyByCategories();
         const vocabularyByFamily = await this.vocabularyModel.getVocabularyByFamily(family);
-        const families = await this.vocabularyModel.getFamilies(); 
+        const families = await this.vocabularyModel.getFamilies();
         this.view.render();
         this.view.renderVocabulary(vocabularyByFamily);
         this.view.renderFilter(families);
 
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Profil');
         this.vocabularyEventBinder.addEventListeners();
-         this.vocabularyEventBinder.addEventListeners();
+        this.vocabularyEventBinder.addEventListeners();
     }
 }

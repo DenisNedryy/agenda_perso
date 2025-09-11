@@ -8,6 +8,10 @@ export class VocabularyModel {
         const res = await this.vocabularyService.getVocabulary();
         return res.data.vocabulary;
     }
+    async getOneVocabularyCategory(category) {
+        const res = await this.vocabularyService.getOneVocabularyCategory(category);
+        return res.data.vocabulary;
+    }
 
     async getVocabularyByCategories() {
         const res = await this.vocabularyService.getVocabularyByCategories();

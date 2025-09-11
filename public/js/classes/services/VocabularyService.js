@@ -89,6 +89,26 @@ export class VocabularyService {
         }
     }
 
+    async getOneVocabularyCategory(category) {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/oneCategory/${category}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     async getVocabularyByFamily(family) {
         try {
             const preRes = await fetch(`${HOST}/api/vocabulary/byFamily/${family}`, {

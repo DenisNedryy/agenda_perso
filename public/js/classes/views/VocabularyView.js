@@ -65,7 +65,6 @@ export class VocabularyView {
 
     // render uniquement les familles
     renderVocabulary(data) {
-        console.log(data);
         const percentage = 50;
 
         const el = document.querySelector(".vocabulary__content__left");
@@ -133,9 +132,9 @@ export class VocabularyView {
                 percentage.textContent = "24 %";
                 ficheBottom.appendChild(percentage);
                 fiche.appendChild(ficheBottom);
-         
-                    vocBodyRight.appendChild(fiche);
-           
+
+                vocBodyRight.appendChild(fiche);
+
 
             }
 
@@ -143,6 +142,44 @@ export class VocabularyView {
 
             el.appendChild(vocBody);
 
+        }
+    }
+
+    renderCategory(data) {
+        console.log(data);
+        console.log("coucou");
+        const el = document.querySelector(".vocabulary__content");
+        if (el) {
+            el.innerHTML = "";
+            // header
+            const header = document.createElement("div");
+            header.className = "category__header";
+            // header - left
+            const headerLeft = document.createElement("div");
+            headerLeft.className = "category__header__left";
+            const img = document.createElement("img");
+            img.setAttribute("src", `${HOST}/api/images/categories/${data[0].img_url}`);
+            headerLeft.appendChild(img);
+            const category = document.createElement("p");
+            category.textContent = data[0].category;
+            headerLeft.appendChild(category);
+            header.appendChild(headerLeft);
+            // header right
+            const headerRight = document.createElement("p");
+            headerRight.textContent = `1/50`;
+            header.appendChild(headerRight)
+
+            el.appendChild(header);
+            // body
+            const body = document.createElement("div");
+            body.className = "category__body";
+
+            el.appendChild(body);
+            // footer
+            const footer = document.createElement("div");
+            footer.className = "category__footer";
+
+            el.appendChild(footer);
         }
     }
 

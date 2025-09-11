@@ -122,6 +122,29 @@ exports.getVocabularyByCategories = async (req, res, next) => {
 
 }
 
+exports.getOneVocabularyCategory = async (req, res, next) => {
+  try {
+    const category = req.params.category;
+    const [rows] = await pool.query(
+      `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family, img_url 
+       FROM vocabulary
+       WHERE category = ?`, [category]
+    );
+
+    if (!rows || rows.length === 0) {
+      return res.status(404).json({ msg: "Introuvable" });
+    }
+
+
+    return res.status(200).json({ vocabulary: rows });
+
+  } catch (err) {
+    return res.status(500).json({ error: "DataBase error" + err });
+  }
+
+}
+
+
 exports.getVocabularyByFamily = async (req, res, next) => {
   try {
 

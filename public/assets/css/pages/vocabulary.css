@@ -231,3 +231,26 @@
     border-radius: 10px;
     background-color: rgb(0, 95, 242);
 }
+
+/* display flash card */
+
+/* header */
+
+.category__header {
+    display: flex;
+    align-items: center;
+}
+
+.category__header__left {
+    display: flex;
+    align-items: center;
+}
+
+.category__header__left img {
+    width: 100px;
+    height: 100px;
+}
+
+.category__header__left p {
+    text-transform: capitalize;
+}
