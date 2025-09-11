@@ -145,9 +145,8 @@ export class VocabularyView {
         }
     }
 
-    renderCategory(data) {
+    renderCategory(data, index, isStarted = false, isVerso = false, isFrToUk = true) {
         console.log(data);
-        console.log("coucou");
         const el = document.querySelector(".vocabulary__content");
         if (el) {
             el.innerHTML = "";
@@ -173,11 +172,44 @@ export class VocabularyView {
             // body
             const body = document.createElement("div");
             body.className = "category__body";
+            if (!isStarted) {
+                const start = document.createElement("button");
+                start.className = "btn-vocabulary-start btn";
+                start.textContent = "Start";
+                body.appendChild(start);
+            }
+            if (isStarted) {
+                const name = document.createElement("p");
+                name.className = "flashCard__title";
+                body.appendChild(name);
 
+                if (isVerso) {
+                    const traduction = document.createElement("p");
+                    traduction.className = "flashCard__traduction";
+                    traduction.textContent = `${isFrToUk ? data[index].frName : data[index].ukName}`;
+                    body.appendChild(traduction);
+                }
+            }
             el.appendChild(body);
             // footer
             const footer = document.createElement("div");
             footer.className = "category__footer";
+
+            const vocabularyMsg = document.createElement("p");
+            vocabularyMsg.className = "category__footer__msg";
+            vocabularyMsg.textContent = "did you got the right answer ? ";
+            footer.appendChild(vocabularyMsg);
+            const btnContainer = document.createElement("div");
+            btnContainer.className = "category__footer__buttons";
+            const btnNo = document.createElement("button");
+            btnNo.className = "btn btn-no";
+            btnNo.textContent = "No";
+            btnContainer.appendChild(btnNo);
+            const btnYes = document.createElement("button");
+            btnYes.className = "btn btn-yes";
+            btnYes.textContent = "Yes";
+            btnContainer.appendChild(btnYes);
+            footer.appendChild(btnContainer);
 
             el.appendChild(footer);
         }
