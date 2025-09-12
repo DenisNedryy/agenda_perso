@@ -89,7 +89,7 @@ export class VocabularyModel {
         return res.data.categories;
     }
 
-    async getFamiliesPercentils() {
+    async getFamiliesPercentils(family) {
         const categories = await this.getCategories();
         console.log(categories);
         const families = [
@@ -102,12 +102,9 @@ export class VocabularyModel {
             { name: "travail et vie professionnelle", data: ["work", "informatique"] }
         ];
 
-        const familiesPercentils = {};
-        for(let i=0;i<families.length;i++){
-            for(let j=0;j<families[i].data.length;j++){
-                
-            }
-        }
+        const myFamily = families.filter((cell)=>cell.name===family);
+        const allCategories = myFamily.data;
+        
 
     }
 

@@ -17,7 +17,7 @@ export class VocabularyCtrl {
         const families = await this.vocabularyModel.getFamilies();
         this.view.render();
         const categories = await this.vocabularyModel.getCategories();
-        const familiesPercentils = await this.vocabularyModel.getFamiliesPercentils();
+        const familiesPercentils = await this.vocabularyModel.getFamiliesPercentils(family);
         this.view.renderVocabulary(vocabularyByFamily, categories);
         this.view.renderFilter(families);
 
