@@ -57,12 +57,11 @@ export class VocabularyEventBinder {
                 const answer = btnFlashCard.classList.contains("btn-flashCard-yes") ? true : false;
                 this.controller.vocabularyModel.pushVocabularySession(answer, oneVocabularyCategory[index]);
                 this.controller.vocabularyModel.next();
-                await this.controller.vocabularyModel.updateategoryPertencil();
+                await this.controller.vocabularyModel.updateategoryPertencil(category); 
                 this.controller.vocabularyModel.end();
                 this.controller.show();
                 return;
             }
-            // trouver pourquoi je perds un vocabulaire par rapport à la length !
             const answer = btnFlashCard.classList.contains("btn-flashCard-yes") ? true : false;
             this.controller.vocabularyModel.pushVocabularySession(answer, oneVocabularyCategory[index]);
             this.controller.vocabularyModel.next();

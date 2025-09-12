@@ -173,5 +173,26 @@ export class VocabularyService {
     }
 
 
+    async getCategories() {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/categories`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+
 
 }

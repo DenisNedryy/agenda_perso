@@ -64,7 +64,7 @@ export class VocabularyView {
 
 
     // render uniquement les familles
-    renderVocabulary(data) {
+    renderVocabulary(data,categories) {
         const percentage = 50;
 
         const el = document.querySelector(".vocabulary__content__left");
@@ -129,7 +129,8 @@ export class VocabularyView {
                 progressBar.appendChild(rectangle);
                 ficheBottom.appendChild(progressBar);
                 const percentage = document.createElement("p");
-                percentage.textContent = "24 %";
+                const percentilsData = categories.filter((cell)=>cell.name===keys[i])[0];
+                percentage.textContent = `${percentilsData? percentilsData.percentage : '0'}%`;
                 ficheBottom.appendChild(percentage);
                 fiche.appendChild(ficheBottom);
 

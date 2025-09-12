@@ -84,4 +84,31 @@ export class VocabularyModel {
         console.log(res);
     }
 
+    async getCategories() {
+        const res = await this.vocabularyService.getCategories();
+        return res.data.categories;
+    }
+
+    async getFamiliesPercentils() {
+        const categories = await this.getCategories();
+        console.log(categories);
+        const families = [
+            { name: "maison et vie quotidienne", data: ["house", "bedroom", "kitchen", "tools", "clothing"] },
+            { name: "nature et environnement", data: ["animals", "vegetation", "fruits", "vegetable", "weather"] },
+            { name: "culture, arts et divertissements", data: ["arts", "cinema", "entertainment", "education", "sport"] },
+            { name: "voyages et lieux", data: ["places", "city", "transport", "travel", "travelTerms"] },
+            { name: "corps et émotions", data: ["bodyParts", "internalBodyParts", "emotions", "orientation", "connectives"] },
+            { name: "langue et grammaire", data: ["irregularVerbs"] },
+            { name: "travail et vie professionnelle", data: ["work", "informatique"] }
+        ];
+
+        const familiesPercentils = {};
+        for(let i=0;i<families.length;i++){
+            for(let j=0;j<families[i].data.length;j++){
+                
+            }
+        }
+
+    }
+
 }

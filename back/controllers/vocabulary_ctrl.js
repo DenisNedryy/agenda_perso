@@ -200,18 +200,31 @@ exports.addVocabulary = async (req, res, next) => {
 
 };
 
+exports.getCategories = async (req, res, next) => {
+  try {
+    const userId = req.auth.userId;
+    const [rows] = await pool.query(
+      `SELECT * FROM category WHERE user_id = ?`, [userId]
+    );
+
+    if (rows && rows.lenght === 0) {
+      return res.status(404).json({ error: err })
+    }
+    return res.status(200).json({ categories: rows });
+
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+}
+
 exports.updateCategory = async (req, res, next) => {
 
   try {
     const userId = req.auth.userId;
     const category = req.params.category;
     const vocabularySession = req.body.vocabularySession;
-    let successCount = 0;
-    for (let i = 0; i < vocabularySession.length; i++) {
-      if (vocabularySession[i].success) successCount++;
-    }
-    const percentageMultiplicator = 100 / vocabularySession.length;
-    const percentage = successCount / percentageMultiplicator;
+    const successCount = vocabularySession.filter(item => item && item.success).length;
+    const percentage = (successCount / vocabularySession.length) * 100;
     console.log(percentage);
 
     const [cat] = await pool.query(
@@ -227,11 +240,11 @@ exports.updateCategory = async (req, res, next) => {
          VALUES(?, ?, ?, ?)
         `, [uuidv4(), userId, category, percentage]
       );
-    } else {
+    } else if (cat) {
       await pool.execute(
-        `UPDATE category SET percentage = ?)
+        `UPDATE category SET percentage = ?
          WHERE user_id = ?
-         AND name = ?`, [, userId, category, percentage]
+         AND name = ?`, [percentage, userId, category]
       );
     }
 
@@ -239,6 +252,6 @@ exports.updateCategory = async (req, res, next) => {
 
     return res.status(200).json({ msg: "category updated" });
   } catch (err) {
-    return res.status(200).json({ error: err });
+    return res.status(500).json({ error: err });
   }
 }

@@ -5,6 +5,7 @@ const auth = require("../middlewares/auth");
 
 router.get("/", auth, vocabularyCtrl.getVocabulary);
 router.get("/families", auth, vocabularyCtrl.getFamilies);
+router.get("/categories", auth, vocabularyCtrl.getCategories);
 router.get("/byCategories", auth, vocabularyCtrl.getVocabularyByCategories);
 router.get("/oneCategory/:category", auth, vocabularyCtrl.getOneVocabularyCategory);
 router.get("/byFamily/:family", auth, vocabularyCtrl.getVocabularyByFamily);
