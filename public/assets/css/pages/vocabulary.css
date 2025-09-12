@@ -260,6 +260,29 @@
 .category__body {
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 440px;
+    height: 180px;
+    /* padding: 71px 174px; */ 
+    /* width: fit-content; */
+    margin: auto;
+    cursor: pointer;
+}
+
+.flashCard {
+    background-color: rgb(20, 21, 21);
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+}
+
+.flashCard__title {
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+.flashCard__traduction {
+    font-size: 22px;
 }
 
 /* footer */

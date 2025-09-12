@@ -140,6 +140,29 @@ export class VocabularyService {
             });
             const res = await preRes.json();
             return {
+                status: preRes.status, 
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async updateategoryPertencil(vocabularySession,category) {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/updateCategory/${category}`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    vocabularySession: vocabularySession
+                }),
+            });
+            const res = await preRes.json();
+            return {
                 status: preRes.status,
                 ok: preRes.ok,
                 data: res
@@ -148,6 +171,7 @@ export class VocabularyService {
             console.error(err);
         }
     }
+
 
 
 }

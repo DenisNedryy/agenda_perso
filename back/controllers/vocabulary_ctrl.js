@@ -199,3 +199,46 @@ exports.getFamilies = async (req, res, next) => {
 exports.addVocabulary = async (req, res, next) => {
 
 };
+
+exports.updateCategory = async (req, res, next) => {
+
+  try {
+    const userId = req.auth.userId;
+    const category = req.params.category;
+    const vocabularySession = req.body.vocabularySession;
+    let successCount = 0;
+    for (let i = 0; i < vocabularySession.length; i++) {
+      if (vocabularySession[i].success) successCount++;
+    }
+    const percentageMultiplicator = 100 / vocabularySession.length;
+    const percentage = successCount / percentageMultiplicator;
+    console.log(percentage);
+
+    const [cat] = await pool.query(
+      `SELECT * FROM category
+      WHERE user_id = ? 
+      AND name = ?
+      `, [userId, category]
+    );
+
+    if (!cat || cat.length === 0) {
+      await pool.execute(
+        `INSERT INTO category (uuid, user_id, name, percentage)
+         VALUES(?, ?, ?, ?)
+        `, [uuidv4(), userId, category, percentage]
+      );
+    } else {
+      await pool.execute(
+        `UPDATE category SET percentage = ?)
+         WHERE user_id = ?
+         AND name = ?`, [, userId, category, percentage]
+      );
+    }
+
+    // determiner si category percentils est déjà créé, si oui put sinon push
+
+    return res.status(200).json({ msg: "category updated" });
+  } catch (err) {
+    return res.status(200).json({ error: err });
+  }
+}

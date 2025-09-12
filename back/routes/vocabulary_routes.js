@@ -10,5 +10,6 @@ router.get("/oneCategory/:category", auth, vocabularyCtrl.getOneVocabularyCatego
 router.get("/byFamily/:family", auth, vocabularyCtrl.getVocabularyByFamily);
 router.post("/init", auth, vocabularyCtrl.initVocabulary);
 router.post("/add", auth, vocabularyCtrl.addVocabulary);
+router.put("/updateCategory/:category", auth, vocabularyCtrl.updateCategory);
 
 module.exports = router; 

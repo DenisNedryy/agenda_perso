@@ -145,9 +145,11 @@ export class VocabularyView {
         }
     }
 
-    renderCategory(data, index, isStarted = false, isVerso = false, isFrToUk = true) {
-        console.log(data);
+    renderCategory(data, { options }) { 
+        // console.log(data);
+        // console.log(options);
         const el = document.querySelector(".vocabulary__content");
+        el.setAttribute("data-category", data[0].category);
         if (el) {
             el.innerHTML = "";
             // header
@@ -159,34 +161,35 @@ export class VocabularyView {
             const img = document.createElement("img");
             img.setAttribute("src", `${HOST}/api/images/categories/${data[0].img_url}`);
             headerLeft.appendChild(img);
-            const category = document.createElement("p");
+            const category = document.createElement("p"); 
             category.textContent = data[0].category;
             headerLeft.appendChild(category);
             header.appendChild(headerLeft);
             // header right
             const headerRight = document.createElement("p");
-            headerRight.textContent = `1/50`;
+            headerRight.textContent = `${options.index+1}/${data.length}`;
             header.appendChild(headerRight)
 
             el.appendChild(header);
             // body
             const body = document.createElement("div");
-            body.className = "category__body";
-            if (!isStarted) {
+            body.className = `category__body ${options.isStarted ?  "flashCard": ""}`;
+            if (!options.isStarted) {
                 const start = document.createElement("button");
                 start.className = "btn-vocabulary-start btn";
                 start.textContent = "Start";
-                body.appendChild(start);
+                body.appendChild(start); 
             }
-            if (isStarted) {
+            if (options.isStarted) {
                 const name = document.createElement("p");
                 name.className = "flashCard__title";
+                name.textContent = options.isFrToUk ? data[options.index].frName : data[options.index].ukName;
                 body.appendChild(name);
 
-                if (isVerso) {
+                if (options.isVerso) {
                     const traduction = document.createElement("p");
                     traduction.className = "flashCard__traduction";
-                    traduction.textContent = `${isFrToUk ? data[index].frName : data[index].ukName}`;
+                    traduction.textContent = `${options.isFrToUk ? data[options.index].ukName : data[options.index].frName}`;
                     body.appendChild(traduction);
                 }
             }
@@ -195,21 +198,23 @@ export class VocabularyView {
             const footer = document.createElement("div");
             footer.className = "category__footer";
 
-            const vocabularyMsg = document.createElement("p");
-            vocabularyMsg.className = "category__footer__msg";
-            vocabularyMsg.textContent = "did you got the right answer ? ";
-            footer.appendChild(vocabularyMsg);
-            const btnContainer = document.createElement("div");
-            btnContainer.className = "category__footer__buttons";
-            const btnNo = document.createElement("button");
-            btnNo.className = "btn btn-no";
-            btnNo.textContent = "No";
-            btnContainer.appendChild(btnNo);
-            const btnYes = document.createElement("button");
-            btnYes.className = "btn btn-yes";
-            btnYes.textContent = "Yes";
-            btnContainer.appendChild(btnYes);
-            footer.appendChild(btnContainer);
+            if (options.isStarted) {
+                const vocabularyMsg = document.createElement("p");
+                vocabularyMsg.className = "category__footer__msg";
+                vocabularyMsg.textContent = "Did you got the right answer ? ";
+                footer.appendChild(vocabularyMsg);
+                const btnContainer = document.createElement("div");
+                btnContainer.className = "category__footer__buttons";
+                const btnNo = document.createElement("button");
+                btnNo.className = "btn btn-flashCard-no btn-flashCard";
+                btnNo.textContent = "No";
+                btnContainer.appendChild(btnNo);
+                const btnYes = document.createElement("button");
+                btnYes.className = "btn btn-flashCard-yes btn-flashCard";
+                btnYes.textContent = "Yes";
+                btnContainer.appendChild(btnYes);
+                footer.appendChild(btnContainer);
+            }
 
             el.appendChild(footer);
         }
