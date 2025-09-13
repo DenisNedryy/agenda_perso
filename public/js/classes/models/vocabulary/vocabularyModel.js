@@ -102,9 +102,24 @@ export class VocabularyModel {
             { name: "travail et vie professionnelle", data: ["work", "informatique"] }
         ];
 
-        const myFamily = families.filter((cell)=>cell.name===family);
-        const allCategories = myFamily.data;
-        
+        const myFamily = families.filter((cell)=>cell.name===family)[0];
+        const familiesCategories = myFamily.data;
+        const categoriesWithPourcentage = [];
+        for(let i=0;i<familiesCategories.length;i++){
+            categoriesWithPourcentage.push({name: familiesCategories[i], pourcentage: 0});
+        }
+        for(let i=0;i<categories.length;i++){
+            if(familiesCategories.includes(categories[i].name)){
+                const searchedCategory = categoriesWithPourcentage.find((cell)=>cell.name ===categories[i].name);
+                searchedCategory.pourcentage = categories[i].percentage;
+            }
+        }
+
+         let cumul = 0;
+         categoriesWithPourcentage.forEach((cell)=>cumul+=cell.pourcentage);
+         const cumulLenght = categoriesWithPourcentage.length;
+         const familyPourcentage = (cumul/(cumulLenght*100))*100;
+         return Math.round(familyPourcentage);
 
     }
 

@@ -15,10 +15,11 @@ export class VocabularyCtrl {
         const vocabularyByCategories = await this.vocabularyModel.getVocabularyByCategories();
         const vocabularyByFamily = await this.vocabularyModel.getVocabularyByFamily(family);
         const families = await this.vocabularyModel.getFamilies();
-        this.view.render();
+
         const categories = await this.vocabularyModel.getCategories();
-        const familiesPercentils = await this.vocabularyModel.getFamiliesPercentils(family);
-        this.view.renderVocabulary(vocabularyByFamily, categories);
+        const familyPercentil = await this.vocabularyModel.getFamiliesPercentils(family);
+        this.view.render();
+        this.view.renderVocabulary(vocabularyByFamily, categories, familyPercentil);
         this.view.renderFilter(families);
 
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Profil');

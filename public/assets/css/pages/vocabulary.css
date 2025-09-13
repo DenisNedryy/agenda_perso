@@ -267,14 +267,13 @@
     /* width: fit-content; */
     margin: auto;
     cursor: pointer;
-}
-
-.flashCard {
-    background-color: rgb(20, 21, 21);
+        background-color: rgb(20, 21, 21);
     display: flex;
     flex-direction: column;
     border-radius: 15px;
 }
+
+
 
 .flashCard__title {
     margin-bottom: 25px;

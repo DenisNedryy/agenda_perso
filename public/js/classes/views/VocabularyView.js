@@ -64,8 +64,7 @@ export class VocabularyView {
 
 
     // render uniquement les familles
-    renderVocabulary(data,categories) {
-        const percentage = 50;
+    renderVocabulary(data,categories,familyPercentil) {
 
         const el = document.querySelector(".vocabulary__content__left");
         if (el) {
@@ -90,10 +89,10 @@ export class VocabularyView {
             progressCircle.className = "progress-circle";
             const circle = document.createElement("div");
             circle.className = "circle";
-            circle.style.background = `conic-gradient(rgb(0, 95, 242) 0 ${percentage}%, #e0e0e0 ${percentage}%)`;
+            circle.style.background = `conic-gradient(rgb(0, 95, 242) 0 ${familyPercentil}%, #e0e0e0 ${familyPercentil}%)`;
             const insideCircle = document.createElement("div");
             insideCircle.className = "inside-circle";
-            insideCircle.textContent = `${percentage} %`;
+            insideCircle.textContent = `${familyPercentil} %`;
             circle.appendChild(insideCircle);
             progressCircle.appendChild(circle);
             vocBodyLeft.appendChild(progressCircle);
@@ -174,14 +173,8 @@ export class VocabularyView {
             el.appendChild(header);
             // body
             const body = document.createElement("div");
-            body.className = `category__body ${options.isStarted ?  "flashCard": ""}`;
-            if (!options.isStarted) {
-                const start = document.createElement("button");
-                start.className = "btn-vocabulary-start btn";
-                start.textContent = "Start";
-                body.appendChild(start); 
-            }
-            if (options.isStarted) {
+            body.className = `category__body`;
+        
                 const name = document.createElement("p");
                 name.className = "flashCard__title";
                 name.textContent = options.isFrToUk ? data[options.index].frName : data[options.index].ukName;
@@ -193,13 +186,13 @@ export class VocabularyView {
                     traduction.textContent = `${options.isFrToUk ? data[options.index].ukName : data[options.index].frName}`;
                     body.appendChild(traduction);
                 }
-            }
+            
             el.appendChild(body);
             // footer
             const footer = document.createElement("div");
             footer.className = "category__footer";
 
-            if (options.isStarted) {
+          
                 const vocabularyMsg = document.createElement("p");
                 vocabularyMsg.className = "category__footer__msg";
                 vocabularyMsg.textContent = "Did you got the right answer ? ";
@@ -215,7 +208,7 @@ export class VocabularyView {
                 btnYes.textContent = "Yes";
                 btnContainer.appendChild(btnYes);
                 footer.appendChild(btnContainer);
-            }
+            
 
             el.appendChild(footer);
         }
