@@ -16,7 +16,7 @@ export class VocabularyView {
                 </div>
                          <div class="vocabulary__content__right box">
                         <div class="vocabulary__content__right__header">
-                            <p class="">Filter</p>
+                            <p class="">Filter</p> 
                             <p class="">Display</p>
                         </div>
                         <div class="vocabulary__content__right__body"></div>
@@ -26,9 +26,10 @@ export class VocabularyView {
         }
     }
 
-    renderFilter(data) {
+    renderFilter(data,options) {
         const el = document.querySelector(".vocabulary__content__right__body");
         if (el) {
+            el.innerHTML = "";
             // tags
             const tags = document.createElement("div");
             tags.className = "vocabulary__tags";
@@ -40,8 +41,8 @@ export class VocabularyView {
             sorted.textContent = "sorted";
             tags.appendChild(sorted);
             const frToUk = document.createElement("button");
-            frToUk.className = "btn-mini";
-            frToUk.textContent = "fr to uk";
+            frToUk.className = "btn-mini switch-lg";
+            frToUk.textContent = `${options.isFrToUk? 'fr to uk' : 'uk to fr'}`;
             tags.appendChild(frToUk);
             el.appendChild(tags);
             // families
@@ -183,7 +184,7 @@ export class VocabularyView {
                 if (options.isVerso) {
                     const traduction = document.createElement("p");
                     traduction.className = "flashCard__traduction";
-                    traduction.textContent = `${options.isFrToUk ? data[options.index].ukName : data[options.index].frName}`;
+                    traduction.textContent = `${options.isFrToUk ? data[options.index].ukName : data[options.index].frName}*`;
                     body.appendChild(traduction);
                 }
             

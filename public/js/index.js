@@ -1,5 +1,8 @@
 
 
+// utils
+import { Debouncer } from "./classes/models/utils/Debouncer.js";
+
 // composants
 import { AgendaWeekView } from "./classes/components/agenda/agenda_week/AgendaWeekView.js";
 import { AgendaNavView } from "./classes/components/agenda/agenda_week/AgendaNavView.js";
@@ -69,6 +72,8 @@ import { HeaderEventBinder } from "./classes/eventBinders/HeaderEventBinder.js";
 import { ProfilEventBinder } from "./classes/eventBinders/ProfilEventBinder.js";
 import { VocabularyEventBinder } from "./classes/eventBinders/vocabulary/VocabularyEventBinder.js";
 
+// utils instance
+const debouncer = new Debouncer(300);
 
 // services instances
 const seoManager = new SEOManager();
@@ -201,7 +206,7 @@ const vocabularyView = new VocabularyView();
 const vocabularyEventBinders = Object.freeze({
     vocabularyEventBinder: vocabularyEventBinder
 });
-const vocabularyCtrl = new VocabularyCtrl(vocabularyView, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager);
+const vocabularyCtrl = new VocabularyCtrl(vocabularyView, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager, debouncer);
 
 
 const routes = {

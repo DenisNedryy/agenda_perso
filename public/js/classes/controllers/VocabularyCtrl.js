@@ -1,11 +1,12 @@
 export class VocabularyCtrl {
 
-    constructor(view, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager) {
+    constructor(view, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager,debouncer) {
         this.view = view;
         this.vocabularyService = vocabularyService;
         this.vocabularyModel = vocabularyModel;
         this.vocabularyEventBinder = vocabularyEventBinders.vocabularyEventBinder;
         this.seoManager = seoManager;
+        this.debouncer = debouncer;
 
         this.vocabularyEventBinder.setController(this);
     }
@@ -20,7 +21,8 @@ export class VocabularyCtrl {
         const familyPercentil = await this.vocabularyModel.getFamiliesPercentils(family);
         this.view.render();
         this.view.renderVocabulary(vocabularyByFamily, categories, familyPercentil);
-        this.view.renderFilter(families);
+        const options = this.vocabularyModel.vocabularyOptions;
+        this.view.renderFilter(families, options);
 
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Profil');
         this.vocabularyEventBinder.addEventListeners();

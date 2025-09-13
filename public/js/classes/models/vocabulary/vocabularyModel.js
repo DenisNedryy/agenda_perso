@@ -4,17 +4,25 @@ export class VocabularyModel {
         this.vocabularyService = vocabularyService;
         this.vocabularyOptions = {
             index: 0,
-            isStarted: false,
             isVerso: false,
             isFrToUk: true
         }
         this.vocabularySession = []; // {uuid:string, success:false}
     }
 
+    speak(text) {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            window.speechSynthesis.speak(utterance);
+        } else {
+            alert('Sorry, your browser does not support speech synthesis.');
+        }
+    }
+
     start() {
         this.vocabularySession = [];
         this.resetIndex();
-        this.vocabularyOptions.isStarted = true;
         this.closeTraduction();
     }
 
@@ -24,15 +32,22 @@ export class VocabularyModel {
     }
 
     end() {
-        this.vocabularyOptions.isStarted = false;
-        this.index = 0;
-        this.isVerso = false;
-        this.isStarted = false;
+        this.vocabularySession = [];
+        this.vocabularyOptions.index = 0;
+        this.vocabularyOptions.isVerso = false;
+        this.closeTraduction();
+    }
 
+    switchLanguage() {
+        this.vocabularyOptions.isFrToUk = !this.vocabularyOptions.isFrToUk;
     }
 
     toggleTraduction() {
         this.vocabularyOptions.isVerso = !this.vocabularyOptions.isVerso;
+    }
+
+    openTraduction() {
+        this.vocabularyOptions.isVerso = true;
     }
 
     closeTraduction() {
@@ -91,7 +106,6 @@ export class VocabularyModel {
 
     async getFamiliesPercentils(family) {
         const categories = await this.getCategories();
-        console.log(categories);
         const families = [
             { name: "maison et vie quotidienne", data: ["house", "bedroom", "kitchen", "tools", "clothing"] },
             { name: "nature et environnement", data: ["animals", "vegetation", "fruits", "vegetable", "weather"] },
@@ -102,24 +116,24 @@ export class VocabularyModel {
             { name: "travail et vie professionnelle", data: ["work", "informatique"] }
         ];
 
-        const myFamily = families.filter((cell)=>cell.name===family)[0];
+        const myFamily = families.filter((cell) => cell.name === family)[0];
         const familiesCategories = myFamily.data;
         const categoriesWithPourcentage = [];
-        for(let i=0;i<familiesCategories.length;i++){
-            categoriesWithPourcentage.push({name: familiesCategories[i], pourcentage: 0});
+        for (let i = 0; i < familiesCategories.length; i++) {
+            categoriesWithPourcentage.push({ name: familiesCategories[i], pourcentage: 0 });
         }
-        for(let i=0;i<categories.length;i++){
-            if(familiesCategories.includes(categories[i].name)){
-                const searchedCategory = categoriesWithPourcentage.find((cell)=>cell.name ===categories[i].name);
+        for (let i = 0; i < categories.length; i++) {
+            if (familiesCategories.includes(categories[i].name)) {
+                const searchedCategory = categoriesWithPourcentage.find((cell) => cell.name === categories[i].name);
                 searchedCategory.pourcentage = categories[i].percentage;
             }
         }
 
-         let cumul = 0;
-         categoriesWithPourcentage.forEach((cell)=>cumul+=cell.pourcentage);
-         const cumulLenght = categoriesWithPourcentage.length;
-         const familyPourcentage = (cumul/(cumulLenght*100))*100;
-         return Math.round(familyPourcentage);
+        let cumul = 0;
+        categoriesWithPourcentage.forEach((cell) => cumul += cell.pourcentage);
+        const cumulLenght = categoriesWithPourcentage.length;
+        const familyPourcentage = (cumul / (cumulLenght * 100)) * 100;
+        return Math.round(familyPourcentage);
 
     }
 
