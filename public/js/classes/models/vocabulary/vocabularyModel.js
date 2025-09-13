@@ -137,4 +137,15 @@ export class VocabularyModel {
 
     }
 
+    async getTotalFamilyPercentage() {
+        const familiesArray = await this.getFamilies();
+        let cumul = 0;
+        const percentils = await Promise.all(
+            familiesArray.map(cell => this.getFamiliesPercentils(cell) || 0)
+        );
+        percentils.forEach((cell)=>cumul+=cell);
+        const pourcentageTotal = (cumul / (familiesArray.length * 100)) * 100;
+        return Math.round(pourcentageTotal);
+    }
+
 }

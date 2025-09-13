@@ -122,6 +122,7 @@ const homeViews = Object.freeze({
 const homeModels = Object.freeze({
     dateModel: dateModel,
     taskModel: taskModel,
+    vocabularyModel: vocabularyModel
 })
 const homeEventBinder = new HomeEventBinder();
 const homeCtrl = new HomeCtrl({ homeViews, homeModels }, seoManager, homeEventBinder, taskServices);

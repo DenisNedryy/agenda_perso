@@ -8,6 +8,7 @@ export class HomeCtrl {
 
         this.dateModel = homeModels.dateModel;
         this.taskModel = homeModels.taskModel;
+        this.vocabularyModel = homeModels.vocabularyModel;
 
         this.seoManager = seoManager;
         this.homeEventBinder = homeEventBinder;
@@ -23,6 +24,7 @@ export class HomeCtrl {
         this.homeView.render();
         this.renderDayOff();
         this.renderProjets();
+        this.renderMap();
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Accueil');
         this.homeEventBinder.addEventListeners();
     }
@@ -39,5 +41,10 @@ export class HomeCtrl {
         // const projectsWithNewIndexes = this.taskModel.resetIndexes(projects);
         this.projetsView.render(projects);
         this.homeEventBinder.initDragAndDrop();
+    }
+
+    async renderMap() {
+        const pourcentageTotal = await this.vocabularyModel.getTotalFamilyPercentage();
+        console.log(pourcentageTotal);
     }
 }
