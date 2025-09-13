@@ -99,7 +99,7 @@ export class HomeView {
                    <div class="home__bodyContainer__right">
                     <div class="home__bodyContainer__right__englishMap box">
                     <h2>Progression</h2>
-                     <img src="/public/assets/images/bordel/uk.png"/>
+                   <div class="map-uk"></div>
                     </div>
                    </div>
                     
