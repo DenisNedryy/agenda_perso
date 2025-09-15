@@ -30,6 +30,7 @@ header {
 .home,
 .agenda,
 .vocabulary,
-.auth {
+.auth,
+.profil {
     margin: 20px 40px;
 }

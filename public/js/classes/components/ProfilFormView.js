@@ -12,7 +12,7 @@ export class ProfilFormView {
               <label>Name</label>
             <input type="text" name="name"/> 
             </div>
-            <button class="btn btn-profil-name">Submit</div> 
+            <button class="btn btn-profil-name">Submit</div>  
             </form>
             `;
     }

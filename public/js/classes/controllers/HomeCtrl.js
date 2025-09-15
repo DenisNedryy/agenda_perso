@@ -25,6 +25,7 @@ export class HomeCtrl {
         this.renderDayOff();
         this.renderProjets();
         this.renderMap();
+        
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Accueil');
         this.homeEventBinder.addEventListeners();
     }
@@ -46,5 +47,6 @@ export class HomeCtrl {
     async renderMap() {
         const pourcentageTotal = await this.vocabularyModel.getTotalFamilyPercentage();
         console.log(pourcentageTotal);
+        this.englishView.render(pourcentageTotal);
     }
 }

@@ -173,3 +173,58 @@
 .profil_form {
     width: 70%;
 }
+
+.profil__header {
+    flex-direction: column;
+}
+
+.profil__header__bg {
+    background-image: url("/public/assets/images/bg/mountain.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 100%;
+}
+
+.profil__header__menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.profil__header__bg {
+    position: relative;
+}
+
+.profil__header__menu__name {
+    display: flex;
+    flex-direction: column;
+    margin-left: 180px;
+}
+
+.profil__header__menu__name p:first-child {
+    font-size: 25px;
+}
+
+.avatar-preview {
+    position: absolute;
+    bottom: -67px;
+    left: 48px;
+    border-radius: 50%;
+    width: 125px;
+    border: 2px solid white;
+}
+
+.profil__header__menu__name>div {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, .8);
+}
+
+.profil__header__menu__forms {
+    display: flex;
+}
+
+.profil__header__menu__forms {
+    margin:15px 15px 0px 15px;
+}

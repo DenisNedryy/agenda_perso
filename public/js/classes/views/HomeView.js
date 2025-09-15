@@ -35,21 +35,6 @@ export class HomeView {
                                  <p>Gpt</p>
                             </div>
                         </a>
-
-                        <a href="https://box-revision-jaguar.vercel.app" target="_blank">
-                             <div>
-                                <img src="/public/assets/images/icons/leiner.png"/>
-                                 <p>Box-revision</p>
-                            </div>
-                        </a>
-
-                        <a href="https://memorywords.netlify.app" target="_blank">
-                             <div>
-                                <img src="/public/assets/images/icons/english.png"/>
-                                 <p>Memo-words</p>
-                            </div>
-                        </a>
-
                         <a href="https://codepen.io/pen" target="_blank">
                              <div>
                                 <img src="/public/assets/images/icons/codepen.png"/>
