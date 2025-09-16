@@ -10,7 +10,11 @@ export class ProfilView {
             <div class="profil box">
                 <div class="profil__header">
                     <div class="profil__header__bg">
-                        <img  class="avatar-preview" src="${HOST}/api/images/avatars/${data.img_url}"/>  
+                      <label for="img-avatar">  
+                         <img class="avatar-preview profilUpdate-img" src="${HOST}/api/images/avatars/${data.img_url}"/>  
+                      </label>
+                      <input id="img-avatar" type="file"/>
+                      
                     </div>
                     
                     <div class="profil__header__menu">

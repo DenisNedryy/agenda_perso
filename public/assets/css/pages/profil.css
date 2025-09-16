@@ -212,6 +212,8 @@
     border-radius: 50%;
     width: 125px;
     border: 2px solid white;
+    height: 125px;
+    object-fit: fill;
 }
 
 .profil__header__menu__name>div {
@@ -226,5 +228,9 @@
 }
 
 .profil__header__menu__forms {
-    margin:15px 15px 0px 15px;
+    margin: 15px 15px 0px 15px;
+}
+
+.img-avatar {
+    display: none;
 }
