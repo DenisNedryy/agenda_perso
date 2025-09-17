@@ -26,7 +26,7 @@ export class VocabularyView {
         }
     }
 
-    renderFilter(data,options) {
+    renderFilter(data, options) {
         const el = document.querySelector(".vocabulary__content__right__body");
         if (el) {
             el.innerHTML = "";
@@ -42,7 +42,7 @@ export class VocabularyView {
             tags.appendChild(sorted);
             const frToUk = document.createElement("button");
             frToUk.className = "btn-mini switch-lg";
-            frToUk.textContent = `${options.isFrToUk? 'fr to uk' : 'uk to fr'}`;
+            frToUk.textContent = `${options.isFrToUk ? 'fr to uk' : 'uk to fr'}`;
             tags.appendChild(frToUk);
             el.appendChild(tags);
             // families
@@ -65,7 +65,7 @@ export class VocabularyView {
 
 
     // render uniquement les familles
-    renderVocabulary(data,categories,familyPercentil) {
+    renderVocabulary(data, categories, familyPercentil) {
 
         const el = document.querySelector(".vocabulary__content__left");
         if (el) {
@@ -112,12 +112,20 @@ export class VocabularyView {
                 fiche.className = "vocFiche";
                 const ficheTop = document.createElement("div");
                 ficheTop.className = "vocFiche__top";
+                const leftContainer = document.createElement("div");
                 const img = document.createElement("img");
                 img.setAttribute("src", `${HOST}/api/images/categories/${data[keys[i]][0].img_url}`);
-                ficheTop.appendChild(img);
+                leftContainer.appendChild(img);
+
                 const category = document.createElement("p");
                 category.textContent = keys[i];
-                ficheTop.appendChild(category);
+                const percentage = document.createElement("p");
+                const percentilsData = categories.filter((cell) => cell.name === keys[i])[0];
+                const pct = percentilsData?.percentage ?? 0;
+                percentage.textContent = `${pct}%`;
+                leftContainer.appendChild(category);
+                ficheTop.appendChild(leftContainer);
+                ficheTop.appendChild(percentage);
                 fiche.appendChild(ficheTop);
 
                 const ficheBottom = document.createElement("div");
@@ -126,12 +134,11 @@ export class VocabularyView {
                 progressBar.className = "progress-bar";
                 const rectangle = document.createElement("div");
                 rectangle.className = "rectangle";
+
+                rectangle.style.width = `${pct}%`;
                 progressBar.appendChild(rectangle);
                 ficheBottom.appendChild(progressBar);
-                const percentage = document.createElement("p");
-                const percentilsData = categories.filter((cell)=>cell.name===keys[i])[0];
-                percentage.textContent = `${percentilsData? percentilsData.percentage : '0'}%`;
-                ficheBottom.appendChild(percentage);
+
                 fiche.appendChild(ficheBottom);
 
                 vocBodyRight.appendChild(fiche);
@@ -146,7 +153,7 @@ export class VocabularyView {
         }
     }
 
-    renderCategory(data, { options }) { 
+    renderCategory(data, { options }) {
         // console.log(data);
         // console.log(options);
         const el = document.querySelector(".vocabulary__content");
@@ -162,54 +169,54 @@ export class VocabularyView {
             const img = document.createElement("img");
             img.setAttribute("src", `${HOST}/api/images/categories/${data[0].img_url}`);
             headerLeft.appendChild(img);
-            const category = document.createElement("p"); 
+            const category = document.createElement("p");
             category.textContent = data[0].category;
             headerLeft.appendChild(category);
             header.appendChild(headerLeft);
             // header right
             const headerRight = document.createElement("p");
-            headerRight.textContent = `${options.index+1}/${data.length}`;
+            headerRight.textContent = `${options.index + 1}/${data.length}`;
             header.appendChild(headerRight)
 
             el.appendChild(header);
             // body
             const body = document.createElement("div");
             body.className = `category__body`;
-        
-                const name = document.createElement("p");
-                name.className = "flashCard__title";
-                name.textContent = options.isFrToUk ? data[options.index].frName : data[options.index].ukName;
-                body.appendChild(name);
 
-                if (options.isVerso) {
-                    const traduction = document.createElement("p");
-                    traduction.className = "flashCard__traduction";
-                    traduction.textContent = `${options.isFrToUk ? data[options.index].ukName : data[options.index].frName}*`;
-                    body.appendChild(traduction);
-                }
-            
+            const name = document.createElement("p");
+            name.className = "flashCard__title";
+            name.textContent = options.isFrToUk ? data[options.index].frName : data[options.index].ukName;
+            body.appendChild(name);
+
+            if (options.isVerso) {
+                const traduction = document.createElement("p");
+                traduction.className = "flashCard__traduction";
+                traduction.textContent = `${options.isFrToUk ? data[options.index].ukName : data[options.index].frName}*`;
+                body.appendChild(traduction);
+            }
+
             el.appendChild(body);
             // footer
             const footer = document.createElement("div");
             footer.className = "category__footer";
 
-          
-                const vocabularyMsg = document.createElement("p");
-                vocabularyMsg.className = "category__footer__msg";
-                vocabularyMsg.textContent = "Did you got the right answer ? ";
-                footer.appendChild(vocabularyMsg);
-                const btnContainer = document.createElement("div");
-                btnContainer.className = "category__footer__buttons";
-                const btnNo = document.createElement("button");
-                btnNo.className = "btn btn-flashCard-no btn-flashCard";
-                btnNo.textContent = "No";
-                btnContainer.appendChild(btnNo);
-                const btnYes = document.createElement("button");
-                btnYes.className = "btn btn-flashCard-yes btn-flashCard";
-                btnYes.textContent = "Yes";
-                btnContainer.appendChild(btnYes);
-                footer.appendChild(btnContainer);
-            
+
+            const vocabularyMsg = document.createElement("p");
+            vocabularyMsg.className = "category__footer__msg";
+            vocabularyMsg.textContent = "Did you got the right answer ? ";
+            footer.appendChild(vocabularyMsg);
+            const btnContainer = document.createElement("div");
+            btnContainer.className = "category__footer__buttons";
+            const btnNo = document.createElement("button");
+            btnNo.className = "btn btn-flashCard-no btn-flashCard";
+            btnNo.textContent = "No";
+            btnContainer.appendChild(btnNo);
+            const btnYes = document.createElement("button");
+            btnYes.className = "btn btn-flashCard-yes btn-flashCard";
+            btnYes.textContent = "Yes";
+            btnContainer.appendChild(btnYes);
+            footer.appendChild(btnContainer);
+
 
             el.appendChild(footer);
         }
