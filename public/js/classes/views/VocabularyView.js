@@ -106,10 +106,11 @@ export class VocabularyView {
 
             const vocBodyRight = document.createElement("div");
             vocBodyRight.className = "vocabulary__content__left__body__right";
+
             for (let i = 0; i < keys.length; i++) {
                 const fiche = document.createElement("div");
                 fiche.setAttribute("data-name", keys[i]);
-                fiche.className = "vocFiche";
+                fiche.className = "vocFiche fade-in";
                 const ficheTop = document.createElement("div");
                 ficheTop.className = "vocFiche__top";
                 const leftContainer = document.createElement("div");
@@ -141,7 +142,11 @@ export class VocabularyView {
 
                 fiche.appendChild(ficheBottom);
 
-                vocBodyRight.appendChild(fiche);
+
+                setTimeout(() => {
+                    vocBodyRight.appendChild(fiche);
+                }, cpt);
+                cpt+=200;
 
 
             }
