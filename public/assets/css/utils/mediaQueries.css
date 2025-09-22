@@ -469,5 +469,6 @@
     body .agendaContent__body__mobileView{
         display:flex;
         flex-direction:column;
+        border:1px solid black;
     }
 }
