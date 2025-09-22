@@ -46,7 +46,6 @@ export class HomeCtrl {
 
     async renderMap() {
         const pourcentageTotal = await this.vocabularyModel.getTotalFamilyPercentage();
-        console.log(pourcentageTotal);
         this.englishView.render(pourcentageTotal);
     }
 }

@@ -37,7 +37,7 @@ export class AgendaCalendarView {
                 titleContainer.appendChild(dayMini);
                 titleContainer.appendChild(number);
                 containerSupreme.appendChild(titleContainer);
-
+                
                 const ul = document.createElement("ul");
                 for (let i = 0; i < 20; i++) {
                     const li = document.createElement("li");
@@ -103,8 +103,6 @@ export class AgendaCalendarView {
 
     renderMobileView(data, dateSelected = null) {
         const el = document.querySelector(".agendaContent__body__mobileView");
-        console.log(data);
-        console.log(dateSelected);
         if (el) {
             el.innerHTML = "";
             const header = document.createElement("div");
@@ -126,7 +124,7 @@ export class AgendaCalendarView {
     ? "calendarMobileView__header__day currentDay-mobile-on"
     : "calendarMobileView__header__day"
 }`;
-                day.style.width = `${(containerWidth / 7) - 10}px`;
+                day.style.width = `${(containerWidth / 7) - 1}px`;
                 const date = `${cell.dayInfo.year}-${cell.dayInfo.month}-${cell.dayInfo.dayDateNum}`;
                 day.innerHTML = `
                  <p class="mobileDay">${this.dateModel.weekDays[index].slice(0, 3)}</p>
@@ -140,11 +138,8 @@ export class AgendaCalendarView {
                 `;
                 header.appendChild(day);
 
-
-
-
-
                 if ((dateSelected && (dateSelected === `${year}-${month}-${currentDay}`)) || (cell.dayInfo.isCurrentDay && !dateSelected)) {
+                    body.setAttribute("data-date", `${year}-${month}-${currentDay}`);
                     const ul = document.createElement("ul");
                     for (let i = 0; i < cell.tasksByDay.length; i++) {
                         const li = document.createElement("li");
@@ -199,7 +194,7 @@ export class AgendaCalendarView {
                         ul.appendChild(li);
                     }
                     const buttonAdd = document.createElement("div");
-                    buttonAdd.className = "addTask-mobile btn";
+                    buttonAdd.className = "addTask-mobile btn-mini";
                     buttonAdd.textContent = "Add Task";
                     body.appendChild(buttonAdd);
                     body.appendChild(ul);

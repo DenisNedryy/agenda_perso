@@ -5,7 +5,10 @@ export class ModalModel {
     }
 
     getTaskObj(form, userIdSelected, auth) {
-        const date = this.modalAddDate;
+        let date = null;
+        const modalContainer = form.closest(".modalContent");
+        if (modalContainer.getAttribute("data-selected-date")) date = modalContainer.getAttribute("data-selected-date");
+        if (!modalContainer.getAttribute("data-selected-date")) date = this.modalAddDate;
 
         const name = form.elements['name'].value;
         const description = form.elements['description'].value;

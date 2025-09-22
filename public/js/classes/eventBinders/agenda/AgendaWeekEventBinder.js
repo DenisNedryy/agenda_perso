@@ -83,6 +83,8 @@ export class AgendaWeekEventBinder {
         // modal addTask
         else if (e.target.classList.contains("weekNumber")) {
             const date = e.target.getAttribute("data-date");
+            const modalContent = document.querySelector(".modalContent");
+            modalContent?.setAttribute("data-selected-date", date);
             this.controller.modalModel.modalAddDate = date;
             const modal = document.querySelector(".modalAddContainer .modal");
             modal.classList.remove("hidden");
@@ -112,8 +114,7 @@ export class AgendaWeekEventBinder {
         }
         else if (e.target.classList.contains("btn-submit-addTask2")) {
             e.preventDefault();
-            const date = document.querySelector(".mobileNumber ").getAttribute("data-date");
-            console.log(date);
+            const date = document.querySelector(".calendarMobileView__body").getAttribute("data-date");
             this.controller.modalModel.modalAddDate = date;
             const form = e.target.closest("form");
             const userIdSelected = this.controller.authServices.userIdSelected;
