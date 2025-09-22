@@ -57,6 +57,9 @@
     body .asside__top__logoContainer p {
         display: none;
     }
+    body .agenda{
+        margin: 0px;
+    }
 }
 
 @media screen and (max-width: 916px) {
@@ -73,6 +76,57 @@
         flex-direction: column;
     }
 
+}
+
+@media screen and (max-width: 660px) {
+    body .home__bodyContainer__left__dayOff {
+        display: none;
+    }
+
+    body .home__bodyContainer__right__englishMap {
+        display: none;
+    }
+
+    body .home__bodyContainer__left {
+        width: 100%;
+    }
+
+    body .home,
+    body .agenda,
+    body .vocabulary,
+    body .auth {
+        margin: 0px 0px;
+    }
+
+    body .vocabulary {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    body .vocabulary__content__left__body__left{
+        display:none;
+    }
+    body .vocabulary__content__left__body__right{
+        padding: 0px;
+    }
+    body .vocabulary__content__left__body__right{
+        margin-top:20px;
+    }
+    body .category__body{
+        width: 100%;
+    }
+    body .vocabulary__content{
+        margin: 3px;
+        margin-top:9px;
+    }
+    body .vocFiche{
+        width: 95%;
+    }
+    body .agendaContent__header--iconsContainer i{
+        padding: 0px;
+    }
+    body .agendaContent__header{
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -176,10 +230,6 @@
 
     body .agenda__viewSelection__viewContainer li i {
         display: none;
-    }
-
-    body .agendaContent__header {
-        width: 90%;
     }
 
     body .agenda__viewSelection {
@@ -411,5 +461,13 @@
         margin-top: 15px;
         border-radius: 15px;
         padding: 20px;
+    }
+
+    body .agendaContent__body__right{
+        display:none;
+    }
+    body .agendaContent__body__mobileView{
+        display:flex;
+        flex-direction:column;
     }
 }

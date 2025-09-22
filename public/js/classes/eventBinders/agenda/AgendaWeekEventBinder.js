@@ -87,6 +87,13 @@ export class AgendaWeekEventBinder {
             const modal = document.querySelector(".modalAddContainer .modal");
             modal.classList.remove("hidden");
         }
+        // modal addTask
+        else if (e.target.classList.contains("addTask-mobile")) {
+            const date = e.target.getAttribute("data-date");
+            this.controller.modalModel.modalAddDate = date;
+            const modal = document.querySelector(".modalAddContainer .modal");
+            modal.classList.remove("hidden");
+        }
         else if (e.target.classList.contains("leaveModal")) {
             const modal = document.querySelector(".modalAddContainer .modal");
             modal.classList.add("hidden");
@@ -103,6 +110,41 @@ export class AgendaWeekEventBinder {
             }
             this.controller.show();
         }
+        else if (e.target.classList.contains("btn-submit-addTask2")) {
+            e.preventDefault();
+            const date = document.querySelector(".mobileNumber ").getAttribute("data-date");
+            console.log(date);
+            this.controller.modalModel.modalAddDate = date;
+            const form = e.target.closest("form");
+            const userIdSelected = this.controller.authServices.userIdSelected;
+            const auth = await this.controller.authServices.getAuth();
+            const task = this.controller.modalModel.getTaskObj(form, userIdSelected, auth);
+            if (task) {
+                console.log(task);
+                await this.controller.taskServices.createTask(task);
+            }
+            this.controller.show();
+        }
+
+        // modal addTask VERSION MOBILE
+
+        else if (e.target.classList.contains("leaveModal2")) {
+            const modal = document.querySelector(".modalAddContainer .modal2");
+            modal.classList.add("hidden");
+        }
+        else if (e.target.classList.contains("btn-submit-addTask2")) {
+            e.preventDefault();
+            const form = e.target.closest("form");
+            const userIdSelected = this.controller.authServices.userIdSelected;
+            const auth = await this.controller.authServices.getAuth();
+            const task = this.controller.modalModel.getTaskObj(form, userIdSelected, auth);
+            if (task) {
+                console.log(task);
+                await this.controller.taskServices.createTask(task);
+            }
+            this.controller.show();
+        }
+
 
         // focus modal 
         else if (e.target.classList.contains("task") || e.target.classList.contains("taskPara") || e.target.classList.contains("taskImg")) {
@@ -119,14 +161,25 @@ export class AgendaWeekEventBinder {
         else if (e.target.classList.contains("task-leave")) {
             document.querySelector(".modalFocus").classList.add("hidden");
         }
+        else if (e.target.classList.contains("task-leave2")) {
+            document.querySelector(".modalFocus2").classList.add("hidden");
+        }
 
         else if (e.target.classList.contains("task-delete")) {
             const taskId = e.target.closest(".modalContent").getAttribute("data-id");
             await this.controller.taskServices.deleteTask(taskId);
             this.controller.show();
         }
+        else if (e.target.classList.contains("task-delete2")) {
+            const taskId = e.target.closest(".modalContent").getAttribute("data-id");
+            await this.controller.taskServices.deleteTask(taskId);
+            this.controller.show();
+        }
 
         else if (e.target.classList.contains("task-update")) {
+            document.querySelector(".modalContent__footer").classList.remove("hidden");
+        }
+        else if (e.target.classList.contains("task-update2")) {
             document.querySelector(".modalContent__footer").classList.remove("hidden");
         }
 
@@ -156,6 +209,16 @@ export class AgendaWeekEventBinder {
                 document.querySelector(".modalFocus").classList.remove("hidden");
             }
         }
+        const taskEl2 = e.target.closest(".task2");
+        if (e.target.closest(".task2")) {
+            const taskId = taskEl2.getAttribute("data-id");
+            if (taskId !== undefined && (!taskEl2.classList.contains("bgJaune") && !taskEl2.classList.contains("bgBlack")) && !taskEl2.classList.contains("bgBanksHollidays") && !taskEl2.classList.contains("birthDayBg")) {
+                const taskRes = await this.controller.taskServices.readOneTask(taskId);
+                const task = taskRes.data.tasks;
+                this.controller.focusModalView.renderMobile(task);
+                document.querySelector(".modalFocus2").classList.remove("hidden");
+            }
+        }
 
         // spaced_Repetition next step
         if (e.target.classList.contains("btn-nextStep")) {
@@ -177,6 +240,19 @@ export class AgendaWeekEventBinder {
             const res = await this.controller.spaceRepService.reset(taskId);
             this.controller.show();
         }
+
+        // changer de jour sur la version mobile
+        const myDay = e.target.closest(".calendarMobileView__header__day");
+        if (myDay) {
+            const days = document.querySelectorAll(".calendarMobileView__header__day");
+            days.forEach((day) => {
+                day.classList.remove("currentDay-mobile-on");
+            });
+            myDay.classList.add("currentDay-mobile-on");
+            const date = myDay.querySelector(".mobileNumber").getAttribute("data-date");
+            this.controller.show(date);
+        }
+
     }
 
 

@@ -6,7 +6,7 @@ export class AgendaCtrl {
         this.agendaWeekView = agendaViews.agendaWeekView;
         this.agendaNavView = agendaViews.agendaNavView;
         this.agendaParamsView = agendaViews.agendaParamsView;
-        this.agendaCalendarView = agendaViews.agendaCalendarView; 
+        this.agendaCalendarView = agendaViews.agendaCalendarView;
         this.yearView = agendaViews.yearView;
         this.planningView = agendaViews.planningView;
         this.addModelView = agendaViews.addModelView;
@@ -35,11 +35,11 @@ export class AgendaCtrl {
         this.agendaEventBinder.setController(this);
         this.agendaWeekEventBinder.setController(this);
         this.agendaYearEventBinder.setController(this);
-        this.agendaPlanningEventBinder.setController(this); 
+        this.agendaPlanningEventBinder.setController(this);
 
     };
 
-    async show() { 
+    async show(dateSelected=null) {
 
         await this.authServices.init();
         this.dateNavigationModel.setCurrentDateSelected();
@@ -56,11 +56,11 @@ export class AgendaCtrl {
         }
         const date = new Date(this.dateNavigationModel.dateSelected);
         const weekParams = {
-            isBankHolidays : this.bankHolidaysModel.bankHolidays,
+            isBankHolidays: this.bankHolidaysModel.bankHolidays,
             isBirthDays: this.birthDaysModel.birthDays,
-            birthDaysTasks : this.birthDaysModel.birthDaysTask
+            birthDaysTasks: this.birthDaysModel.birthDaysTask
         }
-        const weekData = await this.calendarModel.getAgendaPerWeek({weekParams},tasksFiltered, date); 
+        const weekData = await this.calendarModel.getAgendaPerWeek({ weekParams }, tasksFiltered, date);
         const params = await this.authServices.getUsersStatus();
         params.bankHolidays = this.bankHolidaysModel.bankHolidays;
         params.birthDays = this.birthDaysModel.birthDays;
@@ -70,7 +70,9 @@ export class AgendaCtrl {
         this.agendaNavView.render(weekData.dateSelected);
         this.agendaParamsView.render(params);
         this.agendaCalendarView.render(weekData.weeklySchedule);
-        this.addModelView.renderModel(); 
+        this.agendaCalendarView.renderMobileView(weekData.weeklySchedule, dateSelected);
+        this.addModelView.renderModel();
+        this.addModelView.renderModelMobile();
         this.seoManager.setTitle('Ecorcerie Gestionnaire - Agenda');
 
         this.agendaEventBinder.addEventListeners();

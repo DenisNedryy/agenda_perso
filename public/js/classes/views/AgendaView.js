@@ -7,7 +7,7 @@ export class AgendaView {
             <div class="agenda">
                 <div class="agenda__viewSelection">
                     <p class="agenda__viewSelection--title">Views</p>
-                    <ul class="agenda__viewSelection__viewContainer">
+                    <ul class="agenda__viewSelection__viewContainer"> 
                         <li class="weekView">
                             <i class="fa-solid fa-calendar-week weekViewi"></i>
                             <p class="weekViewPara">Week</p>
@@ -23,6 +23,7 @@ export class AgendaView {
                     </ul>
                 </div>
                 <div class="agendaContent"></div> 
+                
             </div>
             `
         }

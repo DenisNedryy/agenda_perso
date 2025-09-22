@@ -382,3 +382,107 @@
 .modalFocus {
     z-index: 9999;
 }
+
+/* agenda version mobile */
+
+.agendaContent__body__mobileView {
+    background-color: rgb(31, 31, 65);
+    display: none;
+}
+
+.calendarMobileView__header {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(7, 8, 11);
+    cursor: pointer;
+}
+
+.calendarMobileView__header .calendarMobileView__header__day:hover {
+    background-color: rgb(31, 31, 65);
+    color: white;
+}
+
+.calendarMobileView__header__day {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(17, 17, 42);
+    color: rgba(255, 255, 255, .3);
+    border-top: 2px solid rgb(33, 66, 146);
+    padding-top: 5px;
+    align-items: center;
+    position: relative;
+}
+
+.currentDay-mobile-on {
+    background-color: rgb(31, 31, 65);
+    color: white;
+    border-top: 2px solid rgb(255, 155, 0);
+}
+
+
+.mobileDay {
+    text-transform: capitalize;
+    font-size: 4vw;
+}
+
+.mobileNumber {
+    font-size: 4vw;
+}
+
+.mobileDayLenght {
+    position: absolute;
+    top: -22px;
+    color: white;
+    font-weight: 600;
+    border: 1px solid red;
+    padding: 3px;
+    font-size: 9px;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0%;
+    z-index: 9999;
+    background-color: red;
+    border-radius: 3px;
+}
+
+.agendaContent__body__mobileView .calendarMobileView__body ul {
+    list-style-type: none;
+}
+
+.agendaContent__body__mobileView .calendarMobileView__body ul li {
+    margin: 15px;
+    padding: 15px;
+}
+
+body .agendaContent__body__left {
+    margin-bottom: 23px;
+}
+
+.modalFocus2 {
+    z-index: 99999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalFocus2 .modalContent__header i {
+    margin-right: 15px;
+}
+
+.addTask-mobile {
+    display: inline-block;
+    margin: 15px;
+}
+
+.agendaContent__body__mobileView .currentDay {
+    background-color: unset;
+}
