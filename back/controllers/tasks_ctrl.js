@@ -107,8 +107,15 @@ exports.createTask = async (req, res, next) => {
         const { name, description, date, type, subject, author_id, owner_id, author_img_url } = req.body;
         const [tasks] = await pool.execute("SELECT _index FROM tasks",);
 
-       
-        const newIndex = (tasks && tasks.length===0)? 1 : (tasks[tasks.length - 1]._index + 1);
+        // sort index pour toutes les tasks
+        let newIndex = (tasks && tasks.length === 0) ? 1 : (tasks[tasks.length - 1]._index + 1);
+        // un index uniquement pour les projects
+        const [projectsIndexs] = await pool.query("SELECT sort_order from tasks WHERE type = ?", type);
+        if (projectsIndexs.length > 0) {
+            newIndex = projectsIndexs.length + 1;
+        } else {
+            newIndex = 1;
+        }
 
 
         const data = {
@@ -194,31 +201,31 @@ exports.deleteTask = async (req, res, next) => {
 };
 
 exports.updateOrder = async (req, res, next) => {
-  try {
-    const orderArr = req.body.orderArr; 
+    try {
+        const orderArr = req.body.orderArr;
 
-    const whenClauses = orderArr.map(() => "WHEN ? THEN ?").join(" ");
-    const ids = orderArr.map(it => it.id);
+        const whenClauses = orderArr.map(() => "WHEN ? THEN ?").join(" ");
+        const ids = orderArr.map(it => it.id);
 
-    const sql = `
+        const sql = `
       UPDATE tasks
       SET sort_order = CASE id ${whenClauses} END
       WHERE id IN (${ids.map(() => "?").join(",")})
     `;
 
-    const params = [];
-    for (const { id, sort_order } of orderArr) {
-      params.push(id, sort_order);
+        const params = [];
+        for (const { id, sort_order } of orderArr) {
+            params.push(id, sort_order);
+        }
+        params.push(...ids);
+
+        await pool.execute(sql, params);
+
+        return res.status(200).json({ msg: "Tasks order updated." });
+    } catch (err) {
+        console.error("updateOrder error:", err);
+        return res.status(500).json({ err: "Erreur lors de la mise à jour" });
     }
-    params.push(...ids);
-
-    await pool.execute(sql, params);
-
-    return res.status(200).json({ msg: "Tasks order updated." });
-  } catch (err) {
-    console.error("updateOrder error:", err);
-    return res.status(500).json({ err: "Erreur lors de la mise à jour" });
-  }
 };
 
 
