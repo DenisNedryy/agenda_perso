@@ -5,7 +5,8 @@ export class VocabularyModel {
         this.vocabularyOptions = {
             index: 0,
             isVerso: false,
-            isFrToUk: true
+            isFrToUk: true,
+            isSounds: true
         }
         this.vocabularySession = []; // {uuid:string, success:false}
     }
@@ -40,6 +41,10 @@ export class VocabularyModel {
 
     switchLanguage() {
         this.vocabularyOptions.isFrToUk = !this.vocabularyOptions.isFrToUk;
+    }
+
+    toggleSounds() {
+        this.vocabularyOptions.isSounds = !this.vocabularyOptions.isSounds;
     }
 
     toggleTraduction() {
@@ -143,7 +148,7 @@ export class VocabularyModel {
         const percentils = await Promise.all(
             familiesArray.map(cell => this.getFamiliesPercentils(cell) || 0)
         );
-        percentils.forEach((cell)=>cumul+=cell);
+        percentils.forEach((cell) => cumul += cell);
         const pourcentageTotal = (cumul / (familiesArray.length * 100)) * 100;
         return Math.round(pourcentageTotal);
     }
