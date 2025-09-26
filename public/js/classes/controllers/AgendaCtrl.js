@@ -74,7 +74,7 @@ export class AgendaCtrl {
         this.agendaCalendarView.renderMobileView(weekData.weeklySchedule, dateSelected);
         this.addModelView.renderModel();
         this.addModelView.renderModelMobile();
-        this.seoManager.setTitle('Ecorcerie Gestionnaire - Agenda');
+        this.seoManager.setTitle('Schedule - Agenda');
 
         this.agendaEventBinder.addEventListeners();
         this.agendaWeekEventBinder.addEventListeners();
