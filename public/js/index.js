@@ -97,7 +97,6 @@ const modalModel = new ModalModel();
 const vocabularyModel = new VocabularyModel(vocabularyService);
 
 // components instances
-
 const addModelView = new AddModelView();
 const focusModalView = new FocusModalView(dateModel);
 
@@ -174,7 +173,6 @@ const agendaModels = Object.freeze({
     planningModel: planningModel,
     modalModel: modalModel
 });
-
 const agendaServices = Object.freeze({
     authServices: authServices,
     taskServices: taskServices,
