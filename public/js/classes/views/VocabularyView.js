@@ -22,7 +22,7 @@ export class VocabularyView {
                         <div class="vocabulary__content__right__body"></div>
                     </div>   
             </div>
-            `; 
+            `;
         }
     }
 
@@ -43,7 +43,7 @@ export class VocabularyView {
             tags.appendChild(frToUk);
             // tags-sounds
             const btnSound = document.createElement("button");
-            btnSound.className="btn-mini toggle-sounds";
+            btnSound.className = "btn-mini toggle-sounds";
             btnSound.textContent = `${options.isSounds ? 'sounds-on' : 'sounds-off'}`;
             tags.appendChild(btnSound);
             el.appendChild(tags);
@@ -112,7 +112,7 @@ export class VocabularyView {
             for (let i = 0; i < keys.length; i++) {
                 const fiche = document.createElement("div");
                 fiche.setAttribute("data-name", keys[i]);
-                fiche.className = "vocFiche fade-in";
+                fiche.className = "vocFiche";
                 const ficheTop = document.createElement("div");
                 ficheTop.className = "vocFiche__top";
                 const leftContainer = document.createElement("div");
@@ -144,11 +144,8 @@ export class VocabularyView {
 
                 fiche.appendChild(ficheBottom);
 
+                vocBodyRight.appendChild(fiche);
 
-                setTimeout(() => {
-                    vocBodyRight.appendChild(fiche);
-                }, cpt);
-                cpt+=200;
 
 
             }
