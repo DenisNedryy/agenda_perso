@@ -25,6 +25,9 @@ async function tasksService() {
   });
 
   await deleteDaysOffPassed(daysOffPassed);
+
+  await deleteTasksToDelete();
+
 }
 
 async function readTasks() {
@@ -58,6 +61,14 @@ async function deleteDaysOffPassed(daysOff) {
     console.log(`${res.affectedRows} dayOff passés supprimés`);
   } catch (err) {
     console.error("Error deleteDaysOff: ", err);
+  }
+}
+
+async function deleteTasksToDelete() {
+  try {
+    await pool.execute("DELETE FROM tasks WHERE to_delete = ?", [true]);
+  } catch (err) {
+    console.error("Error lors de la suppression des taches 'to delete': ", err);
   }
 }
 

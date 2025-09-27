@@ -229,3 +229,22 @@ exports.updateOrder = async (req, res, next) => {
 };
 
 
+
+exports.toggleCardToDelete = async (req, res, next) => {
+    try {
+        const taskId = req.params.id;
+        const [task] = await pool.execute("SELECT * FROM tasks WHERE id = ?", [taskId]);
+
+        if (task.length === 0) {
+            return res.status(404).json({ msg: "Tâche introuvable" });
+        }
+
+        const reverseToDelete = task[0].to_delete === 0 ? 1 : 0;
+
+        if (req.auth.userId !== task[0].user_id) return res.status(400).json({ msg: "action non authorisée" })
+        await pool.execute(`UPDATE tasks SET to_delete = ? WHERE id = ?`, [reverseToDelete, taskId]);
+        return res.status(200).json({ msg: "task to_delete reversed" });
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+};

@@ -4,6 +4,7 @@ CREATE TABLE tasks (
     author_id VARCHAR(36),
     owner_id VARCHAR(36),
     status BOOLEAN DEFAULT FALSE, 
+    to_delete BOOLEAN DEFAULT FALSE,
     name VARCHAR(100),
     description TEXT,
     date DATE,

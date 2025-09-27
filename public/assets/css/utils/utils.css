@@ -34,6 +34,15 @@
     font-weight: 500;
 }
 
+.dark {
+    filter: brightness(.5);
+    background-color: rgb(20, 21, 21);
+}
+
+.rayé {
+    text-decoration: line-through;
+}
+
 .paraGrey {
     color: #bfbfbf;
 }
