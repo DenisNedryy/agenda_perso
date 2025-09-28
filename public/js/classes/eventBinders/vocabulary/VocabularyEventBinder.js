@@ -18,7 +18,7 @@ export class VocabularyEventBinder {
 
         // family
         const familyContainer = e.target.closest(".vocabulary__families");
-        if (familyContainer && e.target.classList.contains("btn-mini")) {
+        if (familyContainer && e.target.classList.contains("btn-mini-white")) {
             const family = e.target.getAttribute("data-name");
             this.controller.vocabularyModel.end();
             this.controller.show(family);
