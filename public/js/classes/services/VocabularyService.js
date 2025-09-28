@@ -140,7 +140,7 @@ export class VocabularyService {
             });
             const res = await preRes.json();
             return {
-                status: preRes.status, 
+                status: preRes.status,
                 ok: preRes.ok,
                 data: res
             };
@@ -149,7 +149,7 @@ export class VocabularyService {
         }
     }
 
-    async updateategoryPertencil(vocabularySession,category) {
+    async updateategoryPertencil(vocabularySession, category) {
         try {
             const preRes = await fetch(`${HOST}/api/vocabulary/updateCategory/${category}`, {
                 method: "PUT",
@@ -193,6 +193,25 @@ export class VocabularyService {
         }
     }
 
+    async isVocabulary() {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/isVocabulary`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
 
 }

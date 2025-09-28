@@ -1,6 +1,6 @@
 export class VocabularyCtrl {
 
-    constructor(view, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager,debouncer) {
+    constructor(view, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager, debouncer) {
         this.view = view;
         this.vocabularyService = vocabularyService;
         this.vocabularyModel = vocabularyModel;
@@ -12,6 +12,17 @@ export class VocabularyCtrl {
     }
 
     async show(family = "nature et environnement") {
+        // si pas de vocabulaire, affichage réduit
+        const isVocabulary = await this.vocabularyModel.isVocabulary();
+        if (!isVocabulary) {
+            console.log("trying to show the ctrl if no vocabulary");
+            this.view.render();
+            this.view.render404();
+            this.view.renderFilter404();
+            return;
+        }
+
+        // main
         const vocabulary = await this.vocabularyModel.getVocabulary();
         const vocabularyByCategories = await this.vocabularyModel.getVocabularyByCategories();
         const vocabularyByFamily = await this.vocabularyModel.getVocabularyByFamily(family);

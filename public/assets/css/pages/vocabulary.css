@@ -1,3 +1,14 @@
+/*404 */
+.englandMap404Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.englendMap404 {
+    width: 200px;
+}
+
 .vocabulary {
     display: flex;
 }
@@ -253,11 +264,11 @@
 }
 
 .vocFiche {
-background-color: rgb(20, 21, 21);
-  padding: 15px;
-  margin: 1px;
-  width: 600px;
-  cursor: pointer;
+    background-color: rgb(20, 21, 21);
+    padding: 15px;
+    margin: 1px;
+    width: 600px;
+    cursor: pointer;
 }
 
 .vocabulary__content__left__body__left__progress {

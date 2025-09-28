@@ -33,10 +33,19 @@ export class VocabularyView {
             const titleAddVoc = document.createElement("p");
             titleAddVoc.textContent = "Vocabulary";
             addVoc.appendChild(titleAddVoc);
+
+            // btn base
+            const addBase = document.createElement("button");
+            addBase.className = "btn-mini-white addVoc";
+            addBase.textContent = "Add basic vocabulary";
+            addVoc.appendChild(addBase);
+
+            // btn add voc
             const btnAddVoc = document.createElement("button");
-            btnAddVoc.className="btn-mini-white addVoc";
+            btnAddVoc.className = "btn-mini-white addVoc";
             btnAddVoc.textContent = "Add vocabulary";
             addVoc.appendChild(btnAddVoc);
+
             el.appendChild(addVoc);
 
             // tags
@@ -255,7 +264,33 @@ export class VocabularyView {
         }
     }
 
+    render404() {
+        const el = document.querySelector(".vocabulary__content");
+        if (el) {
+            el.innerHTML = `<div class="englandMap404Container">
+                                <img class="englendMap404" src="/public/assets/images/map/uk404.png" />
+                            </div>`;
+        }
+    }
 
+    renderFilter404() {
+        const el = document.querySelector(".vocabulary__content__right__body");
+        if (el) {
+            el.innerHTML = "";
+            // addVocabulary
+            const addVoc = document.createElement("div");
+            addVoc.className = "vocabulary__add";
+            const titleAddVoc = document.createElement("p");
+            titleAddVoc.textContent = "Vocabulary";
+            addVoc.appendChild(titleAddVoc);
+            // btn base
+            const addBase = document.createElement("button");
+            addBase.className = "btn-mini-white addVoc";
+            addBase.textContent = "Add basic vocabulary";
+            addVoc.appendChild(addBase);
+            el.appendChild(addVoc);
+        }
+    }
 
 }
 

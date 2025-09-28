@@ -194,11 +194,13 @@ const profilFormView = new ProfilFormView();
 const profilEventBinder = new ProfilEventBinder(profilView);
 const profilCtrl = new ProfilCtrl(profilView, seoManager, profilEventBinder, authServices, miseAJourAuth, profilFormView, birthDaysServices);
 
-// petit programme pour ajouter du vocabulaire
-import { data } from "./data/vocabulary/vocabulary.js"
-import { AddVocabulary } from "./AddVocabulary.js";
-const addVocabulary = new AddVocabulary();
-addVocabulary.init(data);
+// // petit programme pour ajouter du vocabulaire
+// import { data } from "./data/vocabulary/vocabulary.js"
+// import { AddVocabulary } from "./AddVocabulary.js";
+// const addVocabulary = new AddVocabulary();
+// addVocabulary.init(data);
+
+
 // vocabulary instances
 const vocabularyView = new VocabularyView();
 

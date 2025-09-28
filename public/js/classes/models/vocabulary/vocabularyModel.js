@@ -11,6 +11,11 @@ export class VocabularyModel {
         this.vocabularySession = []; // {uuid:string, success:false}
     }
 
+    async isVocabulary(){ 
+        const res = await this.vocabularyService.isVocabulary();
+        return res.ok ? true : false;
+    }
+
     speak(text) {
         if ('speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(text);

@@ -7,6 +7,7 @@ router.get("/", auth, vocabularyCtrl.getVocabulary);
 router.get("/families", auth, vocabularyCtrl.getFamilies);
 router.get("/categories", auth, vocabularyCtrl.getCategories);
 router.get("/byCategories", auth, vocabularyCtrl.getVocabularyByCategories);
+router.get("/isVocabulary", auth, vocabularyCtrl.isVocabulary);
 router.get("/oneCategory/:category", auth, vocabularyCtrl.getOneVocabularyCategory);
 router.get("/byFamily/:family", auth, vocabularyCtrl.getVocabularyByFamily);
 router.post("/init", auth, vocabularyCtrl.initVocabulary);

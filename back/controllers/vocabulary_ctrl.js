@@ -1,7 +1,18 @@
 const { v4: uuidv4 } = require("uuid");
 const pool = require("../connection/sqlConnection");
-
 const CHUNK_SIZE = 1000;
+
+exports.isVocabulary = async (req, res, next) => {
+  try {
+    const [vocabulary] = await pool.query("SELECT * FROM vocabulary");
+    if (vocabulary.length === 0) return res.status(404).json({ msg: "No vocabulary yet." });
+    return res.status(200).json({ msg: "You added some vocabulary" });
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+};
+
+
 exports.initVocabulary = async (req, res) => {
   try {
     const vocabulary = req.body.vocabulary;
