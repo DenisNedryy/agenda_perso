@@ -13,7 +13,7 @@ export class VocabularyEventBinder {
         document.removeEventListener('click', this.boundHandleClick);
         document.addEventListener('click', this.boundHandleClick);
         document.removeEventListener('change', this.boundHandleSubmit);
-        document.addEventListener('change', this.boundHandleSubmit);
+        document.addEventListener('change', this.boundHandleSubmit); 
     }
 
     async handleSubmit(e) {
@@ -129,7 +129,10 @@ export class VocabularyEventBinder {
             this.controller.modalViews.renderSelectCategories(categories);
         }
 
-
+        const familyLink = e.target.closest(".familyLink");
+        if(familyLink){
+            document.querySelector(".familyInput").classList.toggle("unvisible");
+        }
 
     }
 

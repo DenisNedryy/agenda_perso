@@ -364,7 +364,16 @@
 
 
 /* modal */
-.modalViewContainer__body__family{
-    display:flex;
-    flex-direction:column;
+#form-family,
+#form-category {
+    display: flex;
+    flex-direction: column;
+}
+
+.familyLink {
+    cursor: pointer;
+}
+
+.unvisible {
+    visibility: hidden;
 }

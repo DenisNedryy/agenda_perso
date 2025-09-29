@@ -22,13 +22,13 @@ export class ModalViews {
         if (el) {
             el.innerHTML = "";
             const form = document.createElement("form");
-            form.id="form-family";
+            form.id = "form-family";
             const familyLabel = document.createElement("label");
             familyLabel.textContent = "Family";
             form.appendChild(familyLabel);
             const familySelect = document.createElement("select");
             familySelect.id = "familySelect";
-            familySelect.name="family";
+            familySelect.name = "family";
             families.forEach((family) => {
                 const option = document.createElement("option");
                 option.value = family;
@@ -40,6 +40,9 @@ export class ModalViews {
             familyLink.className = "familyLink";
             familyLink.textContent = "+ new family";
             form.appendChild(familyLink);
+            const familyInput = document.createElement("input");
+            familyInput.className = "familyInput unvisible";
+            form.appendChild(familyInput);
             // const btnSubmit = document.createElement("button");
             // btnSubmit.type="submit";
             // btnSubmit.textContent = "Suivant";
@@ -48,26 +51,30 @@ export class ModalViews {
         }
     }
 
-    renderSelectCategories(categories) { 
+    renderSelectCategories(categories) {
         const el = document.querySelector(".modalViewContainer__body__category");
         if (el) {
             el.innerHTML = "";
+            const form = document.createElement("form");
+            form.id = "form-category";
             const categoryLabel = document.createElement("label");
             categoryLabel.textContent = "Category";
-            el.appendChild(categoryLabel);
-            const cateorySelect = document.createElement("select");
-            cateorySelect.id = "cateorySelect";
+            form.appendChild(categoryLabel);
+            const cateorySelect = document.createElement("datalist");
+            cateorySelect.id = "old-categories";
             categories.forEach((category) => {
                 const option = document.createElement("option");
                 option.value = category;
                 option.textContent = category;
                 cateorySelect.appendChild(option);
             });
-            el.appendChild(cateorySelect);
-            const categoryLink = document.createElement("p");
-            categoryLink.className = "categoryLink";
-            categoryLink.textContent = "+ new category";
-            el.appendChild(categoryLink);
+            form.appendChild(cateorySelect);
+            const categoryInput = document.createElement("input");
+            categoryInput.name = "category";
+            categoryInput.setAttribute("list", "old-categories");
+            form.appendChild(categoryInput);
+            el.appendChild(form);
+
         }
     }
 
