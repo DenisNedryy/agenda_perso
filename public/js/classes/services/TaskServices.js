@@ -247,4 +247,25 @@ export class TaskServices {
         }
     }
 
+
+    async reviewTomorow(id) {
+        try {
+            const preRes = await fetch(`${HOST}/api/tasks/reviewTomorow/${id}`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                credentials: "include",
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 }

@@ -12,6 +12,7 @@ router.get("/:id", auth, tasksCtrl.readOneTask);
 router.post("/", auth, tasksCtrl.createTask);
 router.put("/order", auth, tasksCtrl.updateOrder);
 router.put("/:id", auth, tasksCtrl.updateTask);
+router.put("/reviewTomorow/:id", auth, tasksCtrl.reviewTomorow);
 router.put("/toDelete/:id", auth, tasksCtrl.toggleCardToDelete);
 router.delete("/:id", auth, tasksCtrl.deleteTask);
 

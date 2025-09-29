@@ -3,7 +3,7 @@ import { HOST } from "../../host.js";
 export class VocabularyView {
 
     render() {
-        const el = document.getElementById("root");
+        const el = document.getElementById("root"); 
         if (el) {
             el.innerHTML = ` 
             <div class="vocabulary">
@@ -36,13 +36,13 @@ export class VocabularyView {
 
             // btn base
             const addBase = document.createElement("button");
-            addBase.className = "btn-mini-white addVoc";
+            addBase.className = "btn-mini-white addBaseVocabulary";
             addBase.textContent = "Add basic vocabulary";
             addVoc.appendChild(addBase);
 
             // btn add voc
             const btnAddVoc = document.createElement("button");
-            btnAddVoc.className = "btn-mini-white addVoc";
+            btnAddVoc.className = "btn-mini-white addVocabulary";
             btnAddVoc.textContent = "Add vocabulary";
             addVoc.appendChild(btnAddVoc);
 
@@ -285,12 +285,13 @@ export class VocabularyView {
             addVoc.appendChild(titleAddVoc);
             // btn base
             const addBase = document.createElement("button");
-            addBase.className = "btn-mini-white addVoc";
+            addBase.className = "btn-mini-white addBaseVocabulary";
             addBase.textContent = "Add basic vocabulary";
             addVoc.appendChild(addBase);
             el.appendChild(addVoc);
         }
     }
+
 
 }
 

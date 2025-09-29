@@ -100,4 +100,9 @@ export class TaskModel {
         }
     }
 
+    async reviewTomorow(taskId) {
+        const res = await this.taskService.reviewTomorow(taskId);
+        return res.data.msg;
+    }
+
 }

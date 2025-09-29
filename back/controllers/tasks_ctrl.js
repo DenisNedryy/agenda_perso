@@ -248,3 +248,22 @@ exports.toggleCardToDelete = async (req, res, next) => {
         return res.status(500).json({ err });
     }
 };
+
+exports.reviewTomorow = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        // selection de la task
+        const [tasks] = await pool.execute("SELECT * FROM tasks WHERE id = ?", [id]);
+        if (tasks.length === 0) {
+            return res.status(404).json({ msg: "task undefined" });
+        }
+        const task = tasks[0];
+        // ajout d'un jour à la date
+        const date = new Date(new Date(task.date).getTime() + (1 * (1000 * 60 * 60 * 24)));
+        
+        await pool.execute("UPDATE tasks SET date = ? WHERE id = ?", [date, id]);
+        return res.status(200).json({ msg: "task updated" })
+    } catch (err) {
+        return res.status(400).json({ error: err });
+    }
+};

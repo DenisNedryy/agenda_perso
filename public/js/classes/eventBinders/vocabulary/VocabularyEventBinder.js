@@ -16,6 +16,14 @@ export class VocabularyEventBinder {
 
     async handleClick(e) {
 
+        // add base vocabulary
+        const vocabulary = e.target.closest(".addBaseVocabulary");
+        if (vocabulary) {
+            const data = this.controller.data;
+            await this.controller.vocabularyModel.init(data);
+            this.controller.show();
+        }
+
         // family
         const familyContainer = e.target.closest(".vocabulary__families");
         if (familyContainer && e.target.classList.contains("btn-mini-white")) {
@@ -96,6 +104,12 @@ export class VocabularyEventBinder {
             const category = document.querySelector(".vocabulary__content").getAttribute("data-category");
             const oneVocabularyCategory = await this.controller.vocabularyModel.getOneVocabularyCategory(category);
             this.controller.view.renderCategory(oneVocabularyCategory, { options });
+        }
+
+        // render modal container
+        const btnModalContainer = e.target.closest(".addVocabulary");
+        if(btnModalContainer){
+            this.controller.modalViews.renderModalContainer(); 
         }
 
     }
