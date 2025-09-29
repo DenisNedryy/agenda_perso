@@ -104,7 +104,6 @@ export class VocabularyView {
 
             const vocBodyLeft = document.createElement("div");
             vocBodyLeft.className = "vocabulary__content__left__body__left";
-            console.log(data);
 
             const wordsLength = keys.reduce((acc, currV) => {
                 return acc += data[currV].length;

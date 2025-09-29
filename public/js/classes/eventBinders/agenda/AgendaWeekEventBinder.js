@@ -21,6 +21,8 @@ export class AgendaWeekEventBinder {
 
     async handleChangeTask(e) {
         // toggle subject
+        const container = e.target.closest(".formTask-add");
+        if(!container) return;
         const subContainer = document.querySelector(".subjectContainer");
         const subSelect = document.getElementById("subjectSelect");
         const typeSelect = document.getElementById("typeSelect");

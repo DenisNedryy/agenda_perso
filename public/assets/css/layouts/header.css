@@ -101,6 +101,7 @@ header {
     width: 35px;
     height: 35px;
     margin-right: 10px;
+    object-fit: cover;
 }
 
 .header__right__profil__text {

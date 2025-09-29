@@ -1,8 +1,8 @@
 export class VocabularyEventBinder {
 
     constructor() {
-
         this.boundHandleClick = this.handleClick.bind(this);
+        this.boundHandleSubmit = this.handleSubmit.bind(this);
     }
 
     setController(controller) {
@@ -12,6 +12,19 @@ export class VocabularyEventBinder {
     addEventListeners() {
         document.removeEventListener('click', this.boundHandleClick);
         document.addEventListener('click', this.boundHandleClick);
+        document.removeEventListener('change', this.boundHandleSubmit);
+        document.addEventListener('change', this.boundHandleSubmit);
+    }
+
+    async handleSubmit(e) {
+        // submit family
+        const formFamily = e.target.closest("#form-family");
+        if (formFamily) {
+            e.preventDefault();
+            const family = formFamily.elements['family'].value;
+            const categories = await this.controller.vocabularyModel.getCategoriesNames(family);
+            this.controller.modalViews.renderSelectCategories(categories);
+        }
     }
 
     async handleClick(e) {
@@ -108,9 +121,15 @@ export class VocabularyEventBinder {
 
         // render modal container
         const btnModalContainer = e.target.closest(".addVocabulary");
-        if(btnModalContainer){
-            this.controller.modalViews.renderModalContainer(); 
+        if (btnModalContainer) {
+            const familiesNames = await this.controller.vocabularyModel.getFamilies();
+            this.controller.modalViews.renderModalContainer();
+            this.controller.modalViews.renderSelectFamilies(familiesNames);
+            const categories = await this.controller.vocabularyModel.getCategoriesNames();
+            this.controller.modalViews.renderSelectCategories(categories);
         }
+
+
 
     }
 

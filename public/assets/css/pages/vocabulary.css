@@ -126,7 +126,7 @@
 }
 
 .vocabulary__content__left {
-    width: 100%;
+    width: 600px;
 }
 
 .select-vocabulary__content__right {
@@ -360,4 +360,11 @@
 .category__footer__buttons button {
     margin: 0px 10px;
     padding: 5px 15px;
+}
+
+
+/* modal */
+.modalViewContainer__body__family{
+    display:flex;
+    flex-direction:column;
 }
