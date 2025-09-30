@@ -9,12 +9,33 @@ export class VocabularyModel {
             isSounds: true
         }
         this.isNewFamily = false;
+        this.vocabularyAddOptions = {
+            family: "",
+            category: "",
+            img: null
+        }
         this.vocabularySession = []; // {uuid:string, success:false}
     }
 
     async isVocabulary() {
         const res = await this.vocabularyService.isVocabulary();
         return res.ok ? true : false;
+    }
+
+    resetVocabularyAddOptions() {
+        this.vocabularyAddOptions = {
+            family: "",
+            category: "",
+            img: null
+        }
+    }
+
+    setUpVocabularyAddOptions(options) {
+        this.vocabularyAddOptions = {
+            family: options.family,
+            category: options.category,
+            img: options.img
+        }
     }
 
     async init(data) {

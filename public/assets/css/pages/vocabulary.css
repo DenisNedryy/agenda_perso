@@ -377,3 +377,6 @@
 .unvisible {
     visibility: hidden;
 }
+.modalViewContainer__body__family__keys, .modalViewContainer__body__family__values{
+    display:flex;
+}

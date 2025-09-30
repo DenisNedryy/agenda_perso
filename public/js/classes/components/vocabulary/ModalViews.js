@@ -28,10 +28,37 @@ export class ModalViews {
         }
     }
 
-    renderVocabularyForm(options) {
+    renderVocabularyForm(options, length = 0) {
         const el = document.querySelector(".modalViewContainer__body__family");
         if (el) {
-            console.log(options.img.name);
+            el.innerHTML = `
+            <div class="modalViewContainer__body__family__keys">
+                 <p>Family</p>
+                 <p>Category</p> 
+                 <p>Length</p>
+            </div>
+            <div class="modalViewContainer__body__family__values">
+                 <p>${options.family}</p>
+                 <p>${options.category}</p>
+                 <p>${length}</p>
+            </div>
+            <div class="vocabulary-add-container">
+                <p>Add a word</p>
+                <form>
+                      <div>
+                         <label>Word in French</label>
+                         <input type="text" name="name-fr"/>
+                     </div>
+                     <div>
+                          <label>Word in English</label>
+                          <input type="text" name="name-uk"/>
+                      </div>
+                      <div class="btn-container">
+                        <button class="btn-vocabulary-add" type="button">Ajouter</button><button class="btn-vocabulary-close" type="button">Terminer</button>
+                      </div>
+                </form>
+            </div>
+            `;
         }
     }
 

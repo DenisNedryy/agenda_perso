@@ -38,21 +38,32 @@ export class VocabularyEventBinder {
             const family = formAddModal.elements['family'].value;
             const category = formAddModal.elements['category'].value;
             const img = formAddModal.elements['img'].files[0];
-            if (!family || family === "" || !category || category === "") return;
-            console.log(family);
-            console.log(category);
-            console.log(img.name);
+            if (!family || family === "" || !category || category === "" || !img) return;
             const options = {
                 family: family,
                 category: category,
                 img: img
             }
+            // ajouter 
+            this.controller.vocabularyModel.setUpVocabularyAddOptions(options);
             this.controller.modalViews.renderVocabularyForm(options);
         }
-
     }
 
     async handleClick(e) {
+
+        // ajouter un mot de vocabulaire
+        const btnVocabularyAdd = e.target.closest(".btn-vocabulary-add");
+        if (btnVocabularyAdd) {
+            e.preventDefault();
+            const form = e.target.closest("form");
+            const frName = form.elements['name-fr'].value;
+            const ukName = form.elements['name-uk'].value;
+            const options = this.controller.vocabularyModel.vocabularyAddOptions;
+            console.log(options);
+            console.log(frName);
+            console.log(ukName);
+        }
 
         // add base vocabulary
         const vocabulary = e.target.closest(".addBaseVocabulary");
@@ -147,6 +158,7 @@ export class VocabularyEventBinder {
         // render modal container
         const btnModalContainer = e.target.closest(".addVocabulary");
         if (btnModalContainer) {
+            this.controller.vocabularyModel.resetVocabularyAddOptions();
             const familiesNames = await this.controller.vocabularyModel.getFamilies();
             this.controller.modalViews.renderModalContainer();
             this.controller.modalViews.renderBodyFamilyForm();
