@@ -63,6 +63,7 @@ export class VocabularyEventBinder {
             console.log(options);
             console.log(frName);
             console.log(ukName);
+            form.reset();
         }
 
         // add base vocabulary
