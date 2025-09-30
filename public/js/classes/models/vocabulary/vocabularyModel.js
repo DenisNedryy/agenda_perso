@@ -8,6 +8,7 @@ export class VocabularyModel {
             isFrToUk: true,
             isSounds: true
         }
+        this.isNewFamily = false;
         this.vocabularySession = []; // {uuid:string, success:false}
     }
 
@@ -102,7 +103,7 @@ export class VocabularyModel {
         return res.data.vocabulary;
     }
 
-    async getCategoriesNames(family="corps et émotions") {
+    async getCategoriesNames(family = "corps et émotions") {
         const res = await this.vocabularyService.getVocabulary();
         const vocabulary = res.data.vocabulary;
         return vocabulary.reduce((acc, currV) => {
@@ -115,7 +116,7 @@ export class VocabularyModel {
 
     async getOneVocabularyCategory(category) {
         const res = await this.vocabularyService.getOneVocabularyCategory(category);
-        return res.data.vocabulary; 
+        return res.data.vocabulary;
     }
 
     async getVocabularyByCategories() {

@@ -8,8 +8,6 @@ export class ModalViews {
                 <div class="modalViewContainer__header"></div>
                 <div class="modalViewContainer__body">
                     <div class="modalViewContainer__body__family"></div>
-                    <div class="modalViewContainer__body__category"></div>
-                    <div class="modalViewContainer__body__vocabulary"></div>
                 </div>
                 <div class="modalViewContainer__footer"></div>
             </div>
@@ -17,63 +15,97 @@ export class ModalViews {
         }
     }
 
-    renderSelectFamilies(families) {
+    renderBodyFamilyForm() {
         const el = document.querySelector(".modalViewContainer__body__family");
         if (el) {
+            el.innerHTML = `
+                    <form id="vocabularyAddModal">
+                         <div class="vocabularyAddModal__family"></div>
+                        <div class="vocabularyAddModal__category"></div>
+                        <button type="submit">Submit</button>
+                    </form>
+            `;
+        }
+    }
+
+    renderVocabularyForm(options) {
+        const el = document.querySelector(".modalViewContainer__body__family");
+        if (el) {
+            console.log(options.img.name);
+        }
+    }
+
+    renderSelectFamilies(families, isNewFamily) {
+        const el = document.querySelector(".vocabularyAddModal__family");
+        if (el) {
             el.innerHTML = "";
-            const form = document.createElement("form");
-            form.id = "form-family";
+            const fieldset = document.createElement("fieldset");
+            fieldset.id = "fieldset-family";
             const familyLabel = document.createElement("label");
             familyLabel.textContent = "Family";
-            form.appendChild(familyLabel);
-            const familySelect = document.createElement("select");
-            familySelect.id = "familySelect";
-            familySelect.name = "family";
-            families.forEach((family) => {
-                const option = document.createElement("option");
-                option.value = family;
-                option.textContent = family;
-                familySelect.appendChild(option);
-            });
-            form.appendChild(familySelect);
+            fieldset.appendChild(familyLabel);
+            if (!isNewFamily) {
+                const familySelect = document.createElement("select");
+                familySelect.id = "familySelect";
+                familySelect.name = "family";
+                families.forEach((family) => {
+                    const option = document.createElement("option");
+                    option.value = family;
+                    option.textContent = family;
+                    familySelect.appendChild(option);
+                });
+                fieldset.appendChild(familySelect);
+            } else {
+                const familyInput = document.createElement("input");
+                familyInput.name = "family";
+                familyInput.className = "familyInput";
+                fieldset.appendChild(familyInput);
+            }
             const familyLink = document.createElement("p");
             familyLink.className = "familyLink";
-            familyLink.textContent = "+ new family";
-            form.appendChild(familyLink);
-            const familyInput = document.createElement("input");
-            familyInput.className = "familyInput unvisible";
-            form.appendChild(familyInput);
+            familyLink.textContent = `${isNewFamily ? "+ Old families" : "+ New family"}`;
+            fieldset.appendChild(familyLink);
+
             // const btnSubmit = document.createElement("button");
             // btnSubmit.type="submit";
             // btnSubmit.textContent = "Suivant";
             // form.appendChild(btnSubmit);
-            el.appendChild(form);
+            el.appendChild(fieldset);
         }
     }
 
     renderSelectCategories(categories) {
-        const el = document.querySelector(".modalViewContainer__body__category");
+        const el = document.querySelector(".vocabularyAddModal__category");
         if (el) {
             el.innerHTML = "";
-            const form = document.createElement("form");
-            form.id = "form-category";
+            const fieldset = document.createElement("fieldset");
+            fieldset.id = "fieldset-category";
             const categoryLabel = document.createElement("label");
             categoryLabel.textContent = "Category";
-            form.appendChild(categoryLabel);
-            const cateorySelect = document.createElement("datalist");
-            cateorySelect.id = "old-categories";
+            fieldset.appendChild(categoryLabel);
+
+
+            const cateoryDataList = document.createElement("datalist");
+            cateoryDataList.id = "old-categories";
             categories.forEach((category) => {
                 const option = document.createElement("option");
                 option.value = category;
                 option.textContent = category;
-                cateorySelect.appendChild(option);
+                cateoryDataList.appendChild(option);
             });
-            form.appendChild(cateorySelect);
+            fieldset.appendChild(cateoryDataList);
+
             const categoryInput = document.createElement("input");
             categoryInput.name = "category";
             categoryInput.setAttribute("list", "old-categories");
-            form.appendChild(categoryInput);
-            el.appendChild(form);
+            fieldset.appendChild(categoryInput);
+
+            const img = document.createElement("input");
+            img.type = "file";
+            img.name = "img";
+            fieldset.appendChild(img);
+
+            el.appendChild(fieldset);
 
         }
     }
