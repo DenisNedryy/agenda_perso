@@ -27,8 +27,11 @@ export class VocabularyModel {
         const formData = new FormData();
         formData.append("family", options.family);
         formData.append("category", options.category);
-        formData.append("img", options.img);
+        formData.append("img_url", options.img);
+        formData.append("uk_name", options.uk_name);
+        formData.append("fr_name", options.fr_name);
         const res = await this.vocabularyService.addVocabulary(formData);
+        console.log(res);
         return res.data.msg;
     }
 
@@ -165,7 +168,7 @@ export class VocabularyModel {
 
     async updateategoryPertencil(category) {
         const res = await this.vocabularyService.updateategoryPertencil(this.vocabularySession, category);
-        console.log(res);
+
     }
 
     async getCategories() {
@@ -173,17 +176,30 @@ export class VocabularyModel {
         return res.data.categories;
     }
 
+    async getVocabularySortedByFamiliesAndCategories() {
+        const vocabulary = await this.getVocabulary();
+        return vocabulary.reduce((acc, currV) => {
+
+            let existingFamily = acc.find((val) => val.name === currV.family);
+            // ajout de la famille
+            if (!existingFamily) {
+                existingFamily = { name: currV.family, data: [] };
+                acc.push(existingFamily);
+            }
+
+            // ajout des categories
+            if (!existingFamily.data.includes(currV.category)) {
+                existingFamily.data.push(currV.category);
+            }
+
+            return acc;
+
+        }, []);
+    }
+
     async getFamiliesPercentils(family) {
+        const families = await this.getVocabularySortedByFamiliesAndCategories();
         const categories = await this.getCategories();
-        const families = [
-            { name: "maison et vie quotidienne", data: ["house", "bedroom", "kitchen", "tools", "clothing"] },
-            { name: "nature et environnement", data: ["animals", "vegetation", "fruits", "vegetable", "weather"] },
-            { name: "culture, arts et divertissements", data: ["arts", "cinema", "entertainment", "education", "sport"] },
-            { name: "voyages et lieux", data: ["places", "city", "transport", "travel", "travelTerms"] },
-            { name: "corps et émotions", data: ["bodyParts", "internalBodyParts", "emotions", "orientation", "connectives"] },
-            { name: "langue et grammaire", data: ["irregularVerbs"] },
-            { name: "travail et vie professionnelle", data: ["work", "informatique"] }
-        ];
 
         const myFamily = families.filter((cell) => cell.name === family)[0];
         const familiesCategories = myFamily.data;

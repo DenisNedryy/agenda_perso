@@ -210,10 +210,12 @@ exports.getFamilies = async (req, res, next) => {
 exports.addVocabulary = async (req, res, next) => {
   try {
     if (!req.file) return res.status(404).json({ msg: "Missing picture" });
-    const { family, category } = req.body;
-    console.log(family);
-    console.log(category);
-    console.log(req.file);
+    
+    const { family, category, fr_name, uk_name } = req.body;
+    const uuid = uuidv4();
+    const img_url = req.file.filename;
+
+    await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid,fr_name,uk_name,category,family,img_url]);
     return res.status(200).json({ msg: "vocabulary added" });
 
   } catch (err) {

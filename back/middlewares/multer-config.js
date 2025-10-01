@@ -27,7 +27,7 @@ const avatarStorage = multer.diskStorage({
 
 const categoryStorage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, "uploads/pictures/avatars");
+        callback(null, "uploads/pictures/categories");
     },
     filename: (req, file, callback) => {
         const fileInfo = path.parse(file.originalname);

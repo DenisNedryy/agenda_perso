@@ -48,9 +48,6 @@ export class VocabularyEventBinder {
                 category: category,
                 img: img
             }
-            // ajouter 
-            const res = await this.controller.vocabularyModel.addVocabulary(options);
-            console.log(res);
             this.controller.vocabularyModel.setUpVocabularyAddOptions(options);
             this.controller.modalViews.renderVocabularyForm(options);
         }
@@ -66,11 +63,10 @@ export class VocabularyEventBinder {
             const frName = form.elements['name-fr'].value;
             const ukName = form.elements['name-uk'].value;
             const options = this.controller.vocabularyModel.vocabularyAddOptions;
-            console.log(options);
-            console.log(frName);
-            console.log(ukName);
-
+            options.uk_name = ukName;
+            options.fr_name = frName;
             // envoyer 
+            const res = await this.controller.vocabularyModel.addVocabulary(options);
             form.reset();
         }
 
