@@ -208,6 +208,17 @@ exports.getFamilies = async (req, res, next) => {
 }
 
 exports.addVocabulary = async (req, res, next) => {
+  try {
+    if (!req.file) return res.status(404).json({ msg: "Missing picture" });
+    const { family, category } = req.body;
+    console.log(family);
+    console.log(category);
+    console.log(req.file);
+    return res.status(200).json({ msg: "vocabulary added" });
+
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
 
 };
 

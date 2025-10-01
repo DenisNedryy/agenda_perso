@@ -22,11 +22,15 @@ export class VocabularyEventBinder {
     async handleChange(e) {
         // submit family
         const fieldsetFamily = e.target.closest("#fieldset-family");
+        const isCategory = this.controller.vocabularyModel.isCategory;
         if (fieldsetFamily) {
             e.preventDefault();
             const family = fieldsetFamily.elements['family'].value;
             const categories = await this.controller.vocabularyModel.getCategoriesNames(family);
-            this.controller.modalViews.renderSelectCategories(categories);
+            this.controller.vocabularyModel.isNewCategory = false;
+            const isNewCategory = this.controller.vocabularyModel.isNewCategory;
+            console.log(this.controller.vocabularyModel.isNewCategory);
+            this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
         }
     }
 
@@ -45,6 +49,8 @@ export class VocabularyEventBinder {
                 img: img
             }
             // ajouter 
+            const res = await this.controller.vocabularyModel.addVocabulary(options);
+            console.log(res);
             this.controller.vocabularyModel.setUpVocabularyAddOptions(options);
             this.controller.modalViews.renderVocabularyForm(options);
         }
@@ -63,6 +69,8 @@ export class VocabularyEventBinder {
             console.log(options);
             console.log(frName);
             console.log(ukName);
+
+            // envoyer 
             form.reset();
         }
 
@@ -166,16 +174,28 @@ export class VocabularyEventBinder {
             const isNewFamily = this.controller.vocabularyModel.isNewFamily;
             this.controller.modalViews.renderSelectFamilies(familiesNames, isNewFamily);
             const categories = await this.controller.vocabularyModel.getCategoriesNames();
-            this.controller.modalViews.renderSelectCategories(categories);
+            const isNewCategory = this.controller.vocabularyModel.isNewCategory;
+            this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
         }
 
         const familyLink = e.target.closest(".familyLink");
         if (familyLink) {
-            // document.querySelector(".familyInput").classList.toggle("unvisible");
             this.controller.vocabularyModel.isNewFamily = !this.controller.vocabularyModel.isNewFamily;
+            this.controller.vocabularyModel.isCategory = true;
             const isNewFamily = this.controller.vocabularyModel.isNewFamily;
             const familiesNames = await this.controller.vocabularyModel.getFamilies();
             this.controller.modalViews.renderSelectFamilies(familiesNames, isNewFamily);
+            const isNewCategory = this.controller.vocabularyModel.isCategory;
+            const categories = await this.controller.vocabularyModel.getCategoriesNames();
+            this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
+        }
+
+        const categoryLink = e.target.closest(".categoryLink");
+        if (categoryLink) {
+            this.controller.vocabularyModel.isCategory = !this.controller.vocabularyModel.isCategory;
+            const isNewCategory = this.controller.vocabularyModel.isCategory;
+            const categories = await this.controller.vocabularyModel.getCategoriesNames();
+            this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
         }
 
     }

@@ -357,7 +357,7 @@
     margin: 40px 0px;
 }
 
-.category__footer__buttons button { 
+.category__footer__buttons button {
     margin: 0px 10px;
     padding: 5px 15px;
 }
@@ -370,13 +370,16 @@
     flex-direction: column;
 }
 
-.familyLink {
+.familyLink,
+.categoryLink {
     cursor: pointer;
 }
 
 .unvisible {
     visibility: hidden;
 }
-.modalViewContainer__body__family__keys, .modalViewContainer__body__family__values{
-    display:flex;
+
+.modalViewContainer__body__family__keys,
+.modalViewContainer__body__family__values {
+    display: flex;
 }

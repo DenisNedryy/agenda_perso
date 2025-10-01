@@ -30,12 +30,10 @@ export class VocabularyService {
             const preRes = await fetch(`${HOST}/api/vocabulary/add`, {
                 method: "POST",
                 headers: {
-                    'Content-Type': "application/json"
+           
                 },
                 credentials: "include",
-                body: JSON.stringify({
-                    vocabulary: data
-                }),
+                body: data,
             });
             const res = await preRes.json();
             return {

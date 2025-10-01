@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ctrl_auth = require("../controllers/users_ctrl");
 const { uploadAvatar } = require("../middlewares/multer-config");
-const auth = require("../middlewares/auth");
+const auth = require("../middlewares/auth"); 
 const multer = require("multer");
 const upload = multer();
 

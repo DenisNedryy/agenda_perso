@@ -92,16 +92,11 @@ export class ModalViews {
             familyLink.className = "familyLink";
             familyLink.textContent = `${isNewFamily ? "+ Old families" : "+ New family"}`;
             fieldset.appendChild(familyLink);
-
-            // const btnSubmit = document.createElement("button");
-            // btnSubmit.type="submit";
-            // btnSubmit.textContent = "Suivant";
-            // form.appendChild(btnSubmit);
             el.appendChild(fieldset);
         }
     }
 
-    renderSelectCategories(categories) {
+    renderSelectCategories(categories, isNewCategory) {
         const el = document.querySelector(".vocabularyAddModal__category");
         if (el) {
             el.innerHTML = "";
@@ -111,26 +106,45 @@ export class ModalViews {
             categoryLabel.textContent = "Category";
             fieldset.appendChild(categoryLabel);
 
+            if (isNewCategory) {
+                const cateoryDataList = document.createElement("datalist");
+                cateoryDataList.id = "old-categories-dataList";
+                categories.forEach((category) => {
+                    const option = document.createElement("option");
+                    option.value = category;
+                    option.textContent = category;
+                    cateoryDataList.appendChild(option);
+                });
+                fieldset.appendChild(cateoryDataList);
 
-            const cateoryDataList = document.createElement("datalist");
-            cateoryDataList.id = "old-categories";
-            categories.forEach((category) => {
-                const option = document.createElement("option");
-                option.value = category;
-                option.textContent = category;
-                cateoryDataList.appendChild(option);
-            });
-            fieldset.appendChild(cateoryDataList);
+                const categoryInput = document.createElement("input");
+                categoryInput.name = "category";
+                categoryInput.setAttribute("list", "old-categories");
+                fieldset.appendChild(categoryInput);
+            } else {
+                const cateorySelect = document.createElement("select");
+                cateorySelect.id = "old-categories";
+                cateorySelect.name = "category";
+                categories.forEach((category) => {
+                    const option = document.createElement("option");
+                    option.value = category;
+                    option.textContent = category;
+                    cateorySelect.appendChild(option);
+                });
+                fieldset.appendChild(cateorySelect);
+            }
+            const categoryLink = document.createElement("p");
+            categoryLink.className = "categoryLink";
+            categoryLink.textContent = `${isNewCategory ? "+ Old Categories" : "+ New category"}`;
+            fieldset.appendChild(categoryLink);
 
-            const categoryInput = document.createElement("input");
-            categoryInput.name = "category";
-            categoryInput.setAttribute("list", "old-categories");
-            fieldset.appendChild(categoryInput);
 
-            const img = document.createElement("input");
-            img.type = "file";
-            img.name = "img";
-            fieldset.appendChild(img);
+            if (isNewCategory) {
+                const img = document.createElement("input");
+                img.type = "file";
+                img.name = "img";
+                fieldset.appendChild(img);
+            }
 
             el.appendChild(fieldset);
 

@@ -9,6 +9,7 @@ export class VocabularyModel {
             isSounds: true
         }
         this.isNewFamily = false;
+        this.isNewCategory = false;
         this.vocabularyAddOptions = {
             family: "",
             category: "",
@@ -20,6 +21,15 @@ export class VocabularyModel {
     async isVocabulary() {
         const res = await this.vocabularyService.isVocabulary();
         return res.ok ? true : false;
+    }
+
+    async addVocabulary(options) {
+        const formData = new FormData();
+        formData.append("family", options.family);
+        formData.append("category", options.category);
+        formData.append("img", options.img);
+        const res = await this.vocabularyService.addVocabulary(formData);
+        return res.data.msg;
     }
 
     resetVocabularyAddOptions() {
