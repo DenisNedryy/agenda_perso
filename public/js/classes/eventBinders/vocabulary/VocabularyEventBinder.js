@@ -209,6 +209,17 @@ export class VocabularyEventBinder {
             this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
         }
 
+        // btn update vocabulary
+        const btnUpdate = e.target.closest(".updateVocabulary");
+        if (btnUpdate) {
+            // affichage de la partie update
+            console.log("render update vocabulary");
+            const data = await this.controller.vocabularyModel.getVocabularySortedByFamiliesAndCategories();
+            const families = data.map((cell) => cell.name);
+            // créer une base et diviser families et categories en 2 pour mettre à jour categories
+            this.controller.view.renderUpdateVocabulary(data);
+        }
+
     }
 
 }

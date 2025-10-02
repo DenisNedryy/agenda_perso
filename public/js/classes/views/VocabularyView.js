@@ -3,7 +3,7 @@ import { HOST } from "../../host.js";
 export class VocabularyView {
 
     render() {
-        const el = document.getElementById("root"); 
+        const el = document.getElementById("root");
         if (el) {
             el.innerHTML = ` 
             <div class="vocabulary">
@@ -45,6 +45,12 @@ export class VocabularyView {
             btnAddVoc.className = "btn-mini-white addVocabulary";
             btnAddVoc.textContent = "Add vocabulary";
             addVoc.appendChild(btnAddVoc);
+
+            // btn update voc
+            const btnUpdateVoc = document.createElement("button");
+            btnUpdateVoc.className = "btn-mini-white updateVocabulary";
+            btnUpdateVoc.textContent = "Update vocabulary";
+            addVoc.appendChild(btnUpdateVoc);
 
             el.appendChild(addVoc);
 
@@ -288,6 +294,54 @@ export class VocabularyView {
             addBase.textContent = "Add basic vocabulary";
             addVoc.appendChild(addBase);
             el.appendChild(addVoc);
+        }
+    }
+
+    renderUpdateVocabulary(data) {
+        const el = document.querySelector(".vocabulary__content");
+        if (el) {
+            el.innerHTML = "";
+            const form = document.createElement("form");
+
+            // family
+            const fieldsetFamily = document.createElement("fieldset");
+            fieldsetFamily.id = "fieldset-update-family";
+            const familyLabel = document.createElement("label");
+            familyLabel.textContent = "Family";
+            fieldsetFamily.appendChild(familyLabel);
+            const familySelect = document.createElement("select");
+            familySelect.id = "familyUpdateSelect";
+            familySelect.name = "family";
+            const families = data.map((cell) => cell.name);
+            families.forEach((family) => {
+                const option = document.createElement("option");
+                option.value = family;
+                option.textContent = family;
+                familySelect.appendChild(option);
+            });
+            fieldsetFamily.appendChild(familySelect);
+            form.appendChild(fieldsetFamily);
+
+            // category
+            console.log(familySelect.value);
+            const fieldsetCategory = document.createElement("fieldset");
+            fieldsetCategory.id = "fieldset-update-category";
+            const categoryLabel = document.createElement("label");
+            categoryLabel.textContent = "Category";
+            fieldsetCategory.appendChild(categoryLabel);
+            const categorySelect = document.createElement("select");
+            categorySelect.id = "categoryUpdateSelect";
+            categorySelect.name = "category";
+            families.forEach((family) => {
+                const option = document.createElement("option");
+                option.value = family;
+                option.textContent = family;
+                categorySelect.appendChild(option);
+            });
+            fieldsetCategory.appendChild(categorySelect);
+            form.appendChild(fieldsetCategory);
+
+            el.appendChild(form);
         }
     }
 
