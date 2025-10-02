@@ -208,14 +208,22 @@ exports.getFamilies = async (req, res, next) => {
 }
 
 exports.addVocabulary = async (req, res, next) => {
+  console.log("Début du ctrl addVocabulary");
   try {
-    if (!req.file) return res.status(404).json({ msg: "Missing picture" });
-    
     const { family, category, fr_name, uk_name } = req.body;
     const uuid = uuidv4();
-    const img_url = req.file.filename;
+    const img_url = req.file ? req.file.filename : null;
+    
+    if (img_url) {
+      await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid, fr_name, uk_name, category, family, img_url]);
+    } else {
+      // récupération de l'imgage
+      const [vocabularies] = await pool.query("SELECT img_url from vocabulary WHERE family = ? AND category = ?", [family, category]);
+      if (vocabularies.length === 0) return res.status(404).json({ msg: "vocabulary unfoundable" });
+      const vocabulary = vocabularies[0];
+      await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid, fr_name, uk_name, category, family, vocabulary.img_url]);
+    }
 
-    await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid,fr_name,uk_name,category,family,img_url]);
     return res.status(200).json({ msg: "vocabulary added" });
 
   } catch (err) {

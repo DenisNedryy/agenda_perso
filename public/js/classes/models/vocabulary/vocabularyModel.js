@@ -27,7 +27,7 @@ export class VocabularyModel {
         const formData = new FormData();
         formData.append("family", options.family);
         formData.append("category", options.category);
-        formData.append("img_url", options.img);
+        if(options.img) formData.append("img_url", options.img);
         formData.append("uk_name", options.uk_name);
         formData.append("fr_name", options.fr_name);
         const res = await this.vocabularyService.addVocabulary(formData);

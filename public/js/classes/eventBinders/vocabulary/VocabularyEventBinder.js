@@ -29,7 +29,6 @@ export class VocabularyEventBinder {
             const categories = await this.controller.vocabularyModel.getCategoriesNames(family);
             this.controller.vocabularyModel.isNewCategory = false;
             const isNewCategory = this.controller.vocabularyModel.isNewCategory;
-            console.log(this.controller.vocabularyModel.isNewCategory);
             this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
         }
     }
@@ -38,11 +37,14 @@ export class VocabularyEventBinder {
         const formAddModal = e.target.closest("#vocabularyAddModal");
         if (formAddModal) {
             e.preventDefault();
-            console.log(formAddModal);
             const family = formAddModal.elements['family'].value;
             const category = formAddModal.elements['category'].value;
-            const img = formAddModal.elements['img'].files[0];
-            if (!family || family === "" || !category || category === "" || !img) return;
+            const imgInput = formAddModal.elements['img'];
+            const img = imgInput ? imgInput.files[0] : null;
+            
+            if (!family  || !category) return;
+            if(imgInput && !img) return;
+
             const options = {
                 family: family,
                 category: category,

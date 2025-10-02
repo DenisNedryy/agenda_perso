@@ -383,3 +383,47 @@
 .modalViewContainer__body__family__values {
     display: flex;
 }
+
+
+#fieldset-family,
+#fieldset-category {
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.modalViewContainer input,
+.modalViewContainer select {
+    background-color: rgb(30, 33, 36);
+    border: 1px solid rgb(46, 49, 54);
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    padding-left: 10px;
+    width: 327px;
+}
+
+.vocabulary-add-container form>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.vocabularyAddModal__family fieldset {
+    margin: 20px 0px;
+}
+
+.vocabularyAddModal label {
+    margin: 7px 0px;
+}
+
+.familyLink,
+.categoryLink {
+width: fit-content;
+  color: rgb(134,205,254);
+  margin: 5px 0px;
+  font-size: 14px;
+}
+#fieldset-family label, #fieldset-category label{
+        margin: 10px 0px;
+}
