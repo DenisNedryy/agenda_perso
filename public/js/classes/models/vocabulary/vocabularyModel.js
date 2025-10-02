@@ -35,6 +35,15 @@ export class VocabularyModel {
         return res.data.msg;
     }
 
+    async getCategoryLength(category){
+        const categoryData = await this.getOneVocabularyCategory(category);
+        if(categoryData){
+            return categoryData.length;
+        }else{
+            return 0;
+        }
+    }
+
     resetVocabularyAddOptions() {
         this.vocabularyAddOptions = {
             family: "",

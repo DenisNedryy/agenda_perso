@@ -41,9 +41,9 @@ export class VocabularyEventBinder {
             const category = formAddModal.elements['category'].value;
             const imgInput = formAddModal.elements['img'];
             const img = imgInput ? imgInput.files[0] : null;
-            
-            if (!family  || !category) return;
-            if(imgInput && !img) return;
+
+            if (!family || !category) return;
+            if (imgInput && !img) return;
 
             const options = {
                 family: family,
@@ -51,7 +51,8 @@ export class VocabularyEventBinder {
                 img: img
             }
             this.controller.vocabularyModel.setUpVocabularyAddOptions(options);
-            this.controller.modalViews.renderVocabularyForm(options);
+            const length = await this.controller.vocabularyModel.getCategoryLength(category);
+            this.controller.modalViews.renderVocabularyForm(options, length);
         }
     }
 
@@ -67,10 +68,22 @@ export class VocabularyEventBinder {
             const options = this.controller.vocabularyModel.vocabularyAddOptions;
             options.uk_name = ukName;
             options.fr_name = frName;
+            if (!frName || !ukName) return;
             // envoyer 
             const res = await this.controller.vocabularyModel.addVocabulary(options);
             form.reset();
+            // maj ui
+            const length = await this.controller.vocabularyModel.getCategoryLength(options.category);
+            this.controller.modalViews.renderVocabularyForm(options, length);
         }
+
+        // revenir au menu vocabulary
+        const btnLeave = e.target.closest(".btn-vocabulary-close");
+        if (btnLeave) {
+            const family = await this.controller.vocabularyModel.vocabularyAddOptions.family;
+            this.controller.show(family);
+        }
+
 
         // add base vocabulary
         const vocabulary = e.target.closest(".addBaseVocabulary");
@@ -171,7 +184,7 @@ export class VocabularyEventBinder {
             this.controller.modalViews.renderBodyFamilyForm();
             const isNewFamily = this.controller.vocabularyModel.isNewFamily;
             this.controller.modalViews.renderSelectFamilies(familiesNames, isNewFamily);
-            const categories = await this.controller.vocabularyModel.getCategoriesNames();
+            const categories = await this.controller.vocabularyModel.getCategoriesNames(familiesNames[0]);
             const isNewCategory = this.controller.vocabularyModel.isNewCategory;
             this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
         }

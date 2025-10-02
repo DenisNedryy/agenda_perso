@@ -217,8 +217,11 @@ exports.addVocabulary = async (req, res, next) => {
     if (img_url) {
       await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid, fr_name, uk_name, category, family, img_url]);
     } else {
-      // récupération de l'imgage
+      // récupération de l'image
+      console.log(family);
+      console.log(category);
       const [vocabularies] = await pool.query("SELECT img_url from vocabulary WHERE family = ? AND category = ?", [family, category]);
+      console.log(vocabularies);
       if (vocabularies.length === 0) return res.status(404).json({ msg: "vocabulary unfoundable" });
       const vocabulary = vocabularies[0];
       await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid, fr_name, uk_name, category, family, vocabulary.img_url]);

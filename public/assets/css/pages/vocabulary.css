@@ -403,7 +403,8 @@
     padding-left: 10px;
     width: 327px;
 }
-.modalViewContainer input[type="file"]{
+
+.modalViewContainer input[type="file"] {
     margin: 15px 0px;
 }
 
@@ -470,6 +471,52 @@ html body .btn-container {
     flex-direction: row;
 }
 
-.vocabulary-add-container form >div label{
+.vocabulary-add-container form>div label {
     margin: 10px 0px;
+}
+
+/* tableau family - category - length */
+.modalViewContainer__body__family__keys,
+.modalViewContainer__body__family__values {
+    display: flex;
+}
+
+.modalViewContainer__body__family__keys {
+    background-color: black;
+    padding: 15px;
+    border-left: 1px solid rgba(255, 255, 255, .3);
+    border-right: 1px solid rgba(255, 255, 255, .3);
+    border-top: 1px solid rgba(255, 255, 255, .3);
+}
+
+.modalViewContainer__body__family__values {
+    padding: 15px;
+    border-left: 1px solid rgba(255, 255, 255, .3);
+    border-right: 1px solid rgba(255, 255, 255, .3);
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    margin-bottom: 25px;
+}
+
+.modalViewContainer__body__family__keys p:nth-child(1) {
+    width: 300px;
+}
+
+.modalViewContainer__body__family__keys p:nth-child(2) {
+    width: 300px;
+}
+
+.modalViewContainer__body__family__keys p:nth-child(3) {
+    width: 20px;
+}
+
+.modalViewContainer__body__family__values p:nth-child(1) {
+    width: 300px;
+}
+
+.modalViewContainer__body__family__values p:nth-child(2) {
+    width: 300px;
+}
+
+.modalViewContainer__body__family__values p:nth-child(3) {
+    width: 20px;
 }
