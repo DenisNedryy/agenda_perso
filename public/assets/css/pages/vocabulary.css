@@ -403,6 +403,9 @@
     padding-left: 10px;
     width: 327px;
 }
+.modalViewContainer input[type="file"]{
+    margin: 15px 0px;
+}
 
 .vocabulary-add-container form>div {
     display: flex;
@@ -419,11 +422,54 @@
 
 .familyLink,
 .categoryLink {
-width: fit-content;
-  color: rgb(134,205,254);
-  margin: 5px 0px;
-  font-size: 14px;
+    width: fit-content;
+    color: rgb(134, 205, 254);
+    margin: 5px 0px;
+    font-size: 14px;
 }
-#fieldset-family label, #fieldset-category label{
-        margin: 10px 0px;
+
+#fieldset-family label,
+#fieldset-category label {
+    margin: 10px 0px;
+}
+
+#vocabularyAddModal button[type='submit'] {
+    padding: 9px;
+    border: none;
+    background-color: rgb(4, 74, 183);
+    border-radius: 3px;
+    color: snow;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 16px 0px;
+}
+
+.btn-container button {
+    padding: 9px;
+    border: none;
+    border-radius: 3px;
+    color: snow;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 15px 10px 0px 0px
+}
+
+.btn-container button:nth-child(1) {
+    background-color: rgb(4, 74, 183);
+}
+
+.btn-container button:nth-child(2) {
+    background-color: rgb(14, 201, 138);
+}
+
+
+html body .btn-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.vocabulary-add-container form >div label{
+    margin: 10px 0px;
 }
