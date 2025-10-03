@@ -236,7 +236,6 @@ export class VocabularyEventBinder {
         const btnUpdate = e.target.closest(".updateVocabulary");
         if (btnUpdate) {
             // affichage de la partie update
-            console.log("render update vocabulary");
             const data = await this.controller.vocabularyModel.getVocabularySortedByFamiliesAndCategories();
             const families = data.map((cell) => cell.name);
             // créer une base et diviser families et categories en 2 pour mettre à jour categories
@@ -246,6 +245,14 @@ export class VocabularyEventBinder {
             const categories = Object.keys(categoriesObj);
             this.controller.view.renderUpdateVocabularyCategories(categories);
         }
+
+        // btn delete family
+        const btnDeleteFamily = e.target.closest(".btn-delete-family");
+        if(btnDeleteFamily){
+            
+        }
     }
+
+
 
 } 

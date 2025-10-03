@@ -213,7 +213,7 @@ exports.addVocabulary = async (req, res, next) => {
     const { family, category, fr_name, uk_name } = req.body;
     const uuid = uuidv4();
     const img_url = req.file ? req.file.filename : null;
-    
+
     if (img_url) {
       await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid, fr_name, uk_name, category, family, img_url]);
     } else {
@@ -282,11 +282,25 @@ exports.updateCategory = async (req, res, next) => {
          AND name = ?`, [percentage, userId, category]
       );
     }
-
     // determiner si category percentils est déjà créé, si oui put sinon push
-
     return res.status(200).json({ msg: "category updated" });
   } catch (err) {
     return res.status(500).json({ error: err });
   }
 }
+
+
+exports.deleteFamily = async (req, res, next) => {
+  try {
+
+    const family = req.body;
+
+    // récupérer toutes les categories de la famille et les supprimer + les images
+
+    return res.status(200).json({ msg: "family deleted" });
+
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+
+};

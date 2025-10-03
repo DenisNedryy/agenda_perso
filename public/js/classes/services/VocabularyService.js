@@ -30,7 +30,28 @@ export class VocabularyService {
             const preRes = await fetch(`${HOST}/api/vocabulary/add`, {
                 method: "POST",
                 headers: {
-           
+
+                },
+                credentials: "include",
+                body: data,
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async deleteFamily(family) {
+        try {
+            const preRes = await fetch(`${HOST}/api/vocabulary/deleteFamily`, {
+                method: "DELETE",
+                headers: {
+
                 },
                 credentials: "include",
                 body: data,
