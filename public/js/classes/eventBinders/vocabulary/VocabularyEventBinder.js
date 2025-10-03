@@ -20,7 +20,7 @@ export class VocabularyEventBinder {
     }
 
     async handleChange(e) {
-        // submit family
+        // add voc form
         const fieldsetFamily = e.target.closest("#fieldset-family");
         const isCategory = this.controller.vocabularyModel.isCategory;
         if (fieldsetFamily) {
@@ -31,6 +31,16 @@ export class VocabularyEventBinder {
             const isNewCategory = this.controller.vocabularyModel.isNewCategory;
             this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
         }
+
+        // update voc form
+        const fieldsetUpdateFamily = e.target.closest("#fieldset-update-family");
+        if (fieldsetUpdateFamily) {
+            e.preventDefault();
+            const family = fieldsetUpdateFamily.elements['family'].value;
+            const categories = await this.controller.vocabularyModel.getCategoriesNames(family);
+            this.controller.view.renderUpdateVocabularyCategories(categories);
+        }
+
     }
 
     async handleSubmit(e) {
@@ -53,6 +63,19 @@ export class VocabularyEventBinder {
             this.controller.vocabularyModel.setUpVocabularyAddOptions(options);
             const length = await this.controller.vocabularyModel.getCategoryLength(category);
             this.controller.modalViews.renderVocabularyForm(options, length);
+        }
+
+        const vocabularyUpdateModal = e.target.closest("#vocabularyUpdateModal");
+        if (vocabularyUpdateModal) {
+            e.preventDefault();
+            const family = vocabularyUpdateModal.elements['family'].value;
+            const category = vocabularyUpdateModal.elements['category'].value;
+          
+            // afficher le tableau des update
+            const data = await this.controller.vocabularyModel.getOneVocabularyCategory(category);
+            console.log(data);
+            this.controller.view.renderVocabularyUpdateArray(data);
+
         }
     }
 
@@ -209,7 +232,7 @@ export class VocabularyEventBinder {
             this.controller.modalViews.renderSelectCategories(categories, isNewCategory);
         }
 
-        // btn update vocabulary
+        // btn update vocabulary 
         const btnUpdate = e.target.closest(".updateVocabulary");
         if (btnUpdate) {
             // affichage de la partie update
@@ -217,9 +240,12 @@ export class VocabularyEventBinder {
             const data = await this.controller.vocabularyModel.getVocabularySortedByFamiliesAndCategories();
             const families = data.map((cell) => cell.name);
             // créer une base et diviser families et categories en 2 pour mettre à jour categories
-            this.controller.view.renderUpdateVocabulary(data);
+            this.controller.view.renderUpdateVocabularyBase();
+            this.controller.view.renderUpdateVocabularyFamilies(families);
+            const categoriesObj = await this.controller.vocabularyModel.getVocabularyByFamily(families[0]);
+            const categories = Object.keys(categoriesObj);
+            this.controller.view.renderUpdateVocabularyCategories(categories);
         }
-
     }
 
-}
+} 

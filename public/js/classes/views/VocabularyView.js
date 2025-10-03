@@ -297,12 +297,24 @@ export class VocabularyView {
         }
     }
 
-    renderUpdateVocabulary(data) {
+    renderUpdateVocabularyBase() {
         const el = document.querySelector(".vocabulary__content");
         if (el) {
-            el.innerHTML = "";
-            const form = document.createElement("form");
+            el.innerHTML = `
+                    <form id="vocabularyUpdateModal">
+                         <div class="vocabularyUpdateModal__family"></div>
+                        <div class="vocabularyUpdateModal__category"></div>
+                        <button type="submit">Submit</button>
+                    </form>
+                    <div class="vocabulary__content__updateArray"></div>
+            `;
+        }
+    }
 
+    renderUpdateVocabularyFamilies(families) {
+        const el = document.querySelector(".vocabularyUpdateModal__family");
+        if (el) {
+            el.innerHTML = "";
             // family
             const fieldsetFamily = document.createElement("fieldset");
             fieldsetFamily.id = "fieldset-update-family";
@@ -312,7 +324,6 @@ export class VocabularyView {
             const familySelect = document.createElement("select");
             familySelect.id = "familyUpdateSelect";
             familySelect.name = "family";
-            const families = data.map((cell) => cell.name);
             families.forEach((family) => {
                 const option = document.createElement("option");
                 option.value = family;
@@ -320,10 +331,15 @@ export class VocabularyView {
                 familySelect.appendChild(option);
             });
             fieldsetFamily.appendChild(familySelect);
-            form.appendChild(fieldsetFamily);
+            el.appendChild(fieldsetFamily);
+        }
+    }
 
+    renderUpdateVocabularyCategories(categories) {
+        const el = document.querySelector(".vocabularyUpdateModal__category");
+        if (el) {
+            el.innerHTML = "";
             // category
-            console.log(familySelect.value);
             const fieldsetCategory = document.createElement("fieldset");
             fieldsetCategory.id = "fieldset-update-category";
             const categoryLabel = document.createElement("label");
@@ -332,16 +348,65 @@ export class VocabularyView {
             const categorySelect = document.createElement("select");
             categorySelect.id = "categoryUpdateSelect";
             categorySelect.name = "category";
-            families.forEach((family) => {
+            categories.forEach((category) => {
                 const option = document.createElement("option");
-                option.value = family;
-                option.textContent = family;
+                option.value = category;
+                option.textContent = category;
                 categorySelect.appendChild(option);
             });
             fieldsetCategory.appendChild(categorySelect);
-            form.appendChild(fieldsetCategory);
+            el.appendChild(fieldsetCategory);
+        }
+    }
 
-            el.appendChild(form);
+    renderVocabularyUpdateArray(vocabularies) {
+        const el = document.querySelector(".vocabulary__content__updateArray");
+        if (el) {
+            el.innerHTML = "";
+            const container = document.createElement("div");
+            container.className = "vocabulary__content__updateArray__container";
+
+            const header = document.createElement("div");
+            header.className = "vocabulary__content__updateArray__container__header";
+            const nameFrKey = document.createElement("p");
+            nameFrKey.textContent = "Name fr";
+            header.appendChild(nameFrKey);
+            const nameUkKey = document.createElement("p");
+            nameUkKey.textContent = "Name uk";
+            header.appendChild(nameUkKey);
+            const deleteKey = document.createElement("p");
+            deleteKey.textContent = "Delete";
+            header.appendChild(deleteKey);
+            container.appendChild(header);
+
+            const body = document.createElement("ul");
+            body.className = "vocabulary__content__updateArray__container__body";
+            let cpt = 0;
+            vocabularies.forEach((vocabulary) => {
+
+                const vocLine = document.createElement("li");
+                vocLine.setAttribute("data-id", vocabulary.uuid);
+                vocLine.className = "vocabulary__content__updateArray__container__body__vocLine fade-in";
+                const nameFrColumn = document.createElement("p");
+                nameFrColumn.className = "vocabulary__content__updateArray__container__body__vocLine--fr";
+                nameFrColumn.textContent = vocabulary.frName;
+                vocLine.appendChild(nameFrColumn);
+                const nameUkColumn = document.createElement("p");
+                nameUkColumn.className = "vocabulary__content__updateArray__container__body__vocLine--uk";
+                nameUkColumn.textContent = vocabulary.ukName;
+                vocLine.appendChild(nameUkColumn);
+                const btnDelete = document.createElement("button");
+                btnDelete.className = "btn-delete-vocabulary-line";
+                btnDelete.textContent = "Delete";
+                vocLine.appendChild(btnDelete);
+                setTimeout(() => {
+                    body.appendChild(vocLine);
+                }, cpt);
+                cpt += 70;
+
+            });
+            container.appendChild(body);
+            el.appendChild(container);
         }
     }
 

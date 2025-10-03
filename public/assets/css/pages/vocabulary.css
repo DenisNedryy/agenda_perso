@@ -520,3 +520,93 @@ html body .btn-container {
 .modalViewContainer__body__family__values p:nth-child(3) {
     width: 20px;
 }
+
+/* update vocabulary */
+.vocabulary__content__updateArray__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.vocabulary__content__updateArray__container__header {
+    display: flex;
+    background-color: black;
+    padding: 15px;
+    border-left: 1px solid rgba(255, 255, 255, .3);
+    border-right: 1px solid rgba(255, 255, 255, .3);
+    border-top: 1px solid rgba(255, 255, 255, .3);
+}
+
+.vocabulary__content__updateArray__container__header p:nth-child(1) {
+    width: 35%;
+}
+
+.vocabulary__content__updateArray__container__header p:nth-child(2) {
+    width: 35%;
+}
+
+.vocabulary__content__updateArray__container__header p:nth-child(3) {
+    width: 30%;
+}
+
+.vocabulary__content__updateArray__container__body__vocLine {
+    display: flex;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, .3);
+}
+
+.vocabulary__content__updateArray__container__body__vocLine p:nth-child(1) {
+    width: 35%;
+}
+
+.vocabulary__content__updateArray__container__body__vocLine p:nth-child(2) {
+    width: 35%;
+}
+
+.vocabulary__content__updateArray__container__body__vocLine p:nth-child(3) {
+    width: 30%;
+}
+
+#vocabularyUpdateModal fieldset {
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+#vocabularyUpdateModal fieldset label {
+    margin: 10px 0px;
+}
+
+#vocabularyUpdateModal fieldset select {
+    background-color: rgb(30, 33, 36);
+    border: 1px solid rgb(46, 49, 54);
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    padding-left: 5px;
+    padding-left: 10px;
+    width: 327px;
+}
+
+#vocabularyUpdateModal button[type="submit"] {
+    padding: 9px;
+    border: none;
+    background-color: rgb(4, 74, 183);
+    border-radius: 3px;
+    color: snow;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 16px 0px;
+}
+
+.btn-delete-vocabulary-line {
+    background-color: rgb(201, 14, 14);
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+    color: snow;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}

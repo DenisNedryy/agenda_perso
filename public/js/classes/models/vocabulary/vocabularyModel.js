@@ -6,7 +6,7 @@ export class VocabularyModel {
             index: 0,
             isVerso: false,
             isFrToUk: true,
-            isSounds: true
+            isSounds: true 
         }
         this.isNewFamily = false;
         this.isNewCategory = false;
@@ -19,7 +19,7 @@ export class VocabularyModel {
     }
 
     async isVocabulary() {
-        const res = await this.vocabularyService.isVocabulary();
+        const res = await this.vocabularyService.isVocabulary(); 
         return res.ok ? true : false;
     }
 
