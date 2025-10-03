@@ -366,7 +366,7 @@ export class VocabularyView {
             el.innerHTML= `
                                 <div class="deleteFamilyOrCategoryButtons">
                         <button class="btn-delete-family" data-family="${vocabularies[0].family}">Delete family</button>
-                        <button class="btn-delete-category" data-category="${vocabularies[0].category}">Delete category</button>
+                        <button class="btn-delete-category" data-family="${vocabularies[0].family}" data-category="${vocabularies[0].category}">Delete category</button>
                     </div>
             `;
             const container = document.createElement("div");

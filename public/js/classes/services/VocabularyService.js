@@ -48,13 +48,34 @@ export class VocabularyService {
 
     async deleteFamily(family) {
         try {
-            const preRes = await fetch(`${HOST}/api/vocabulary/deleteFamily`, {
+            const preRes = await fetch(`${HOST}/api/vocabulary/families/${family}`, {
                 method: "DELETE",
                 headers: {
 
                 },
                 credentials: "include",
-                body: data,
+            });
+            const res = await preRes.json();
+            return {
+                status: preRes.status,
+                ok: preRes.ok,
+                data: res
+            };
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async deleteCategory(family, category) {
+        try {
+            console.log(family);
+            console.log(category);
+            const preRes = await fetch(`${HOST}/api/vocabulary/families/${family}/categories/${category}`, {
+                method: "DELETE",
+                headers: {
+
+                },
+                credentials: "include",
             });
             const res = await preRes.json();
             return {

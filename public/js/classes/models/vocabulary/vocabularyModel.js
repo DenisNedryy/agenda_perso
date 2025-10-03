@@ -242,4 +242,14 @@ export class VocabularyModel {
         return Math.round(pourcentageTotal);
     }
 
+    async deleteCategory(family,category){
+         const res = await this.vocabularyService.deleteCategory(family,category);
+         console.log(res.data.msg);
+    }
+
+       async deleteFamily(family){
+         const res = await this.vocabularyService.deleteFamily(family);
+         console.log(res.data.msg);
+    }
+
 }

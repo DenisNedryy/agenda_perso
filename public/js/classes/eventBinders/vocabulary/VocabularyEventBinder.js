@@ -70,7 +70,7 @@ export class VocabularyEventBinder {
             e.preventDefault();
             const family = vocabularyUpdateModal.elements['family'].value;
             const category = vocabularyUpdateModal.elements['category'].value;
-          
+
             // afficher le tableau des update
             const data = await this.controller.vocabularyModel.getOneVocabularyCategory(category);
             console.log(data);
@@ -248,8 +248,18 @@ export class VocabularyEventBinder {
 
         // btn delete family
         const btnDeleteFamily = e.target.closest(".btn-delete-family");
-        if(btnDeleteFamily){
-            
+        if (btnDeleteFamily) {
+            const family = btnDeleteFamily.getAttribute("data-family");
+            await this.controller.vocabularyModel.deleteFamily(family);
+        }
+
+        // btn delete category
+        const btnDeleteCategory = e.target.closest(".btn-delete-category");
+        if (btnDeleteCategory) {
+            const family = btnDeleteCategory.getAttribute("data-family");
+            const category = btnDeleteCategory.getAttribute("data-category");
+
+            await this.controller.vocabularyModel.deleteCategory(family, category);
         }
     }
 

@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
 const pool = require("../connection/sqlConnection");
+const fs = require('fs').promises;
 const CHUNK_SIZE = 1000;
 
 exports.isVocabulary = async (req, res, next) => {
@@ -293,9 +294,47 @@ exports.updateCategory = async (req, res, next) => {
 exports.deleteFamily = async (req, res, next) => {
   try {
 
-    const family = req.body;
+    const family = req.params.family;
+    const [families] = await pool.query("SELECT * FROM vocabulary WHERE family = ?", [family]);
+    if (families.length === 0) return res.status(404).json({ msg: "Family not found" });
 
     // récupérer toutes les categories de la famille et les supprimer + les images
+    const categories = families.reduce((acc, currV) => {
+      if (!acc.includes(currV.category)) {
+        acc.push(currV.category);
+      }
+      return acc;
+    }, []);
+
+    try {
+      await Promise.all(
+        categories.map(async (category) => {
+          const famille = families.find((cell) => cell.category === category);
+          await fs.unlink(`uploads/pictures/categories/${famille.img_url}`);
+          await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ?", [family, category]);
+        })
+      )
+    } catch (err) {
+      console.error(err);
+    }
+    return res.status(200).json({ msg: "family deleted" });
+
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+
+};
+
+exports.deleteCategory = async (req, res, next) => {
+  try {
+    const family = req.params.family;
+    const category = req.params.category;
+
+    const [rows] = await pool.query("SELECT * FROM vocabulary WHERE family = ? AND category = ?", [family, category]);
+    if (rows.length === 0) return res.status(404).json({ msg: "Category not found" });
+    if (!rows[0].img_url) return res.status(500).json({ msg: "No pictures found" });
+    await fs.unlink(`uploads/pictures/categories/${rows[0].img_url}`);
+    await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ?", [family, category]);
 
     return res.status(200).json({ msg: "family deleted" });
 
