@@ -5,7 +5,8 @@ const CHUNK_SIZE = 1000;
 
 exports.isVocabulary = async (req, res, next) => {
   try {
-    const [vocabulary] = await pool.query("SELECT * FROM vocabulary");
+    const userId = req.auth.userId;
+    const [vocabulary] = await pool.query("SELECT * FROM vocabulary WHERE user_id = ?", [userId]);
     if (vocabulary.length === 0) return res.status(404).json({ msg: "No vocabulary yet." });
     return res.status(200).json({ msg: "You added some vocabulary" });
   } catch (err) {
@@ -17,10 +18,12 @@ exports.isVocabulary = async (req, res, next) => {
 exports.initVocabulary = async (req, res) => {
   try {
     const vocabulary = req.body.vocabulary;
+    const userId = req.auth.userId;
     if (!vocabulary || typeof vocabulary !== "object") {
       return res.status(400).json({ error: "Invalid vocabulary format" });
     }
 
+    const [vocDB] = await pool.query("SELECT * FROM vocabulary WHERE user_id = ?", [userId]);
     const families = [
       { name: "maison et vie quotidienne", data: ["house", "bedroom", "kitchen", "tools", "clothing"] },
       { name: "nature et environnement", data: ["animals", "vegetation", "fruits", "vegetable", "weather"] },
@@ -30,12 +33,27 @@ exports.initVocabulary = async (req, res) => {
       { name: "langue et grammaire", data: ["irregularVerbs"] },
       { name: "travail et vie professionnelle", data: ["work", "informatique"] }
     ];
+    try {
+      await Promise.all(
+        vocDB.map(async (vocabulary) => {
+          const sameFamily = families.find((cell) => cell.name === vocabulary.family);
+          if (sameFamily) {
+            const sameCategory = sameFamily.data.find((cell) => cell === vocabulary.category);
+            if (sameCategory) {
+              await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ? AND user_id = ?", [vocabulary.family, vocabulary.category, userId]);
+            }
+          }
+        })
+      )
+    } catch (err) {
+      console.error(err);
+    }
 
     function getFamily(category) {
       for (const f of families) {
         if (f.data.includes(category)) return f.name;
       }
-      return null; // <- valeur par défaut
+      return null;
     }
 
     const categories = Object.keys(vocabulary);
@@ -46,8 +64,9 @@ exports.initVocabulary = async (req, res) => {
         const items = Array.isArray(vocabulary[category]) ? vocabulary[category] : [];
         if (items.length === 0) continue;
 
-        const family = getFamily(category); // <- calculée une fois
+        const family = getFamily(category);
         const rows = items.map(item => [
+          userId,
           uuidv4(),
           item.frName ?? null,
           item.ukName ?? null,
@@ -61,7 +80,7 @@ exports.initVocabulary = async (req, res) => {
           await conn.beginTransaction();
           try {
             await conn.query(
-              `INSERT INTO vocabulary (uuid, fr_name, uk_name, category, family, img_url) VALUES ?`,
+              `INSERT INTO vocabulary (user_id, uuid, fr_name, uk_name, category, family, img_url) VALUES ?`,
               [chunk]
             );
             await conn.commit();
@@ -84,13 +103,16 @@ exports.initVocabulary = async (req, res) => {
 
 exports.getVocabulary = async (req, res, next) => {
   try {
-    const [vocabulary] = await pool.execute("SELECT * FROM vocabulary");
+    const userId = req.auth.userId;
+    const [vocabulary] = await pool.execute("SELECT * FROM vocabulary WHERE user_id = ?", [userId]);
     if (vocabulary.length === 0) {
       return res.status(200).json({ vocabulary: [] });
     }
     // a suppr
-    console.log("starting");
-
+    const [things] = await pool.query("SELECT * FROM `vocabulary` WHERE family = ? AND category = ?", ["culture, arts et divertissements", "education"])
+    console.log(things.length);
+    // const [things] = await pool.query("SELECT * FROM `vocabulary` WHERE family = ? AND category = ? AND user_id =?", ["culture, arts et divertissements", "education", "3d049810-78a9-42d5-a6c9-7ea83494747d"])
+    // console.log(things.length);
     const missingFamilies = [];
     for (let i = 0; i < vocabulary.length; i++) {
 
@@ -113,9 +135,10 @@ exports.getVocabulary = async (req, res, next) => {
 
 exports.getVocabularyByCategories = async (req, res, next) => {
   try {
+    const userId = req.auth.userId;
     const [rows] = await pool.query(
       `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family 
-       FROM vocabulary`
+       FROM vocabulary WHERE user_id = ?`, [userId]
     );
 
     const data = {};
@@ -136,11 +159,12 @@ exports.getVocabularyByCategories = async (req, res, next) => {
 
 exports.getOneVocabularyCategory = async (req, res, next) => {
   try {
+    const userId = req.auth.userId;
     const category = req.params.category;
     const [rows] = await pool.query(
       `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family, img_url 
        FROM vocabulary
-       WHERE category = ?`, [category]
+       WHERE category = ? AND user_id = ?`, [category, userId]
     );
 
     if (!rows || rows.length === 0) {
@@ -159,12 +183,12 @@ exports.getOneVocabularyCategory = async (req, res, next) => {
 
 exports.getVocabularyByFamily = async (req, res, next) => {
   try {
-
+    const userId = req.auth.userId;
     const family = req.params.family;
 
     const [rows] = await pool.query(
       `SELECT uuid, fr_name AS frName, uk_name AS ukName, category, family, img_url 
-       FROM vocabulary WHERE family = ?`, [family]
+       FROM vocabulary WHERE family = ? AND user_id = ?`, [family, userId]
     );
 
     const data = {};
@@ -185,10 +209,11 @@ exports.getVocabularyByFamily = async (req, res, next) => {
 
 exports.getFamilies = async (req, res, next) => {
   try {
-
+    const userId = req.auth.userId;
     const [rows] = await pool.query(
       `SELECT family 
-       FROM vocabulary`,
+       FROM vocabulary
+       WHERE user_id = ?`, [userId],
     );
 
 
@@ -209,23 +234,23 @@ exports.getFamilies = async (req, res, next) => {
 }
 
 exports.addVocabulary = async (req, res, next) => {
-  console.log("Début du ctrl addVocabulary");
   try {
+    const userId = req.auth.userId;
     const { family, category, fr_name, uk_name } = req.body;
     const uuid = uuidv4();
     const img_url = req.file ? req.file.filename : null;
 
     if (img_url) {
-      await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid, fr_name, uk_name, category, family, img_url]);
+      await pool.execute("INSERT INTO vocabulary(user_id, uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?,?)", [userId, uuid, fr_name, uk_name, category, family, img_url]);
     } else {
       // récupération de l'image
       console.log(family);
       console.log(category);
-      const [vocabularies] = await pool.query("SELECT img_url from vocabulary WHERE family = ? AND category = ?", [family, category]);
+      const [vocabularies] = await pool.query("SELECT img_url from vocabulary WHERE family = ? AND category = ? AND user_id = ?", [family, category, userId]);
       console.log(vocabularies);
       if (vocabularies.length === 0) return res.status(404).json({ msg: "vocabulary unfoundable" });
       const vocabulary = vocabularies[0];
-      await pool.execute("INSERT INTO vocabulary(uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?)", [uuid, fr_name, uk_name, category, family, vocabulary.img_url]);
+      await pool.execute("INSERT INTO vocabulary(user_id, uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?,?)", [userId, uuid, fr_name, uk_name, category, family, vocabulary.img_url]);
     }
 
     return res.status(200).json({ msg: "vocabulary added" });
@@ -240,7 +265,7 @@ exports.getCategories = async (req, res, next) => {
   try {
     const userId = req.auth.userId;
     const [rows] = await pool.query(
-      `SELECT * FROM category WHERE user_id = ?`, [userId]
+      `SELECT * FROM category WHERE user_id = ? AND user_id = ?`, [userId, userId]
     );
 
     if (rows && rows.lenght === 0) {
@@ -267,7 +292,8 @@ exports.updateCategory = async (req, res, next) => {
       `SELECT * FROM category
       WHERE user_id = ? 
       AND name = ?
-      `, [userId, category]
+      AND user_id = ?
+      `, [userId, category, userId]
     );
 
     if (!cat || cat.length === 0) {
@@ -293,9 +319,9 @@ exports.updateCategory = async (req, res, next) => {
 
 exports.deleteFamily = async (req, res, next) => {
   try {
-
+    const userId = req.auth.userId;
     const family = req.params.family;
-    const [families] = await pool.query("SELECT * FROM vocabulary WHERE family = ?", [family]);
+    const [families] = await pool.query("SELECT * FROM vocabulary WHERE family = ? AND user_id = ?", [family, userId]);
     if (families.length === 0) return res.status(404).json({ msg: "Family not found" });
 
     // récupérer toutes les categories de la famille et les supprimer + les images
@@ -319,10 +345,11 @@ exports.deleteFamily = async (req, res, next) => {
     try {
       await Promise.all(
         categories.map(async (category) => {
+          const userId = req.auth.userId;
           const famille = families.find((cell) => cell.category === category);
           const isFamilyProtected = familiesProtected.find((cell) => cell.name === family);
           if (!isFamilyProtected) await fs.unlink(`uploads/pictures/categories/${famille.img_url}`);
-          await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ?", [family, category]);
+          await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ? AND user_id = ?", [family, category, userId]);
         })
       )
     } catch (err) {
@@ -340,8 +367,9 @@ exports.deleteCategory = async (req, res, next) => {
   try {
     const family = req.params.family;
     const category = req.params.category;
+    const userId = req.auth.userId;
 
-    const [rows] = await pool.query("SELECT img_url FROM vocabulary WHERE family = ? AND category = ? LIMIT 1", [family, category]);
+    const [rows] = await pool.query("SELECT img_url FROM vocabulary WHERE family = ? AND category = ? AND user_id = ? LIMIT 1", [family, category, userId]);
     if (rows.length === 0) return res.status(404).json({ msg: "Category not found" });
     if (!rows[0].img_url) return res.status(404).json({ msg: "No pictures found" });
 
@@ -361,7 +389,7 @@ exports.deleteCategory = async (req, res, next) => {
     if (!sameFamily || !sameFamily.data.includes(category)) {
       await fs.unlink(`uploads/pictures/categories/${rows[0].img_url}`);
     }
-    await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ?", [family, category]);
+    await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ? AND user_id = ?", [family, category, userId]);
 
     return res.status(200).json({ msg: "category deleted" });
 
