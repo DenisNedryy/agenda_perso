@@ -306,11 +306,22 @@ exports.deleteFamily = async (req, res, next) => {
       return acc;
     }, []);
 
+    const familiesProtected = [
+      { name: "maison et vie quotidienne", data: ["house", "bedroom", "kitchen", "tools", "clothing"] },
+      { name: "nature et environnement", data: ["animals", "vegetation", "fruits", "vegetable", "weather"] },
+      { name: "culture, arts et divertissements", data: ["arts", "cinema", "entertainment", "education", "sport"] },
+      { name: "voyages et lieux", data: ["places", "city", "transport", "travel", "travelTerms"] },
+      { name: "corps et émotions", data: ["bodyParts", "internalBodyParts", "emotions", "orientation", "connectives"] },
+      { name: "langue et grammaire", data: ["irregularVerbs"] },
+      { name: "travail et vie professionnelle", data: ["work", "informatique"] }
+    ];
+
     try {
       await Promise.all(
         categories.map(async (category) => {
           const famille = families.find((cell) => cell.category === category);
-          await fs.unlink(`uploads/pictures/categories/${famille.img_url}`);
+          const isFamilyProtected = familiesProtected.find((cell) => cell.name === family);
+          if (!isFamilyProtected) await fs.unlink(`uploads/pictures/categories/${famille.img_url}`);
           await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ?", [family, category]);
         })
       )
@@ -330,13 +341,29 @@ exports.deleteCategory = async (req, res, next) => {
     const family = req.params.family;
     const category = req.params.category;
 
-    const [rows] = await pool.query("SELECT * FROM vocabulary WHERE family = ? AND category = ?", [family, category]);
+    const [rows] = await pool.query("SELECT img_url FROM vocabulary WHERE family = ? AND category = ? LIMIT 1", [family, category]);
     if (rows.length === 0) return res.status(404).json({ msg: "Category not found" });
-    if (!rows[0].img_url) return res.status(500).json({ msg: "No pictures found" });
-    await fs.unlink(`uploads/pictures/categories/${rows[0].img_url}`);
+    if (!rows[0].img_url) return res.status(404).json({ msg: "No pictures found" });
+
+    const families = [
+      { name: "maison et vie quotidienne", data: ["house", "bedroom", "kitchen", "tools", "clothing"] },
+      { name: "nature et environnement", data: ["animals", "vegetation", "fruits", "vegetable", "weather"] },
+      { name: "culture, arts et divertissements", data: ["arts", "cinema", "entertainment", "education", "sport"] },
+      { name: "voyages et lieux", data: ["places", "city", "transport", "travel", "travelTerms"] },
+      { name: "corps et émotions", data: ["bodyParts", "internalBodyParts", "emotions", "orientation", "connectives"] },
+      { name: "langue et grammaire", data: ["irregularVerbs"] },
+      { name: "travail et vie professionnelle", data: ["work", "informatique"] }
+    ];
+
+    // on supprime l'image uniquement si pas la même family et category
+    const sameFamily = families.find((cell) => cell.name === family);
+
+    if (!sameFamily || !sameFamily.data.includes(category)) {
+      await fs.unlink(`uploads/pictures/categories/${rows[0].img_url}`);
+    }
     await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ?", [family, category]);
 
-    return res.status(200).json({ msg: "family deleted" });
+    return res.status(200).json({ msg: "category deleted" });
 
   } catch (err) {
     return res.status(500).json({ error: err });

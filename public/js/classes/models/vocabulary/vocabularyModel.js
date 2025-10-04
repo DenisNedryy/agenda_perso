@@ -6,7 +6,7 @@ export class VocabularyModel {
             index: 0,
             isVerso: false,
             isFrToUk: true,
-            isSounds: true 
+            isSounds: true
         }
         this.isNewFamily = false;
         this.isNewCategory = false;
@@ -19,7 +19,7 @@ export class VocabularyModel {
     }
 
     async isVocabulary() {
-        const res = await this.vocabularyService.isVocabulary(); 
+        const res = await this.vocabularyService.isVocabulary();
         return res.ok ? true : false;
     }
 
@@ -27,7 +27,7 @@ export class VocabularyModel {
         const formData = new FormData();
         formData.append("family", options.family);
         formData.append("category", options.category);
-        if(options.img) formData.append("img_url", options.img);
+        if (options.img) formData.append("img_url", options.img);
         formData.append("uk_name", options.uk_name);
         formData.append("fr_name", options.fr_name);
         const res = await this.vocabularyService.addVocabulary(formData);
@@ -35,11 +35,11 @@ export class VocabularyModel {
         return res.data.msg;
     }
 
-    async getCategoryLength(category){
+    async getCategoryLength(category) {
         const categoryData = await this.getOneVocabularyCategory(category);
-        if(categoryData){
+        if (categoryData) {
             return categoryData.length;
-        }else{
+        } else {
             return 0;
         }
     }
@@ -61,19 +61,8 @@ export class VocabularyModel {
     }
 
     async init(data) {
-
-        // vérification si du vocabulaire a été ajouté
-        const vocRes = await this.vocabularyService.getVocabulary();
-        const vocabulary = vocRes.data.vocabulary;
-        if (vocabulary && vocabulary.length > 0) {
-            // const res = await this.addService(data);
-            // console.log(res);
-            return;
-        } else {
-            // sinon on init
-            const res = await this.vocabularyService.initService(data);
-            console.log(res);
-        }
+        const res = await this.vocabularyService.initService(data);
+        console.log(res);
     }
 
     speak(text) {
@@ -242,14 +231,14 @@ export class VocabularyModel {
         return Math.round(pourcentageTotal);
     }
 
-    async deleteCategory(family,category){
-         const res = await this.vocabularyService.deleteCategory(family,category);
-         console.log(res.data.msg);
+    async deleteCategory(family, category) {
+        const res = await this.vocabularyService.deleteCategory(family, category);
+        console.log(res.data.msg);
     }
 
-       async deleteFamily(family){
-         const res = await this.vocabularyService.deleteFamily(family);
-         console.log(res.data.msg);
+    async deleteFamily(family) {
+        const res = await this.vocabularyService.deleteFamily(family);
+        console.log(res.data.msg);
     }
 
 }
