@@ -36,6 +36,7 @@ export class ModalView {
     }
 
     renderAlertsModal(alerts) {
+        console.log(alerts);
         const el = document.querySelector(".popUp");
         if (el) {
             this.toggle();
@@ -46,9 +47,38 @@ export class ModalView {
                  <div class="popUp__header__length">${alerts.length}</div>
                  </div>
             </div>
-            <div class="popUp__body"></div>
+            <div class="popUp__body">
+                 <p class="popUp__body--title">Alerts</p>
+                 <div class="popUp__body__alerts"></div>
+            </div>
             <idv class="popUp__footer"></div>
             `;
+
+            this.renderAlertsDiv(alerts);
         }
+    }
+
+    renderAlertsDiv(alerts) {
+        const el = document.querySelector(".popUp__body__alerts");
+        if (el) {
+            alerts.forEach((cell) => {
+                const date = new Date(cell.date);
+                const year = date.getFullYear();
+                const month = date.getMonth()+1;
+                const day = date.getDate();
+                const dateString = `${year}-${this.getFormatForNumbersWidhtZeroBefore(month)}-${this.getFormatForNumbersWidhtZeroBefore(day)}`
+                const alert = document.createElement("div");
+                alert.setAttribute("data-date", dateString);
+                alert.className = "popUp__body__alerts__alert"
+                const alertPara = document.createElement("p");
+                alertPara.textContent = cell.name;
+                alert.appendChild(alertPara);
+                el.appendChild(alert);
+            });
+        }
+    }
+
+    getFormatForNumbersWidhtZeroBefore(number) {
+        return number < 10 ? `0${number}` : number;
     }
 }

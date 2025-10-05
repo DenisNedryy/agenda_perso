@@ -95,6 +95,7 @@ header {
 
 .ball-red {
     background-color: rgb(255, 50, 63);
+    border: 1px solid white;
 }
 
 .header__right__profil {

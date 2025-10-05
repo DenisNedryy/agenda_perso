@@ -1,8 +1,9 @@
 export class HeaderCtrl {
-    constructor(headerEventBinder, taskModel, modalView) {
+    constructor(headerEventBinder, taskModel, modalView, agendaCtrl) {
         this.headerEventBinder = headerEventBinder;
         this.taskModel = taskModel;
         this.modalView = modalView;
+        this.agendaCtrl = agendaCtrl;
 
         this.headerEventBinder.setController(this);
     }

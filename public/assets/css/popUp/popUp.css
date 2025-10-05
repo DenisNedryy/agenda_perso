@@ -10,6 +10,8 @@
     animation-fill-mode: forwards;
     top: 20%;
     left: 40%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 999;
 }
 
 .header__right__alerts--bells--status {
@@ -36,7 +38,6 @@
 .popUp__header {
     display: flex;
     justify-content: center;
-    background-color: orange;
 }
 
 .popUp__header>div {
@@ -44,10 +45,31 @@
     display: flex;
     justify-content: center;
     padding: 15px;
+    top: -50px;
 }
 
 .popUp__header i {
     position: absolute;
     font-size: 50px;
     color: gold;
+}
+
+.popUp__body__alerts {
+    margin-top: 30px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color: rgb(48, 51, 58);
+}
+
+.popUp__body__alerts__alert {
+    padding: 15px;
+    font-weight: 600;
+}
+
+.popUp__body__alerts__alert:hover {
+    filter: brightness(.8);
+    cursor: pointer;
+}
+
+.popUp__body--title {
+    font-weight: 600;
 }

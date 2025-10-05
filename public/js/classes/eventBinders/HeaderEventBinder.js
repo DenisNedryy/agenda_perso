@@ -30,6 +30,17 @@ export class HeaderEventBinder {
                 this.controller.modalView.renderAlertsModal(alerts);
             }
         }
+
+        const navigateToAlert = e.target.closest(".popUp__body__alerts__alert");
+        if (navigateToAlert) {
+            const dateStr = navigateToAlert.getAttribute("data-date");
+            console.log(dateStr);
+            const date = new Date(dateStr);
+            console.log(date);
+            this.controller.agendaCtrl.dateNavigationModel.dateSelected = date.getTime();
+            this.controller.agendaCtrl.show(this.controller.agendaCtrl.dateNavigationModel.dateSelected);
+            this.controller.modalView.close();
+        }
     }
 
 }

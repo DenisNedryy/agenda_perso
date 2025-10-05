@@ -106,10 +106,7 @@ const focusModalView = new FocusModalView(dateModel);
 const miseAJourAuth = new MiseAJourAuth(authServices);
 miseAJourAuth.init();
 
-const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
-const modalView = new ModalView();
-const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView);
-headerCtrl.init();
+
 
 // home instance
 const dayOffView = new DayOffView(dateModel);
@@ -190,8 +187,14 @@ const agendaEventBinders = Object.freeze({
     agendaYearEventBinder: agendaYearEventBinder,
     agendaPlanningEventBinder: agendaPlanningEventBinder
 })
-
+const modalView = new ModalView();
 const agendaCtrl = new AgendaCtrl(seoManager, modalView, { agendaViews, agendaModels, agendaServices, agendaEventBinders });
+
+// header instance
+const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
+
+const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView, agendaCtrl);
+headerCtrl.init();
 
 const profilView = new ProfilView();
 const profilFormView = new ProfilFormView();
