@@ -251,6 +251,7 @@ export class VocabularyEventBinder {
         if (btnDeleteFamily) {
             const family = btnDeleteFamily.getAttribute("data-family");
             await this.controller.vocabularyModel.deleteFamily(family);
+            this.controller.show();
         }
 
         // btn delete category
@@ -258,8 +259,8 @@ export class VocabularyEventBinder {
         if (btnDeleteCategory) {
             const family = btnDeleteCategory.getAttribute("data-family");
             const category = btnDeleteCategory.getAttribute("data-category");
-
             await this.controller.vocabularyModel.deleteCategory(family, category);
+            this.controller.show();
         }
     }
 

@@ -220,15 +220,62 @@ export class VocabularyModel {
 
     }
 
+    async getCategory(category) {
+        const res = await this.vocabularyService.getOneVocabularyCategory(category);
+        return res.data.vocabulary;
+    }
+
+    async getCategoryLength(category) {
+        const data = await this.getCategory(category);
+        return data.length;
+    }
+
     async getTotalFamilyPercentage() {
-        const familiesArray = await this.getFamilies();
-        let cumul = 0;
-        const percentils = await Promise.all(
-            familiesArray.map(cell => this.getFamiliesPercentils(cell) || 0)
-        );
-        percentils.forEach((cell) => cumul += cell);
-        const pourcentageTotal = (cumul / (familiesArray.length * 100)) * 100;
-        return Math.round(pourcentageTotal);
+        // récupération du vocabulaire
+        const vocabulary = await this.getVocabulary();
+        // récupération d'un tableau des catégories
+        const categories = vocabulary.reduce((acc, currV) => {
+            if (!acc.includes(currV.category)) acc.push(currV.category);
+            return acc;
+        }, []);
+
+        // assignation du vocabulaire.length par category
+        const categoriesWithLength =
+            await Promise.all(
+                categories.map(async (cell) => {
+                    const length = await this.getCategoryLength(cell);
+                    return { name: cell, length: length };
+                })
+            );
+
+        const categoriesWidthPercentages = await this.getCategories();
+
+        // assignation du pourcentage par category
+        const categoriesWithlengthAndPercentages = categoriesWithLength.map((cell) => {
+            const sameCategory = categoriesWidthPercentages.find((cat) => cat.name === cell.name);
+            if (sameCategory) {
+                cell.percentage = sameCategory.percentage;
+            } else {
+                cell.percentage = 0;
+            }
+            return cell;
+        });
+
+        // récupération total voc
+        let totalVocabulary = 0;
+        categoriesWithlengthAndPercentages.forEach((cell) => totalVocabulary += cell.length);
+
+        // calcul total voc appris
+        let totalVocLearnt = 0;
+        categoriesWithlengthAndPercentages.forEach((cell) => {
+            if (cell.percentage > 0) {
+                totalVocLearnt += Math.round((cell.percentage / 100) * cell.length);
+            }
+        });
+
+        // pourcentage
+        const result = Math.round((totalVocLearnt / totalVocabulary) * 100);
+        return result;
     }
 
     async deleteCategory(family, category) {

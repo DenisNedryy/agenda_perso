@@ -108,11 +108,7 @@ exports.getVocabulary = async (req, res, next) => {
     if (vocabulary.length === 0) {
       return res.status(200).json({ vocabulary: [] });
     }
-    // a suppr
-    const [things] = await pool.query("SELECT * FROM `vocabulary` WHERE family = ? AND category = ?", ["culture, arts et divertissements", "education"])
-    console.log(things.length);
-    // const [things] = await pool.query("SELECT * FROM `vocabulary` WHERE family = ? AND category = ? AND user_id =?", ["culture, arts et divertissements", "education", "3d049810-78a9-42d5-a6c9-7ea83494747d"])
-    // console.log(things.length);
+
     const missingFamilies = [];
     for (let i = 0; i < vocabulary.length; i++) {
 
@@ -244,10 +240,7 @@ exports.addVocabulary = async (req, res, next) => {
       await pool.execute("INSERT INTO vocabulary(user_id, uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?,?)", [userId, uuid, fr_name, uk_name, category, family, img_url]);
     } else {
       // récupération de l'image
-      console.log(family);
-      console.log(category);
       const [vocabularies] = await pool.query("SELECT img_url from vocabulary WHERE family = ? AND category = ? AND user_id = ?", [family, category, userId]);
-      console.log(vocabularies);
       if (vocabularies.length === 0) return res.status(404).json({ msg: "vocabulary unfoundable" });
       const vocabulary = vocabularies[0];
       await pool.execute("INSERT INTO vocabulary(user_id, uuid, fr_name, uk_name, category, family, img_url) VALUES(?,?,?,?,?,?,?)", [userId, uuid, fr_name, uk_name, category, family, vocabulary.img_url]);
@@ -265,7 +258,7 @@ exports.getCategories = async (req, res, next) => {
   try {
     const userId = req.auth.userId;
     const [rows] = await pool.query(
-      `SELECT * FROM category WHERE user_id = ? AND user_id = ?`, [userId, userId]
+      `SELECT * FROM category WHERE user_id = ?`, [userId]
     );
 
     if (rows && rows.lenght === 0) {
@@ -286,7 +279,6 @@ exports.updateCategory = async (req, res, next) => {
     const vocabularySession = req.body.vocabularySession;
     const successCount = vocabularySession.filter(item => item && item.success).length;
     const percentage = (successCount / vocabularySession.length) * 100;
-    console.log(percentage);
 
     const [cat] = await pool.query(
       `SELECT * FROM category
