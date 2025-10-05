@@ -1,0 +1,53 @@
+.popUp {
+    position: fixed;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: rgb(41, 44, 49);
+    color: white;
+    width: 400px;
+    animation-name: afr;
+    animation-duration: .4s;
+    animation-fill-mode: forwards;
+    top: 20%;
+    left: 40%;
+}
+
+.header__right__alerts--bells--status {
+    font-size: 12px;
+}
+
+.popUp__header__length {
+    position: absolute;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 5px;
+    right: -12px;
+    top: 26px;
+}
+
+.popUp__header {
+    display: flex;
+    justify-content: center;
+    background-color: orange;
+}
+
+.popUp__header>div {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.popUp__header i {
+    position: absolute;
+    font-size: 50px;
+    color: gold;
+}

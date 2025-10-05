@@ -22,7 +22,7 @@ export class AgendaWeekEventBinder {
     async handleChangeTask(e) {
         // toggle subject
         const container = e.target.closest(".formTask-add");
-        if(!container) return;
+        if (!container) return;
         const subContainer = document.querySelector(".subjectContainer");
         const subSelect = document.getElementById("subjectSelect");
         const typeSelect = document.getElementById("typeSelect");
@@ -97,6 +97,8 @@ export class AgendaWeekEventBinder {
             this.controller.modalModel.modalAddDate = date;
             const modal = document.querySelector(".modalAddContainer .modal");
             modal.classList.remove("hidden");
+            const alerts = await this.controller.taskModel.getAlerts();
+            this.controller.modalView.renderAlertsLength(alerts);
         }
         else if (e.target.classList.contains("leaveModal")) {
             const modal = document.querySelector(".modalAddContainer .modal");
@@ -109,10 +111,12 @@ export class AgendaWeekEventBinder {
             const auth = await this.controller.authServices.getAuth();
             const task = this.controller.modalModel.getTaskObj(form, userIdSelected, auth);
             if (task) {
-                console.log(task);
+
                 await this.controller.taskServices.createTask(task);
             }
             this.controller.show();
+            const alerts = await this.controller.taskModel.getAlerts();
+            this.controller.modalView.renderAlertsLength(alerts);
         }
         else if (e.target.classList.contains("btn-submit-addTask2")) {
             e.preventDefault();
@@ -123,10 +127,12 @@ export class AgendaWeekEventBinder {
             const auth = await this.controller.authServices.getAuth();
             const task = this.controller.modalModel.getTaskObj(form, userIdSelected, auth);
             if (task) {
-                console.log(task);
                 await this.controller.taskServices.createTask(task);
             }
             this.controller.show();
+            const alerts = await this.controller.taskModel.getAlerts();
+            console.log(alerts);
+            this.controller.modalView.renderAlertsLength(alerts);
         }
 
         // modal addTask VERSION MOBILE
@@ -172,11 +178,15 @@ export class AgendaWeekEventBinder {
             const taskId = e.target.closest(".modalContent").getAttribute("data-id");
             await this.controller.taskServices.deleteTask(taskId);
             this.controller.show();
+            const alerts = await this.controller.taskModel.getAlerts();
+            this.controller.modalView.renderAlertsLength(alerts);
         }
         else if (e.target.classList.contains("task-delete2")) {
             const taskId = e.target.closest(".modalContent").getAttribute("data-id");
             await this.controller.taskServices.deleteTask(taskId);
             this.controller.show();
+            const alerts = await this.controller.taskModel.getAlerts();
+            this.controller.modalView.renderAlertsLength(alerts);
         }
 
         else if (e.target.classList.contains("task-update")) {
@@ -221,7 +231,7 @@ export class AgendaWeekEventBinder {
                 this.controller.focusModalView.renderMobile(task);
                 document.querySelector(".modalFocus2").classList.remove("hidden");
             }
-        } 
+        }
 
         // task review Tomorow
         if (e.target.classList.contains("btn-task-reviewTomorow")) {

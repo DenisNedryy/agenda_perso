@@ -54,6 +54,7 @@ import { AuthView } from "./classes/views/AuthView.js";
 import { AgendaView } from "./classes/views/AgendaView.js";
 import { ProfilView } from "./classes/views/ProfilView.js";
 import { VocabularyView } from "./classes/views/VocabularyView.js";
+import { ModalView } from "./classes/views/ModalView.js";
 
 // ctrls
 import { HomeCtrl } from "/public/js/classes/controllers/HomeCtrl.js";
@@ -106,7 +107,8 @@ const miseAJourAuth = new MiseAJourAuth(authServices);
 miseAJourAuth.init();
 
 const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
-const headerCtrl = new HeaderCtrl(headerEventBinder);
+const modalView = new ModalView();
+const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView);
 headerCtrl.init();
 
 // home instance
@@ -189,7 +191,7 @@ const agendaEventBinders = Object.freeze({
     agendaPlanningEventBinder: agendaPlanningEventBinder
 })
 
-const agendaCtrl = new AgendaCtrl(seoManager, { agendaViews, agendaModels, agendaServices, agendaEventBinders });
+const agendaCtrl = new AgendaCtrl(seoManager, modalView, { agendaViews, agendaModels, agendaServices, agendaEventBinders });
 
 const profilView = new ProfilView();
 const profilFormView = new ProfilFormView();
