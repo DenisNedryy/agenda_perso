@@ -96,6 +96,7 @@
     body .agendaContent__body {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
 
 }
@@ -128,6 +129,13 @@
     body .vocabulary,
     body .auth {
         margin: 0px 0px;
+    }
+
+    body .agenda {
+        padding: 15px 12px;
+    }
+    .calendarMobileView__header .calendarMobileView__header__day:last-child{
+        margin: 0px;
     }
 
     body .vocabulary__content__left__body__left {
@@ -163,7 +171,8 @@
 
 @media screen and (max-width: 600px) {
 
-    body .modalViewContainer input, body .modalViewContainer select{
+    body .modalViewContainer input,
+    body .modalViewContainer select {
         width: 100%;
     }
 
