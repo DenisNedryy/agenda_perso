@@ -12,7 +12,7 @@ import { AgendaCalendarView } from "./classes/components/agenda/agenda_week/Agen
 import { YearView } from "./classes/components/agenda/agenda_year/YearView.js";
 import { PlanningView } from "./classes/components/agenda/agenda_planning/PlanningView.js";
 import { MiseAJourAuth } from "./classes/components/MiseAJourAuth.js";
-import { ProfilFormView } from "./classes/components/ProfilFormView.js";
+import { ProfilFormView } from "./classes/components/profil/ProfilFormView.js";
 import { AddModelView } from "./classes/components/agenda/agenda_week/AddModelView.js";
 import { FocusModalView } from "./classes/components/agenda/agenda_week/FocusModelView.js";
 import { DayOffView } from "./classes/components/home/DayOffView.js";
