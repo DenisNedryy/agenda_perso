@@ -18,7 +18,12 @@ import { FocusModalView } from "./classes/components/agenda/agenda_week/FocusMod
 import { DayOffView } from "./classes/components/home/DayOffView.js";
 import { ProjetsView } from "./classes/components/home/ProjetsView.js";
 import { EnglishView } from "./classes/components/home/EnglishView.js";
-import { ModalViews } from "./classes/components/vocabulary/ModalViews.js";
+import { VocabularyAddView } from "./classes/components/vocabulary/add/VocabularyAddView.js";
+import { Vocabulary404 } from "./classes/components/vocabulary/404/Vocabulary404.js";
+import { VocabularyUpdate } from "./classes/components/vocabulary/update/VocabularyUpdate.js";
+import { VocabularyCategory } from "./classes/components/vocabulary/category/VocabularyCategory.js";
+import { VocabularyFamilyAndCategories } from "./classes/components/vocabulary/familyAndCategories/VocabularyFamilyAndCategories.js";
+import { VocabularyFilters } from "./classes/components/vocabulary/filters/VocabularyFilters.js";
 
 // services
 import { UserServices } from "./classes/services/UserServices.js";
@@ -105,8 +110,6 @@ const focusModalView = new FocusModalView(dateModel);
 
 const miseAJourAuth = new MiseAJourAuth(authServices);
 miseAJourAuth.init();
-
-
 
 // home instance
 const dayOffView = new DayOffView(dateModel);
@@ -203,14 +206,24 @@ const profilCtrl = new ProfilCtrl(profilView, seoManager, profilEventBinder, aut
 
 // vocabulary instances
 const vocabularyView = new VocabularyView();
-const modalViews = new ModalViews();
+const vocabularyAddView = new VocabularyAddView();
+const vocabulary404 = new Vocabulary404();
+const vocabularyUpdate = new VocabularyUpdate();
+const vocabularyCategory = new VocabularyCategory();
+const vocabularyFamilyAndCategories = new VocabularyFamilyAndCategories();
+const vocabularyFilters = new VocabularyFilters();
 
 const vocabularyEventBinders = Object.freeze({
     vocabularyEventBinder: vocabularyEventBinder
 });
 const vocabularyViews = Object.freeze({
     vocabularyView: vocabularyView,
-    modalViews: modalViews
+    vocabularyAddView: vocabularyAddView,
+    vocabulary404: vocabulary404,
+    vocabularyUpdate: vocabularyUpdate,
+    vocabularyCategory: vocabularyCategory,
+    vocabularyFamilyAndCategories: vocabularyFamilyAndCategories,
+    vocabularyFilters: vocabularyFilters
 })
 const vocabularyCtrl = new VocabularyCtrl({ vocabularyViews }, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager, debouncer, data);
 
