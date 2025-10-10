@@ -5,7 +5,6 @@ export class AgendaParamsView {
     render(params) {
         const el = document.querySelector(".agendaContent__body__left");
         if (el) {
-            console.log(params);
 
             // options pour width 600px
             const option = document.createElement("div");

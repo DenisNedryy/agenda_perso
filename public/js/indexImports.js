@@ -62,7 +62,7 @@ import { VocabularyView } from "./classes/views/VocabularyView.js";
 import { ModalView } from "./classes/views/ModalView.js";
 
 // ctrls
-import { HomeCtrl } from "./classes/controllers/HomeCtrl.js";
+import { HomeCtrl } from "/public/js/classes/controllers/HomeCtrl.js";
 import { AuthCtrl } from "./classes/controllers/AuthCtrl.js";
 import { AgendaCtrl } from "./classes/controllers/AgendaCtrl.js";
 import { HeaderCtrl } from "./classes/controllers/HeaderCtrl.js";
@@ -226,21 +226,3 @@ const vocabularyViews = Object.freeze({
     vocabularyFilters: vocabularyFilters
 })
 const vocabularyCtrl = new VocabularyCtrl({ vocabularyViews }, { vocabularyEventBinders }, vocabularyService, vocabularyModel, seoManager, debouncer, data);
-
-const routes = {
-    "home": homeCtrl,
-    "auth": authCtrl,
-    "agenda": agendaCtrl,
-    "vocabulary": vocabularyCtrl,
-    "profil": profilCtrl,
-};
-
-const navHighLighter = new NavHighLighter();
-const navigationManager = new NavigationManager(routes, navHighLighter);
-navigationManager.init();
-
-const navigationEventBinder = new NavigationEventBinder(navigationManager);
-navigationEventBinder.bindClickLinks();
-
-
-
