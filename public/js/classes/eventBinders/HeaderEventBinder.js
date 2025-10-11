@@ -17,7 +17,6 @@ export class HeaderEventBinder {
     }
 
     async handleClickTask(e) {
-              console.log("coucou");
         const logOut = e.target.closest(".log-out");
         if (logOut) {
             console.log("coucou");

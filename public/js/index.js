@@ -30,7 +30,8 @@ const userServices = new UserServices();
 const authServices = new AuthServices(userServices);
 const miseAJourAuth = new MiseAJourAuth(authServices);
 const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
-const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView, initAgenda);
+const agendaCtrl = initAgenda();
+const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView, agendaCtrl);
 headerCtrl.init();
 
 const routes = {
