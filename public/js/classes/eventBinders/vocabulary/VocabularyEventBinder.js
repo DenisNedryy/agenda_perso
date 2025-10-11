@@ -248,19 +248,30 @@ export class VocabularyEventBinder {
 
         // btn delete family
         const btnDeleteFamily = e.target.closest(".btn-delete-family");
-        if (btnDeleteFamily) { 
+        if (btnDeleteFamily) {
             const family = btnDeleteFamily.getAttribute("data-family");
-            await this.controller.vocabularyModel.deleteFamily(family); 
+            await this.controller.vocabularyModel.deleteFamily(family);
             this.controller.show();
         }
 
         // btn delete category
         const btnDeleteCategory = e.target.closest(".btn-delete-category");
         if (btnDeleteCategory) {
+            console.log("couocu");
             const family = btnDeleteCategory.getAttribute("data-family");
             const category = btnDeleteCategory.getAttribute("data-category");
             await this.controller.vocabularyModel.deleteCategory(family, category);
             this.controller.show();
+        }
+
+        // btn-delete-vocabulary-line
+        const btnDeleteVocabulary = e.target.closest(".btn-delete-vocabulary-line");
+        if (btnDeleteVocabulary) {
+            const vocId = btnDeleteVocabulary.closest(".vocabulary__content__updateArray__container__body__vocLine").getAttribute("data-id");
+            const category = await this.controller.vocabularyModel.deleteVocabulary(vocId);
+            // mettre à jour l'ui
+            const data = await this.controller.vocabularyModel.getOneVocabularyCategory(category);
+            this.controller.vocabularyUpdate.renderVocabularyUpdateArray(data);
         }
     }
 

@@ -54,8 +54,11 @@ exports.readCourses = async (req, res, next) => {
 
 exports.readAlerts = async (req, res, next) => {
     try {
+        console.log("je suis dans readAlert");
         const type = "alert";
         const [tasks] = await pool.execute('SELECT * FROM tasks WHERE type = ? ORDER BY _index', [type]);
+      console.log(tasks);
+      
         if (tasks.length === 0) {
             return res.status(200).json({ alerts: [] });
         }

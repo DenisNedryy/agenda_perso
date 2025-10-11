@@ -9,7 +9,29 @@ import { initAgenda } from "./init/initAgenda.js";
 import { initVocabulary } from "./init/initVocabulary.js";
 import { initProfil } from "./init/initProfil.js";
 
+import { HeaderEventBinder } from "./classes/eventBinders/HeaderEventBinder.js";
+import { HeaderCtrl } from "./classes/controllers/HeaderCtrl.js";
+import { UserServices } from "./classes/services/UserServices.js";
+import { MiseAJourAuth } from "./classes/components/MiseAJourAuth.js";
+import { AuthServices } from "./classes/services/AuthServices.js";
+import { TaskModel } from "./classes/models/agenda/TaskModel.js";
+import { DateModel } from "./classes/models/agenda/DateModel.js";
+import { TaskServices } from "./classes/services/TaskServices.js";
+import { ModalView } from "./classes/views/ModalView.js";
+
 const seoManager = new SEOManager();
+
+// header instance
+const dateModel = new DateModel();
+const taskServices = new TaskServices();
+const modalView = new ModalView();
+const taskModel = new TaskModel(dateModel, taskServices);
+const userServices = new UserServices();
+const authServices = new AuthServices(userServices);
+const miseAJourAuth = new MiseAJourAuth(authServices);
+const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
+const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView, initAgenda);
+headerCtrl.init();
 
 const routes = {
     "home": initHome(seoManager),

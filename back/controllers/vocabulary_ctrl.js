@@ -285,6 +285,7 @@ exports.updateCategory = async (req, res, next) => {
       WHERE user_id = ? 
       AND name = ?
       AND user_id = ?
+      ORDER BY index_id
       `, [userId, category, userId]
     );
 
@@ -384,6 +385,22 @@ exports.deleteCategory = async (req, res, next) => {
     await pool.execute("DELETE FROM vocabulary WHERE family = ? AND category = ? AND user_id = ?", [family, category, userId]);
 
     return res.status(200).json({ msg: "category deleted" });
+
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+
+};
+
+
+exports.deleteVocabulary = async (req, res, next) => {
+  try {
+    const vocabularyId = req.params.id;
+    const userId = req.auth.userId;
+    const [rows] = await pool.query("SELECT category FROM vocabulary WHERE uuid = ? AND user_id = ? ", [vocabularyId, userId]);
+    await pool.execute("DELETE FROM vocabulary WHERE uuid = ? AND user_id = ?", [vocabularyId, userId]);
+
+    return res.status(200).json({ msg: "vocabulary deleted", category: rows[0].category });
 
   } catch (err) {
     return res.status(500).json({ error: err });

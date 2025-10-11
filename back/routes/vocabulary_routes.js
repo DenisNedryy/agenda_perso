@@ -16,6 +16,7 @@ router.get("/byFamily/:family", auth, vocabularyCtrl.getVocabularyByFamily);
 router.post("/init", auth, vocabularyCtrl.initVocabulary);
 router.post("/add", auth, uploadCategory, vocabularyCtrl.addVocabulary);
 router.put("/updateCategory/:category", auth, vocabularyCtrl.updateCategory);
+router.delete("/:id", auth, vocabularyCtrl.deleteVocabulary);
 router.delete("/families/:family", auth, vocabularyCtrl.deleteFamily);
 router.delete("/families/:family/categories/:category", auth, vocabularyCtrl.deleteCategory);
 

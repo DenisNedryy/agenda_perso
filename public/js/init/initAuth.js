@@ -5,10 +5,19 @@ import { AuthView } from "../classes/views/AuthView.js";
 import { AuthCtrl } from "../classes/controllers/AuthCtrl.js";
 import { AuthEventBinder } from "../classes/eventBinders/AuthEventBinder.js";
 import { UserServices } from "../classes/services/UserServices.js";
+import { TaskModel } from "../classes/models/agenda/TaskModel.js";
+import { ModalView } from "../classes/views/ModalView.js";
+import { DateModel } from "../classes/models/agenda/DateModel.js";
+import { TaskServices } from "../classes/services/TaskServices.js";
 
 
 export function initAuth(seoManager) {
 
+
+    const modalView = new ModalView();
+    const dateModel = new DateModel();
+    const taskServices = new TaskServices();
+    const taskModel = new TaskModel(dateModel, taskServices);
     const userServices = new UserServices();
     const authServices = new AuthServices(userServices);
     const authModel = new AuthModel(userServices);
@@ -18,7 +27,7 @@ export function initAuth(seoManager) {
     miseAJourAuth.init();
 
 
-    const authCtrl = new AuthCtrl(authView, seoManager, authEventBinder, authModel, authServices, miseAJourAuth);
+    const authCtrl = new AuthCtrl(authView, seoManager, authEventBinder, authModel, authServices, miseAJourAuth, taskModel, modalView);
     return authCtrl;
 
 }

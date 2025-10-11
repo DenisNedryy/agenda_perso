@@ -258,6 +258,3 @@ navigationManager.init();
 
 const navigationEventBinder = new NavigationEventBinder(navigationManager);
 navigationEventBinder.bindClickLinks();
-
-
-

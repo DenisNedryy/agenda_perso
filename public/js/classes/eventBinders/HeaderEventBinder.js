@@ -17,11 +17,15 @@ export class HeaderEventBinder {
     }
 
     async handleClickTask(e) {
-        if (e.target.classList.contains("log-out")) {
+              console.log("coucou");
+        const logOut = e.target.closest(".log-out");
+        if (logOut) {
+            console.log("coucou");
             // créer une déconection des cookies https-only
             await this.userServices.logOut();
             await this.miseAJourAuth.init();
         }
+
 
         const alertsBells = e.target.closest(".header__right__alerts--bells");
         if (alertsBells) {
