@@ -104,15 +104,20 @@
     border-radius: 3px;
     padding: 5px 15px;
     margin: 7px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgba(42, 42, 45, 0.63);
 }
 
 .fiche-birthDay p {
     margin: 0px 15px;
 }
+
+.fiche-birthDay .names {
+    color: rgb(0, 95, 242);
+}
+
 
 .iconContainer-birthDay {
     display: flex;
@@ -121,6 +126,10 @@
 
 .iconContainer-birthDay i {
     margin-right: 15px;
+}
+
+.fiche-birthDay i {
+    color: #dd3333b2;
 }
 
 .fiche-birthDay {}
@@ -148,8 +157,9 @@
     padding-left: 10px;
     width: 100%;
 }
-.profil_form__filter form{
-    margin-bottom:15px;
+
+.profil_form__filter form {
+    margin-bottom: 15px;
 }
 
 /* header */
