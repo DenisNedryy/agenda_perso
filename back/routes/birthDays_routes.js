@@ -4,6 +4,7 @@ const birthDaysCtrl = require("../controllers/birthDays_ctrl");
 const auth = require("../middlewares/auth");
 
 router.get("/", auth, birthDaysCtrl.getBirthDaysByAuth);
+router.get("/:name", auth, birthDaysCtrl.getBirthDaysByName);
 router.get("/:id", auth, birthDaysCtrl.getOneBirthDay);
 router.post("/", auth, birthDaysCtrl.addBirthDay);
 router.put("/:id", auth, birthDaysCtrl.updateBirthday);

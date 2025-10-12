@@ -56,3 +56,21 @@ exports.deleteBirthDay = async (req, res, next) => {
         return res.status(500).json({ msg: `error : ${err}` })
     }
 };
+
+
+exports.getBirthDaysByName = async (req, res, next) => {
+    try {
+        const name = req.params.name;
+        const userId = req.auth.userId;
+
+        const [birthDays] = await pool.execute(
+            "SELECT * FROM birthdays WHERE user_id = ? AND name LIKE ?",
+            [userId, `${name}%`]
+        );
+
+        return res.status(200).json({ birthDays: birthDays });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ msg: `error: ${err}` });
+    }
+};

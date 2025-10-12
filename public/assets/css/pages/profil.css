@@ -1,3 +1,6 @@
+.profil {}
+
+
 .profil_top {
     display: flex;
 }
@@ -120,9 +123,7 @@
     margin-right: 15px;
 }
 
-.fiche-birthDay {
-    width: 60%;
-}
+.fiche-birthDay {}
 
 .fiche-birthDay i {
     cursor: pointer;
@@ -134,6 +135,21 @@
 
 .fiche-birthDay p:nth-child(2) {
     text-transform: uppercase;
+}
+
+.profil_form__filter form input[type='text'] {
+    background-color: rgb(30, 33, 36);
+    border: 1px solid rgb(46, 49, 54);
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    padding-left: 5px;
+    padding-left: 10px;
+    width: 100%;
+}
+.profil_form__filter form{
+    margin-bottom:15px;
 }
 
 /* header */
@@ -176,6 +192,11 @@
 
 .profil__header {
     flex-direction: column;
+    max-width: 650px;
+}
+
+.profil__body {
+    max-width: 650px;
 }
 
 .profil__header__bg {
