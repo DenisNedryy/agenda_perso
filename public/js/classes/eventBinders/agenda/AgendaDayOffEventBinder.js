@@ -20,9 +20,16 @@ export class AgendaDayOffEventBinder {
         console.log(dayOffBtn);
         if (dayOffBtn) {
             // chercher dans la bdd le weekEnd et l'envoyer dans le render
-            this.controller.agendaDayOffView.render();
+            const data = await this.controller.weekEndModel.getWeekEnd();
+           await this.controller.agendaDayOffView.render(data);
 
         }
+
+
+        //  // chercher dans la bdd le weekEnd et l'envoyer dans le render
+        // const weekEndId = "123";
+        // const day = "mardi";
+        // const res = await this.controller.weekEndModel.updateWeekEnd(weekEndId, day);
 
     }
 

@@ -36,7 +36,7 @@ import { ModalView } from "../classes/views/ModalView.js";
 export function initAgenda(seoManager) {
 
     const weekEndService = new WeekEndService();
-    const weekEndModel = new WeekEndModel();
+    const weekEndModel = new WeekEndModel(weekEndService);
     const userServices = new UserServices();
     const authServices = new AuthServices(userServices);
     const agendaView = new AgendaView();

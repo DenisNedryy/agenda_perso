@@ -2,7 +2,7 @@ import { HOST } from "../../constants/host.js";
 
 export class WeekEndService {
 
-    async getWeekEnds(data) {
+    async getWeekEnd(data) {
         try {
             const preRes = await fetch(`${HOST}/api/weekEnd`, {
                 method: "GET",

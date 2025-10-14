@@ -25,12 +25,16 @@ exports.createWeekEnd = async (req, res, next) => {
 };
 
 exports.updateWeekEnd = async (req, res, next) => {
+    console.log("Je suis dans updateWeekEnd");
     try {
         const userId = req.auth.userId;
         const day = req.body.day; // ex "lundi"
 
+        // si pas de table alors on la créer
         const [rows] = await pool.execute("SELECT * FROM weekend WHERE user_id = ?", [userId]);
-        if (rows.length === 0) return res.status(200).json({ msg: "weeEnd not know" });
+        if (rows.length === 0) {
+            await pool.execute("INSERT INTO weekend (uuid, user_id) VALUES(?,?)", [uuidv4(), userId]);
+        }
 
         // si dans la bdd lundi = 0 alors on le toggle
         console.log(rows[0]);
