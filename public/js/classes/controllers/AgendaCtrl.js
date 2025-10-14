@@ -24,11 +24,13 @@ export class AgendaCtrl {
         this.userModel = agendaModels.userModel;
         this.planningModel = agendaModels.planningModel;
         this.modalModel = agendaModels.modalModel;
+        this.weekEndModel = agendaModels.weekEndModel;
 
         this.authServices = agendaServices.authServices;
         this.taskServices = agendaServices.taskServices;
         this.birthDaysServices = agendaServices.birthDaysServices;
         this.spaceRepService = agendaServices.spaceRepService;
+        this.weekEndService = agendaServices.weekEndService;
 
         this.agendaEventBinder = agendaEventBinders.agendaEventBinder;
         this.agendaWeekEventBinder = agendaEventBinders.agendaWeekEventBinder;

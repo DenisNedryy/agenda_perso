@@ -20,7 +20,7 @@ export class AgendaDayOffView {
                 dayPara.textContent = day;
                 li.appendChild(box);
                 li.appendChild(dayPara);
-                ul.appendChild(li); 
+                ul.appendChild(li);
             });
             el.appendChild(ul);
 

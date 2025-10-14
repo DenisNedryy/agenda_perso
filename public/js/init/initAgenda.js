@@ -28,11 +28,15 @@ import { AgendaPlanningEventBinder } from "../classes/eventBinders/agenda/Agenda
 import { AgendaDayOffEventBinder } from "../classes/eventBinders/agenda/AgendaDayOffEventBinder.js";
 import { AgendaCtrl } from "../classes/controllers/AgendaCtrl.js";
 import { SpaceRepService } from "../classes/services/SpaceRepService.js";
+import { WeekEndService } from "../classes/services/WeekEndService.js";
+import { WeekEndModel } from "../classes/models/agenda/WeekEndModel.js";
 import { ModalView } from "../classes/views/ModalView.js";
 
 
 export function initAgenda(seoManager) {
 
+    const weekEndService = new WeekEndService();
+    const weekEndModel = new WeekEndModel();
     const userServices = new UserServices();
     const authServices = new AuthServices(userServices);
     const agendaView = new AgendaView();
@@ -87,13 +91,15 @@ export function initAgenda(seoManager) {
         dateNavigationModel: dateNavigationModel,
         userModel: userModel,
         planningModel: planningModel,
-        modalModel: modalModel
+        modalModel: modalModel,
+        weekEndModel: weekEndModel
     });
     const agendaServices = Object.freeze({
         authServices: authServices,
         taskServices: taskServices,
         birthDaysServices: birthDaysServices,
-        spaceRepService: spaceRepService
+        spaceRepService: spaceRepService,
+        weekEndService: weekEndService
     });
 
     const agendaEventBinders = Object.freeze({
