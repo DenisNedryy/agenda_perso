@@ -17,14 +17,20 @@ export class AgendaDayOffEventBinder {
 
     async handleClick(e) {
         const dayOffBtn = e.target.closest(".dayOff-manager");
-        console.log(dayOffBtn);
         if (dayOffBtn) {
             // chercher dans la bdd le weekEnd et l'envoyer dans le render
             const data = await this.controller.weekEndModel.getWeekEnd();
-           await this.controller.agendaDayOffView.render(data);
-
+            await this.controller.agendaDayOffView.render(data);
         }
 
+        const weekEndDay = e.target.closest(".agendaContent__weekDays__day");
+        if (weekEndDay) {
+            const day = weekEndDay.getAttribute("data-day");
+            console.log(day);
+            const weekEndId = weekEndDay.parentElement.getAttribute("data-id");
+            const res = await this.controller.weekEndModel.updateWeekEnd(weekEndId, day);
+            console.log(res);
+        }
 
         //  // chercher dans la bdd le weekEnd et l'envoyer dans le render
         // const weekEndId = "123";

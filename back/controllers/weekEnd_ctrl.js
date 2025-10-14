@@ -7,7 +7,7 @@ exports.getWeekEnds = async (req, res, next) => {
 
         const [rows] = await pool.execute("SELECT * FROM weekend WHERE user_id = ?", [userId]);
         if (rows.length === 0) return res.status(200).json({ weekEnd: [] });
-        return res.status(200).json({ weekEnd: rows });
+        return res.status(200).json({ weekEnd: rows[0] });
     } catch (err) {
         return res.status(500).json({ msg: `error : ${err}` });
     }
@@ -25,7 +25,6 @@ exports.createWeekEnd = async (req, res, next) => {
 };
 
 exports.updateWeekEnd = async (req, res, next) => {
-    console.log("Je suis dans updateWeekEnd");
     try {
         const userId = req.auth.userId;
         const day = req.body.day; // ex "lundi"
@@ -37,9 +36,9 @@ exports.updateWeekEnd = async (req, res, next) => {
         }
 
         // si dans la bdd lundi = 0 alors on le toggle
-        console.log(rows[0]);
+        // d'abord on récupère la table ensuite on set tous les days 
 
-        await pool.execute("UPDATE weekend SET ")
+        await pool.execute(`UPDATE weekend SET ${day} = ? WHERE user_id = ?`,[day, userId]);
         return res.status(201).json({ msg: "weekEnd created" });
     } catch (err) {
         return res.status(500).json({ msg: `error : ${err}` });
