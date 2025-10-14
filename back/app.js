@@ -7,6 +7,7 @@ const userRoutes = require("./routes/users_routes");
 const tasksRoutes = require("./routes/tasks_routes");
 const birthDaysRoutes = require("./routes/birthDays_routes");
 const spaceRoutes = require("./routes/space_routes");
+const weekEndRoutes = require("./routes/weekEnd_routes");
 const vocabularyRoutes = require("./routes/vocabulary_routes");
 const path = require('path');
 const { startTaskStatusCron } = require("./hooks/statusTasks");
@@ -31,6 +32,7 @@ app.use("/api/tasks", tasksRoutes);
 app.use("/api/birthDays", birthDaysRoutes);
 app.use("/api/spaced_repetition", spaceRoutes);
 app.use("/api/vocabulary", vocabularyRoutes);
+app.use("/api/weekEnd", weekEndRoutes);
 
 app.use("/api/images/avatars", express.static(path.join(__dirname, "uploads/pictures/avatars")));
 app.use("/api/images/categories", express.static(path.join(__dirname, "uploads/pictures/categories")));

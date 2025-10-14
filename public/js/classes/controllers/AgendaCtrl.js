@@ -13,6 +13,7 @@ export class AgendaCtrl {
         this.planningView = agendaViews.planningView;
         this.addModelView = agendaViews.addModelView;
         this.focusModalView = agendaViews.focusModalView;
+        this.agendaDayOffView = agendaViews.agendaDayOffView;
 
         this.dateModel = agendaModels.dateModel;
         this.taskModel = agendaModels.taskModel;
@@ -33,11 +34,13 @@ export class AgendaCtrl {
         this.agendaWeekEventBinder = agendaEventBinders.agendaWeekEventBinder;
         this.agendaYearEventBinder = agendaEventBinders.agendaYearEventBinder;
         this.agendaPlanningEventBinder = agendaEventBinders.agendaPlanningEventBinder;
+        this.agendaDayOffEventBinder = agendaEventBinders.agendaDayOffEventBinder;
 
         this.agendaEventBinder.setController(this);
         this.agendaWeekEventBinder.setController(this);
         this.agendaYearEventBinder.setController(this);
         this.agendaPlanningEventBinder.setController(this);
+        this.agendaDayOffEventBinder.setController(this);
 
     };
 
@@ -82,5 +85,6 @@ export class AgendaCtrl {
         this.agendaWeekEventBinder.addEventListeners();
         this.agendaYearEventBinder.addEventListeners();
         this.agendaPlanningEventBinder.addEventListeners();
+        this.agendaDayOffEventBinder.addEventListeners();
     }
 }

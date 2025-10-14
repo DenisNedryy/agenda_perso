@@ -6,6 +6,7 @@ import { AgendaCalendarView } from "../classes/components/agenda/agenda_week/Age
 import { YearView } from "../classes/components/agenda/agenda_year/YearView.js";
 import { PlanningView } from "../classes/components/agenda/agenda_planning/PlanningView.js";
 import { CalendarModel } from "../classes/models/agenda/CalendarModel.js";
+import { AgendaDayOffView } from "../classes/components/agenda/agenda_dayOff/AgendaDayOffView.js";
 import { DateModel } from "../classes/models/agenda/DateModel.js";
 import { AuthServices } from "../classes/services/AuthServices.js";
 import { UserServices } from "../classes/services/UserServices.js";
@@ -24,6 +25,7 @@ import { AgendaEventBinder } from "../classes/eventBinders/agenda/AgendaEventBin
 import { AgendaWeekEventBinder } from "../classes/eventBinders/agenda/AgendaWeekEventBinder.js";
 import { AgendaYearEventBinder } from "../classes/eventBinders/agenda/AgendaYearEventBinder.js";
 import { AgendaPlanningEventBinder } from "../classes/eventBinders/agenda/AgendaPlanningEventBinder.js";
+import { AgendaDayOffEventBinder } from "../classes/eventBinders/agenda/AgendaDayOffEventBinder.js";
 import { AgendaCtrl } from "../classes/controllers/AgendaCtrl.js";
 import { SpaceRepService } from "../classes/services/SpaceRepService.js";
 import { ModalView } from "../classes/views/ModalView.js";
@@ -39,6 +41,7 @@ export function initAgenda(seoManager) {
     const agendaNavView = new AgendaNavView(dateModel);
     const agendaParamsView = new AgendaParamsView();
     const agendaCalendarView = new AgendaCalendarView(dateModel);
+    const agendaDayOffView = new AgendaDayOffView();
     const yearView = new YearView();
     const planningView = new PlanningView(dateModel);
     const bankHolidaysModel = new BankHolidaysModel();
@@ -57,6 +60,7 @@ export function initAgenda(seoManager) {
     const agendaWeekEventBinder = new AgendaWeekEventBinder();
     const agendaYearEventBinder = new AgendaYearEventBinder();
     const agendaPlanningEventBinder = new AgendaPlanningEventBinder();
+    const agendaDayOffEventBinder = new AgendaDayOffEventBinder();
     const spaceRepService = new SpaceRepService();
     const modalView = new ModalView();
 
@@ -70,7 +74,8 @@ export function initAgenda(seoManager) {
         yearView: yearView,
         planningView: planningView,
         addModelView: addModelView,
-        focusModalView: focusModalView
+        focusModalView: focusModalView,
+        agendaDayOffView: agendaDayOffView
     });
 
     const agendaModels = Object.freeze({
@@ -95,7 +100,8 @@ export function initAgenda(seoManager) {
         agendaEventBinder: agendaEventBinder,
         agendaWeekEventBinder: agendaWeekEventBinder,
         agendaYearEventBinder: agendaYearEventBinder,
-        agendaPlanningEventBinder: agendaPlanningEventBinder
+        agendaPlanningEventBinder: agendaPlanningEventBinder,
+        agendaDayOffEventBinder: agendaDayOffEventBinder
     })
 
     const agendaCtrl = new AgendaCtrl(seoManager, modalView, { agendaViews, agendaModels, agendaServices, agendaEventBinders });
