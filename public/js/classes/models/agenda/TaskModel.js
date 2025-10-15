@@ -16,7 +16,6 @@ export class TaskModel {
 
     async getAlerts() {
         const res = await this.taskService.getAlerts();
-        console.log(res);
         return res.data.alerts;
     }
 
@@ -71,6 +70,7 @@ export class TaskModel {
     }
 
     getNextConsecutiveDaysOff(arr) {
+        // il faut ajouter les weekend pour cette semaine et la semaine pro
         let isStarted = false;
         let previousDate = null;
         const nextConsecutiveDaysOff = [];

@@ -36,7 +36,6 @@ export class HomeCtrl {
         const daysOff = this.taskModel.getDaysOff(myTasks);
         const nextConsecutiveDaysOff = this.taskModel.getNextConsecutiveDaysOff(daysOff);
         this.dayOffView.render(nextConsecutiveDaysOff);
-        console.log(nextConsecutiveDaysOff);
     }
 
     async renderProjets() {
