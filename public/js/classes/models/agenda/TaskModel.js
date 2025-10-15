@@ -73,25 +73,25 @@ export class TaskModel {
 
         // récupération du weekend en propre
         const weekEndDays = [
-            { day: "lundi", isWeekEnd: weekend.lundi, num: 1, date: this.getDateOfWeek("lundi").toLocaleDateString("fr-FR") },
-            { day: "mardi", isWeekEnd: weekend.mardi, num: 2, date: this.getDateOfWeek("mardi").toLocaleDateString("fr-FR") },
-            { day: "merdredi", isWeekEnd: weekend.merdredi, num: 3, date: this.getDateOfWeek("mercredi").toLocaleDateString("fr-FR") },
-            { day: "jeudi", isWeekEnd: weekend.jeudi, num: 4, date: this.getDateOfWeek("jeudi").toLocaleDateString("fr-FR") },
-            { day: "vendredi", isWeekEnd: weekend.vendredi, num: 5, date: this.getDateOfWeek("vendredi").toLocaleDateString("fr-FR") },
-            { day: "samedi", isWeekEnd: weekend.samedi, num: 6, date: this.getDateOfWeek("samedi").toLocaleDateString("fr-FR") },
-            { day: "dimanche", isWeekEnd: weekend.dimanche, num: 0, date: this.getDateOfWeek("dimanche").toLocaleDateString("fr-FR") },
+            { day: "lundi", isWeekEnd: weekend.lundi, num: 1, date: this.getDateOfWeek("lundi") },
+            { day: "mardi", isWeekEnd: weekend.mardi, num: 2, date: this.getDateOfWeek("mardi") },
+            { day: "merdredi", isWeekEnd: weekend.merdredi, num: 3, date: this.getDateOfWeek("mercredi") },
+            { day: "jeudi", isWeekEnd: weekend.jeudi, num: 4, date: this.getDateOfWeek("jeudi") },
+            { day: "vendredi", isWeekEnd: weekend.vendredi, num: 5, date: this.getDateOfWeek("vendredi") },
+            { day: "samedi", isWeekEnd: weekend.samedi, num: 6, date: this.getDateOfWeek("samedi") },
+            { day: "dimanche", isWeekEnd: weekend.dimanche, num: 0, date: this.getDateOfWeek("dimanche") },
         ];
 
         const weekEndThisWeek = weekEndDays.filter((cell) => cell.isWeekEnd);
         const total = weekEndThisWeek;
         weekEndThisWeek.forEach((cell) => {
-            total.push({ ...cell, date: this.getDateOfWeek(cell.day, true).toLocaleDateString("fr-FR") });
+            total.push({ ...cell, date: this.getDateOfWeek(cell.day, true) });
         })
         return total;
     }
 
-    cleanDayOff(dayOff){
-        const sorted =  dayOff.filter((cell)=>new Date(cell.date) >= new Date());
+    cleanDayOff(dayOff) {
+        const sorted = dayOff.filter((cell) => new Date(cell.date) >= new Date());
         return sorted || [];
     }
 
