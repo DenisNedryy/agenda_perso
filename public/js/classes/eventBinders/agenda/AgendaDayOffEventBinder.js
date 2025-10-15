@@ -26,10 +26,10 @@ export class AgendaDayOffEventBinder {
         const weekEndDay = e.target.closest(".agendaContent__weekDays__day");
         if (weekEndDay) {
             const day = weekEndDay.getAttribute("data-day");
-            console.log(day);
             const weekEndId = weekEndDay.parentElement.getAttribute("data-id");
             const res = await this.controller.weekEndModel.updateWeekEnd(weekEndId, day);
-            console.log(res);
+            const data = await this.controller.weekEndModel.getWeekEnd();
+            await this.controller.agendaDayOffView.render(data);
         }
 
         //  // chercher dans la bdd le weekEnd et l'envoyer dans le render

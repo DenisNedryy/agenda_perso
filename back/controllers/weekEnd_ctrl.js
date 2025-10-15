@@ -35,10 +35,21 @@ exports.updateWeekEnd = async (req, res, next) => {
             await pool.execute("INSERT INTO weekend (uuid, user_id) VALUES(?,?)", [uuidv4(), userId]);
         }
 
-        // si dans la bdd lundi = 0 alors on le toggle
-        // d'abord on récupère la table ensuite on set tous les days 
+        function toggleBooltinyint(num){
+            return num===0 ? 1 : 0;
+        }
 
-        await pool.execute(`UPDATE weekend SET ${day} = ? WHERE user_id = ?`,[day, userId]);
+        const days = {
+            lundi: day === "lundi" ? toggleBooltinyint(rows[0]['lundi']) : rows[0]['lundi'],
+            mardi: day === "mardi" ?  toggleBooltinyint(rows[0]['mardi']): rows[0]['mardi'],
+            mercredi: day === "mercredi" ? toggleBooltinyint(rows[0]['mercredi']) : rows[0]['mercredi'],
+            jeudi: day === "jeudi" ? toggleBooltinyint(rows[0]['jeudi']) : rows[0]['jeudi'],
+            vendredi: day === "vendredi" ? toggleBooltinyint(rows[0]['vendredi']) : rows[0]['vendredi'],
+            samedi: day === "samedi" ? toggleBooltinyint(rows[0]['samedi']) : rows[0]['samedi'],
+            dimanche: day === "dimanche" ? toggleBooltinyint(rows[0]['dimanche']) : rows[0]['dimanche']
+        }
+
+        await pool.execute(`UPDATE weekend SET lundi = ?, mardi = ?, mercredi = ?, jeudi = ?, vendredi = ?, samedi = ?, dimanche = ?  WHERE user_id = ?`, [days['lundi'], days['mardi'], days['mercredi'], days['jeudi'], days['vendredi'], days['samedi'], days['dimanche'], userId]);
         return res.status(201).json({ msg: "weekEnd created" });
     } catch (err) {
         return res.status(500).json({ msg: `error : ${err}` });

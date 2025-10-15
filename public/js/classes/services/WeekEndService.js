@@ -51,7 +51,7 @@ export class WeekEndService {
                 },
                 credentials: "include",
                 body: JSON.stringify({
-                    vocabulary: day
+                    day: day
                 }),
             });
             const res = await preRes.json();

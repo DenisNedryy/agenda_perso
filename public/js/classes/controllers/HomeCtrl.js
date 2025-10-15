@@ -9,6 +9,7 @@ export class HomeCtrl {
         this.dateModel = homeModels.dateModel;
         this.taskModel = homeModels.taskModel;
         this.vocabularyModel = homeModels.vocabularyModel;
+        this.weekEndModel = homeModels.weekEndModel;
 
         this.seoManager = seoManager;
         this.homeEventBinder = homeEventBinder;
@@ -29,10 +30,13 @@ export class HomeCtrl {
     }
 
     async renderDayOff() {
+        const weekend = await this.weekEndModel.getWeekEnd();
+        console.log(weekend);
         const myTasks = await this.taskModel.getTasksByAuth();
         const daysOff = this.taskModel.getDaysOff(myTasks);
         const nextConsecutiveDaysOff = this.taskModel.getNextConsecutiveDaysOff(daysOff);
         this.dayOffView.render(nextConsecutiveDaysOff);
+        console.log(nextConsecutiveDaysOff);
     }
 
     async renderProjets() {

@@ -1,6 +1,6 @@
 export class AgendaCtrl {
 
-    constructor(seoManager,modalView, { agendaViews, agendaModels, agendaServices, agendaEventBinders }) {
+    constructor(seoManager, modalView, { agendaViews, agendaModels, agendaServices, agendaEventBinders }) {
         this.seoManager = seoManager;
         this.modalView = modalView;
 
@@ -8,7 +8,7 @@ export class AgendaCtrl {
         this.agendaWeekView = agendaViews.agendaWeekView;
         this.agendaNavView = agendaViews.agendaNavView;
         this.agendaParamsView = agendaViews.agendaParamsView;
-        this.agendaCalendarView = agendaViews.agendaCalendarView; 
+        this.agendaCalendarView = agendaViews.agendaCalendarView;
         this.yearView = agendaViews.yearView;
         this.planningView = agendaViews.planningView;
         this.addModelView = agendaViews.addModelView;
@@ -68,7 +68,8 @@ export class AgendaCtrl {
             isBirthDays: this.birthDaysModel.birthDays,
             birthDaysTasks: this.birthDaysModel.birthDaysTask
         }
-        const weekData = await this.calendarModel.getAgendaPerWeek({ weekParams }, tasksFiltered, date);
+        const weekend = await this.weekEndModel.getWeekEnd();
+        const weekData = await this.calendarModel.getAgendaPerWeek({ weekParams }, tasksFiltered, date, weekend);
         const params = await this.authServices.getUsersStatus();
         params.bankHolidays = this.bankHolidaysModel.bankHolidays;
         params.birthDays = this.birthDaysModel.birthDays;

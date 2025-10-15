@@ -5,6 +5,7 @@
 .agendaContent__weekDays li{
     display:flex;
     margin: 5px 0px;
+    width:fit-content;
 }
 .agendaContent__weekDays li>div{
     margin-right: 25px;

@@ -15,7 +15,7 @@ export class WeekEndModel {
     }
 
     async updateWeekEnd(weekEndId, day) {
-        const res = await this.weekEndService.updateWeekEnd(weekEndId, day);
+        const res = await this.weekEndService.updateWeekEnd(weekEndId, day); 
         return res.data.msg;
     }
 }
