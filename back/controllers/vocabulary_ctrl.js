@@ -272,42 +272,41 @@ exports.getCategories = async (req, res, next) => {
 }
 
 exports.updateCategory = async (req, res, next) => {
-
   try {
     const userId = req.auth.userId;
     const category = req.params.category;
-    const vocabularySession = req.body.vocabularySession;
-    const successCount = vocabularySession.filter(item => item && item.success).length;
-    const percentage = (successCount / vocabularySession.length) * 100;
+    const vocabularySession = req.body.vocabularySession || [];
 
-    const [cat] = await pool.query(
-      `SELECT * FROM category
-      WHERE user_id = ? 
-      AND name = ?
-      AND user_id = ?
-      ORDER BY index_id
-      `, [userId, category, userId]
+    const successCount = vocabularySession.filter(item => item && item.success).length;
+    const percentage = vocabularySession.length > 0
+      ? (successCount / vocabularySession.length) * 100
+      : 0;
+
+    const [rows] = await pool.query(
+      `SELECT * FROM category WHERE user_id = ? AND name = ?`,
+      [userId, category]
     );
 
-    if (!cat || cat.length === 0) {
+    if (rows.length === 0) {
       await pool.execute(
         `INSERT INTO category (uuid, user_id, name, percentage)
-         VALUES(?, ?, ?, ?)
-        `, [uuidv4(), userId, category, percentage]
+         VALUES (?, ?, ?, ?)`,
+        [uuidv4(), userId, category, percentage]
       );
-    } else if (cat) {
+    } else {
       await pool.execute(
-        `UPDATE category SET percentage = ?
-         WHERE user_id = ?
-         AND name = ?`, [percentage, userId, category]
+        `UPDATE category SET percentage = ? WHERE user_id = ? AND name = ?`,
+        [percentage, userId, category]
       );
     }
-    // determiner si category percentils est déjà créé, si oui put sinon push
-    return res.status(200).json({ msg: "category updated" });
+
+    return res.status(200).json({ msg: "Category updated" });
   } catch (err) {
-    return res.status(500).json({ error: err });
+    console.error(err);
+    return res.status(500).json({ error: err.message || err });
   }
-}
+};
+
 
 
 exports.deleteFamily = async (req, res, next) => {
