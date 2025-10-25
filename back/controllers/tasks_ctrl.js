@@ -56,7 +56,7 @@ exports.readAlerts = async (req, res, next) => {
     try {
         const type = "alert";
         const [tasks] = await pool.execute('SELECT * FROM tasks WHERE type = ? ORDER BY _index', [type]);
-      
+
         if (tasks.length === 0) {
             return res.status(200).json({ alerts: [] });
         }
@@ -260,8 +260,9 @@ exports.reviewTomorow = async (req, res, next) => {
         }
         const task = tasks[0];
         // ajout d'un jour à la date
-        const date = new Date(new Date(task.date).getTime() + (1 * (1000 * 60 * 60 * 24)));
-        
+        const date = new Date(task.date);
+        date.setDate(date.getDate() + 1);
+
         await pool.execute("UPDATE tasks SET date = ? WHERE id = ?", [date, id]);
         return res.status(200).json({ msg: "task updated" })
     } catch (err) {
