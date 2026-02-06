@@ -9,6 +9,7 @@ const birthDaysRoutes = require("./routes/birthDays_routes");
 const spaceRoutes = require("./routes/space_routes");
 const weekEndRoutes = require("./routes/weekEnd_routes");
 const vocabularyRoutes = require("./routes/vocabulary_routes");
+const depenseRoutes = require("./routes/depense_routes");
 const path = require('path');
 const { startTaskStatusCron } = require("./hooks/statusTasks");
 
@@ -16,8 +17,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(cors({
-    origin: `http://127.0.0.1:5500`,
-    methods: "GET, POST, PUT, DELETE",
+    origin: `http://localhost:3000`,
+    methods: "GET, POST, PUT,PATCH, DELETE",
     allowedHeaders: "Content-Type, Authorization",
     credentials: true,
 }));
@@ -33,6 +34,7 @@ app.use("/api/birthDays", birthDaysRoutes);
 app.use("/api/spaced_repetition", spaceRoutes);
 app.use("/api/vocabulary", vocabularyRoutes);
 app.use("/api/weekEnd", weekEndRoutes);
+app.use("/api/depense", depenseRoutes);
 
 app.use("/api/images/avatars", express.static(path.join(__dirname, "uploads/pictures/avatars")));
 app.use("/api/images/categories", express.static(path.join(__dirname, "uploads/pictures/categories")));
