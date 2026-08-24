@@ -29,6 +29,7 @@ export class AddModelView {
         <label for="typeSelect">Type</label>
         <select id="typeSelect" name="type">
           <option value="tasks">Tasks</option>
+          <option value="movies">Movies</option>
           <option value="spaced_repetition">Spaced repetition</option>
           <option value="courses">Courses</option>
           <option value="rdvs">Rdvs</option>
@@ -38,6 +39,14 @@ export class AddModelView {
           <option value="alert">Alert</option>
         </select>
       </div>
+
+
+      <!-- Time -->
+      <div>
+        <label for="timeSelect">Time</label>
+        <input type="time" name="scheduled_time" id="timeSelect">
+      </div>
+      
 
       <!-- Subject -->
       <div class="subjectContainer hidden">
@@ -70,10 +79,10 @@ export class AddModelView {
     }
   }
 
-renderModel() {
-  const el = document.querySelector(".modalAddContainer");
-  if (el) {
-    el.innerHTML = `
+  renderModel() {
+    const el = document.querySelector(".modalAddContainer");
+    if (el) {
+      el.innerHTML = `
             <div class="modal hidden">
   <div class="modalContent">
     <div class="modal__content__header">
@@ -99,6 +108,7 @@ renderModel() {
         <label for="typeSelect">Type</label>
         <select id="typeSelect" name="type">
           <option value="tasks">Tasks</option>
+          <option value="movies">Movies</option>
           <option value="spaced_repetition">Spaced repetition</option>
           <option value="courses">Courses</option>
           <option value="rdvs">Rdvs</option>
@@ -137,6 +147,6 @@ renderModel() {
 </div>
 
             `;
+    }
   }
-}
 }

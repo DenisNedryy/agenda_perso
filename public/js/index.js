@@ -6,9 +6,7 @@ import { SEOManager } from "./classes/core/SEOManager.js";
 import { initHome } from "./init/initHome.js";
 import { initAuth } from "./init/initAuth.js";
 import { initAgenda } from "./init/initAgenda.js";
-import { initVocabulary } from "./init/initVocabulary.js";
 import { initProfil } from "./init/initProfil.js";
-import { initDepense } from "./init/initDepense.js";
 
 import { HeaderEventBinder } from "./classes/eventBinders/HeaderEventBinder.js";
 import { HeaderCtrl } from "./classes/controllers/HeaderCtrl.js";
@@ -31,17 +29,20 @@ const userServices = new UserServices();
 const authServices = new AuthServices(userServices);
 const miseAJourAuth = new MiseAJourAuth(authServices);
 const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
-const agendaCtrl = initAgenda();
+const agendaCtrl = initAgenda(seoManager);
 const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView, agendaCtrl);
 headerCtrl.init();
 
+
 const routes = {
-    "home": initHome(seoManager),
-    "auth": initAuth(seoManager),
-    "agenda": initAgenda(seoManager),
-    "vocabulary": initVocabulary(seoManager),
-    "profil": initProfil(seoManager),
-    "depense": initDepense(seoManager)
+    home: initHome(seoManager, {
+        goToAgendaDate: (dateSelected) => {
+            agendaCtrl.show(dateSelected);
+        }
+    }),
+    auth: initAuth(seoManager),
+    agenda: agendaCtrl,
+    profil: initProfil(seoManager),
 };
 
 const navHighLighter = new NavHighLighter();

@@ -98,6 +98,7 @@ export class CalendarModel {
                         name: task.name,
                         description: task.description,
                         date,
+                        scheduled_time: task.scheduled_time,
                         year: dayYear,
                         month: taskMonth,
                         dateNum: taskDay,
@@ -175,8 +176,12 @@ export class CalendarModel {
                 return 'bgTasks';
                 break;
 
+            case 'movies':
+                return 'bgMovies';
+                break;
+
             case 'events':
-                return 'bgEvents';
+                return 'bgEvents'; 
                 break;
 
             case 'rdvs':

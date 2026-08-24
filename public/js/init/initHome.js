@@ -7,12 +7,14 @@ import { HomeEventBinder } from "../classes/eventBinders/homeEventBinder.js";
 import { DateModel } from "../classes/models/agenda/DateModel.js";
 import { TaskModel } from "../classes/models/agenda/TaskModel.js";
 import { TaskServices } from "../classes/services/TaskServices.js";
-import { VocabularyModel } from "../classes/models/vocabulary/vocabularyModel.js";
-import { VocabularyService } from "../classes/services/VocabularyService.js";
 import { WeekEndService } from "../classes/services/WeekEndService.js";
 import { WeekEndModel } from "../classes/models/agenda/WeekEndModel.js";
+import { TodayList } from "../classes/components/home/TodayList.js";
+import { MoviesList } from "../classes/components/home/MoviesList.js";
+import { TasksManager } from "../classes/components/home/TasksManager.js";
+import { DateNavigationModel } from "../classes/models/agenda/DateNavigationModel.js";
 
-export function initHome(seoManager) {
+export function initHome(seoManager, actions = {}) {
 
     const dateModel = new DateModel();
     const dayOffView = new DayOffView(dateModel);
@@ -21,27 +23,39 @@ export function initHome(seoManager) {
     const homeView = new HomeView();
     const taskServices = new TaskServices();
     const homeEventBinder = new HomeEventBinder();
-    const vocabularyService = new VocabularyService();
-    const vocabularyModel = new VocabularyModel(vocabularyService);
     const taskModel = new TaskModel(dateModel, taskServices);
     const weekEndService = new WeekEndService();
     const weekEndModel = new WeekEndModel(weekEndService);
+    const todayList = new TodayList();
+    const moviesList = new MoviesList();
+    const tasksManager = new TasksManager();
+    const dateNavigationModel = new DateNavigationModel(dateModel);
 
     const homeViews = Object.freeze({
         homeView: homeView,
         dayOffView: dayOffView,
         projetsView: projetsView,
-        englishView: englishView
+        englishView: englishView,
+        todayList: todayList,
+        moviesList: moviesList,
+        tasksManager: tasksManager
     });
 
     const homeModels = Object.freeze({
         dateModel: dateModel,
         taskModel: taskModel,
-        vocabularyModel: vocabularyModel,
-        weekEndModel:weekEndModel
+        weekEndModel: weekEndModel,
+        dateNavigationModel: dateNavigationModel
     });
 
-    const homeCtrl = new HomeCtrl({ homeViews, homeModels }, seoManager, homeEventBinder, taskServices);
+    const homeCtrl = new HomeCtrl(
+        { homeViews, homeModels },
+        seoManager,
+        homeEventBinder,
+        taskServices
+    );
+
+    homeCtrl.actions = actions;
 
     return homeCtrl;
 

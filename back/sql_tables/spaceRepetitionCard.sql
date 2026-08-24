@@ -2,5 +2,6 @@ CREATE TABLE spacedRepetitionCard (
   task_id VARCHAR(36) PRIMARY KEY,
   review_date DATE,
   step TINYINT UNSIGNED NOT NULL CHECK (step BETWEEN 0 AND 8),
+  scheduled_time TIME DEFAULT NULL,
   FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;

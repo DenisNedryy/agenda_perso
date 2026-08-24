@@ -10,7 +10,7 @@ body {
 }
 
 main {
-    width: 83%;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -22,15 +22,24 @@ header {
 
 #root {
     flex-grow: 1;
-    background-color: rgb(7, 8, 11);
-    color: white;
+    color: black;
     overflow: auto;
 }
 
-.home,
+
 .agenda,
 .vocabulary,
 .auth,
 .profil {
-    margin: 20px 40px;
+    width: 100%;
+    height: 100%;
 }
+
+.home {
+    width: 100%;
+}
+
+.agenda,
+.vocabulary,
+.auth,
+.profil {}

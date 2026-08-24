@@ -9,7 +9,6 @@ const birthDaysRoutes = require("./routes/birthDays_routes");
 const spaceRoutes = require("./routes/space_routes");
 const weekEndRoutes = require("./routes/weekEnd_routes");
 const vocabularyRoutes = require("./routes/vocabulary_routes");
-const depenseRoutes = require("./routes/depense_routes");
 const path = require('path');
 const { startTaskStatusCron } = require("./hooks/statusTasks");
 
@@ -17,7 +16,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(cors({
-    origin: `http://localhost:3000`,
+    origin: `http://127.0.0.1:5500`,
     methods: "GET, POST, PUT,PATCH, DELETE",
     allowedHeaders: "Content-Type, Authorization",
     credentials: true,
@@ -28,13 +27,25 @@ app.use("/api/welcome", (req, res, next) => {
     res.status(200).json({ msg: "Les cors marchent ! " });
 });
 
+
+
+const pool = require("./connection/sqlConnection");
+
+(async () => {
+    try {
+        const [rows] = await pool.query("SELECT 1 AS test");
+        console.log("MYSQL CONNECTÉ :", rows);
+    } catch (err) {
+        console.error("MYSQL ERREUR :", err);
+    }
+})();
+
 app.use("/api/auth", userRoutes);
 app.use("/api/tasks", tasksRoutes);
 app.use("/api/birthDays", birthDaysRoutes);
 app.use("/api/spaced_repetition", spaceRoutes);
 app.use("/api/vocabulary", vocabularyRoutes);
 app.use("/api/weekEnd", weekEndRoutes);
-app.use("/api/depense", depenseRoutes);
 
 app.use("/api/images/avatars", express.static(path.join(__dirname, "uploads/pictures/avatars")));
 app.use("/api/images/categories", express.static(path.join(__dirname, "uploads/pictures/categories")));

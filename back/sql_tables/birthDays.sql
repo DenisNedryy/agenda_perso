@@ -5,6 +5,7 @@ CREATE TABLE birthdays (
     last_name VARCHAR(100) NOT NULL,
     `date` DATE NOT NULL,
     type VARCHAR(50) DEFAULT 'birthDays',
+    scheduled_time TIME DEFAULT NULL,
     row_index INT NOT NULL AUTO_INCREMENT,
     UNIQUE INDEX (row_index),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

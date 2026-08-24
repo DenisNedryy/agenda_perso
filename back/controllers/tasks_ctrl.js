@@ -16,13 +16,28 @@ exports.readTasks = async (req, res, next) => {
     }
 };
 
+exports.readTodayTasks = async (req, res, next) => {
+    try {
+        const [tasks] = await pool.execute(`
+            SELECT *
+            FROM tasks
+            WHERE date = CURDATE()
+            ORDER BY _index ASC
+        `);
+
+        return res.status(200).json({ tasks });
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+};
+
 exports.readTasksByAuthAndType = async (req, res, next) => {
     try {
         const userId = req.auth.userId;
         const type = req.params.type;
         const [tasks] = await pool.execute(
             `SELECT id, user_id, author_id, owner_id, status, name, description, date,
-              type, subject, sort_order, _index, author_img_url
+              type, subject, sort_order, _index, author_img_url, scheduled_time
        FROM tasks
        WHERE user_id = ? AND type = ?
        ORDER BY sort_order IS NULL, sort_order, _index`,
@@ -37,6 +52,67 @@ exports.readTasksByAuthAndType = async (req, res, next) => {
     }
 }
 
+
+exports.readMovies = async (req, res, next) => {
+    try {
+        const [movies] = await pool.execute('SELECT * FROM tasks WHERE type = ? ORDER BY _index', ["movies"]);
+        if (movies.length === 0) {
+            return res.status(200).json({ movies: [] });
+        }
+        return res.status(200).json({ movies });
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+};
+
+
+exports.readTasksByFilter = async (req, res, next) => {
+    try {
+
+        const {
+            search = "",
+            type = "all",
+            sort = "recent"
+        } = req.body;
+
+        let query = `
+            SELECT *
+            FROM tasks
+            WHERE 1=1
+        `;
+
+        const params = [];
+
+        if (search) {
+            query += ` AND name LIKE ?`;
+            params.push(`%${search}%`);
+        }
+
+        if (type !== "all") {
+            query += ` AND type = ?`;
+            params.push(type);
+        }
+
+        switch (sort) {
+
+            case "oldest":
+                query += ` ORDER BY _index ASC`;
+                break;
+
+            case "recent":
+            default:
+                query += ` ORDER BY _index DESC`;
+                break;
+        }
+
+        const [tasks] = await pool.execute(query, params);
+
+        return res.status(200).json({ tasks });
+
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+};
 
 
 
@@ -105,7 +181,7 @@ exports.readTasksByAuth = async (req, res, next) => {
 
 exports.createTask = async (req, res, next) => {
     try {
-        const { name, description, date, type, subject, author_id, owner_id, author_img_url } = req.body;
+        const { name, description, date, type, subject, author_id, owner_id, author_img_url, scheduled_time } = req.body;
         const [tasks] = await pool.execute("SELECT _index FROM tasks",);
 
         // sort index pour toutes les tasks
@@ -129,6 +205,7 @@ exports.createTask = async (req, res, next) => {
             author_id: author_id || null,
             owner_id: owner_id || null,
             author_img_url: author_img_url,
+            scheduled_time: scheduled_time || null,
             sort_order: newIndex
         }
 
@@ -167,12 +244,15 @@ exports.updateTask = async (req, res, next) => {
         if (req.auth.userId !== task[0].user_id) {
             return res.status(400).json({ msg: "action non authorisée" });
         }
-        const { name, description, type } = req.body;
+        const { name, description, type, scheduled_time } = req.body;
+
+        console.log(req.body);
 
         const data = {
             name: name || null,
             description: description || null,
-            type: type || null
+            type: type || null,
+            scheduled_time: scheduled_time || null
         }
 
         const keys = Object.keys(data).filter((key) => data[key] !== null);
