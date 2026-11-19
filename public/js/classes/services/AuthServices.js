@@ -33,7 +33,7 @@ export class AuthServices {
         });
     }
 
-    async setCurrentUser() {
+    async setCurrentUser() { 
         const authRes = await this.userServices.getMyProfil();
         return authRes.data.user;
     }

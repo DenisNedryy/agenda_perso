@@ -179,7 +179,7 @@ export class AgendaCalendarView {
                             }
 
                             // author
-                            if (tasksByList[i].author_id) {
+                          if (tasksByList[i].author_id && tasksByList[i].author_img_url) {
 
                                 const headerAvatar = document.createElement("img");
 

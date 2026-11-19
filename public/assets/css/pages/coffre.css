@@ -1,0 +1,230 @@
+.coffre {
+    box-sizing: border-box;
+    min-height: calc(100vh - 55px);
+    padding: 28px 36px;
+    background: #eff4f8;
+    color: #102331;
+}
+
+.coffre > h2 {
+    margin: 0 0 24px;
+    font-size: 26px;
+}
+
+.coffre__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    gap: 24px;
+}
+
+.coffre__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.coffre__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: center;
+    gap: 6px 16px;
+    min-width: 0;
+    min-height: 104px;
+    padding: 18px 22px;
+    border: 1px solid #cbd9e5;
+    border-radius: 12px;
+    background: #fff;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.coffre__card:hover {
+    border-color: #298f83;
+    background: #f3faf9;
+}
+
+.coffre__card[aria-pressed="true"] {
+    border-color: #298f83;
+    background: #e8f6f3;
+    box-shadow: inset 4px 0 #298f83;
+}
+
+.coffre__card:focus-visible {
+    outline: 2px solid #08746d;
+    outline-offset: 2px;
+}
+
+.coffre__card-name {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 17px;
+    overflow-wrap: anywhere;
+}
+
+.coffre__card-category {
+    grid-column: 1;
+    grid-row: 2;
+    color: #526779;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.coffre__card-favorite {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    color: #08746d;
+    font-size: 13px;
+}
+
+.coffre__details {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid #cbd9e5;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.coffre__details h3 {
+    margin: 0 0 20px;
+    font-size: 22px;
+    overflow-wrap: anywhere;
+}
+
+.coffre__fields {
+    margin: 0;
+}
+
+.coffre__fields dt {
+    margin-bottom: 6px;
+    color: #526779;
+    font-size: 14px;
+}
+
+.coffre__fields dd {
+    margin: 0 0 14px;
+    padding: 10px 12px;
+    border: 1px solid #cbd9e5;
+    border-radius: 8px;
+    background: #f5f8fb;
+    overflow-wrap: anywhere;
+}
+
+.coffre__fields dd:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+    .coffre__layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .coffre {
+        padding: 20px 16px;
+    }
+
+    .coffre__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .coffre__card,
+    .coffre__details {
+        padding: 16px;
+    }
+}
+
+.coffre {
+    box-sizing: border-box;
+    min-height: calc(100vh - 55px);
+    padding: 28px 36px;
+    background: #edf3f8;
+    color: #102331;
+}
+.coffre h2 { margin: 0 0 24px; font-size: 26px; }
+.coffre__status { margin: 0 0 12px; }
+.coffre__status:empty { display: none; }
+.coffre__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 24px;
+    align-items: start;
+    max-width: 1600px;
+}
+.coffre__toolbar, .coffre__pagination, .coffre__footer, .coffre__details-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.coffre__toolbar { margin-bottom: 20px; }
+.coffre__toolbar input { flex: 1 1 170px; }
+.coffre button, .coffre input, .coffre select {
+    min-width: 0;
+    padding: 8px 11px;
+    border: 1px solid #c2d3e4;
+    border-radius: 8px;
+    background: #f6f9fc;
+    color: inherit;
+    font: inherit;
+}
+.coffre button { cursor: pointer; }
+.coffre button:disabled { opacity: .5; cursor: default; }
+.coffre button:focus-visible, .coffre input:focus-visible, .coffre select:focus-visible {
+    outline: 2px solid #08746d;
+    outline-offset: 2px;
+}
+.coffre .coffre__primary { background: #08746d; border-color: #08746d; color: #fff; }
+.coffre__toolbar button[aria-pressed="true"] { background: #d8f0ea; border-color: #83bab4; }
+.coffre__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.coffre__card, .coffre__details {
+    min-width: 0;
+    border: 1px solid #cbd9e5;
+    border-radius: 12px;
+    background: #fff;
+}
+.coffre__card { display: flex; align-items: center; min-height: 94px; padding: 6px 10px; }
+.coffre__card:has([data-action="select"][aria-pressed="true"]) {
+    border-color: #298f83;
+    background: #e8f6f3;
+    box-shadow: inset 4px 0 #298f83;
+}
+.coffre__card button { border: 0; background: transparent; }
+.coffre__card [data-action="select"] { flex: 1; align-self: stretch; text-align: left; }
+.coffre__card strong, .coffre__card span { display: block; overflow-wrap: anywhere; }
+.coffre__card span { margin-top: 5px; color: #526779; font-size: 14px; }
+.coffre__card [data-action="favorite"] { color: #08746d; font-size: 13px; }
+.coffre__pagination { justify-content: flex-end; margin-top: 16px; }
+.coffre__details { padding: 22px; }
+.coffre__details h3 { margin: 0; overflow-wrap: anywhere; }
+.coffre__details-header { justify-content: space-between; }
+.coffre__fields, .coffre__form { margin: 18px 0 0; }
+.coffre__fields dt, .coffre__form label { margin-bottom: 6px; color: #526779; font-size: 14px; }
+.coffre__fields dd {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    padding: 8px 10px;
+    border: 1px solid #cbd9e5;
+    border-radius: 8px;
+    background: #f5f8fb;
+    overflow-wrap: anywhere;
+}
+.coffre__fields dd span { flex: 1; min-width: 0; }
+.coffre__fields dd button { padding: 4px; border: 0; background: transparent; color: #08746d; }
+.coffre__form { display: grid; gap: 12px; }
+.coffre__form label { display: grid; gap: 5px; }
+.coffre__footer { margin-top: 16px; }
+.coffre__footer [data-action="delete"] { color: #922f3a; }
+@media (max-width: 1050px) {
+    .coffre__layout { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 650px) {
+    .coffre { padding: 20px 16px; }
+    .coffre__grid { grid-template-columns: minmax(0, 1fr); }
+}

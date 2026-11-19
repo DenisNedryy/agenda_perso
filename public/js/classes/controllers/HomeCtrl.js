@@ -16,19 +16,19 @@ export class HomeCtrl {
         this.dateNavigationModel = homeModels.dateNavigationModel;
 
         this.seoManager = seoManager;
-        this.homeEventBinder = homeEventBinder;
+        this.homeEventBinder = homeEventBinder; 
 
         this.taskServices = taskServices;
 
         this.homeEventBinder.setController(this);
     }
 
-    async show() {
+    async show() { 
         this.homeView.render();
         this.renderDayOff();
         this.renderProjets();
         this.renderMoviesList();
-        this.renderTasksManager();
+        this.renderTasksManager(); 
 
         this.seoManager.setTitle('Schedule - Accueil');
         this.homeEventBinder.addEventListeners();

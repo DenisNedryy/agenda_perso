@@ -7,6 +7,7 @@ import { initHome } from "./init/initHome.js";
 import { initAuth } from "./init/initAuth.js";
 import { initAgenda } from "./init/initAgenda.js";
 import { initProfil } from "./init/initProfil.js";
+import { initCoffre } from "./init/initCoffre.js";
 
 import { HeaderEventBinder } from "./classes/eventBinders/HeaderEventBinder.js";
 import { HeaderCtrl } from "./classes/controllers/HeaderCtrl.js";
@@ -30,6 +31,7 @@ const authServices = new AuthServices(userServices);
 const miseAJourAuth = new MiseAJourAuth(authServices);
 const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
 const agendaCtrl = initAgenda(seoManager);
+const coffreCtrl = initCoffre(seoManager);
 const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView, agendaCtrl);
 headerCtrl.init();
 
@@ -43,6 +45,7 @@ const routes = {
     auth: initAuth(seoManager),
     agenda: agendaCtrl,
     profil: initProfil(seoManager),
+    coffre: initCoffre(seoManager)
 };
 
 const navHighLighter = new NavHighLighter();
