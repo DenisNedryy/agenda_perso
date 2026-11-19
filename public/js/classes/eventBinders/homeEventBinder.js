@@ -29,7 +29,7 @@ export class HomeEventBinder {
     async handleClickTask(e) {
         const btnSelect = e.target.closest(".btn-selectDate");
         if (btnSelect) {
-            const el = e.target.closest(".findTasks__task");
+            const el = e.target.closest(".findTasks__task"); 
             if (el) {
                 const dateStr = el.getAttribute("data-date");
                 const date = new Date(dateStr);

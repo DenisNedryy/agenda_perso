@@ -1,14 +1,15 @@
 header {
     display: flex;
     width: 100%;
- background-color: rgb(6,22,34);
+    background-color: #0A222E;
     color: white;
-    height: 60px;
+    height: 55px;
 }
 
 .header__right {
     display: flex;
     align-items: center;
+    margin-left: 20px;
 }
 
 .header__left--slogan {
@@ -102,15 +103,55 @@ header {
     right: 0px;
 }
 
+.header__right__profil:hover .header__right__profil__text {
+    background-color: #31BDB1;
+}
+
+/* .header__right__profil:hover img{
+    transform:rotate(4deg);
+} */
+.header__right__profil>img {
+    transform-origin: 50% 75%;
+    transition: filter 200ms ease;
+}
+
+.header__right__profil:is(:hover, :focus-within)>img {
+    animation: boba-scan 650ms ease-in-out;
+    filter: drop-shadow(0 0 4px rgba(81, 190, 178, 0.5));
+}
+
+@keyframes boba-scan {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0) scale(1);
+    }
+
+    30% {
+        transform: translateY(-3px) rotate(-10deg) scale(1.08);
+    }
+
+    65% {
+        transform: translateY(-1px) rotate(5deg) scale(1.04);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header__right__profil:is(:hover, :focus-within)>img {
+        animation: none;
+    }
+}
+
 .header__right__profil img {
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     margin-right: 10px;
     object-fit: cover;
 }
 
 .header__right__profil__text {
     font-weight: 600;
+    padding: 15px;
 }
 
 header .header__right__profil__text--name {
@@ -197,12 +238,14 @@ header .header__right__profil__text--role {
 
 .header__right__profil__options ul li i {
     margin-right: 10px;
-    color: rgb(0, 95, 242);
+    color: #31BDB1;
 }
 
 .header__right__profil__options ul li:hover {
     background-color: rgb(59, 57, 57);
 }
+
+
 
 .header__right__links {
     display: flex;
@@ -219,7 +262,7 @@ header .header__right__profil__text--role {
     color: inherit;
     transform: translateY(5px);
     transition: opacity 0.18s ease, transform 0.18s ease;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .header__right__links a li {
@@ -259,4 +302,59 @@ header .header__right__profil__text--role {
 .header__left {
     width: auto;
     margin-left: 30px;
+}
+/* 
+Bulle bd */
+
+
+
+/* Apparition de la bulle et de sa pointe */
+.header__right__profil::before,
+.header__right__profil::after {
+  position: absolute;
+  top: 50%;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+/* Bulle */
+.header__right__profil::before {
+  content: "You wanna dance ?";
+  right: calc(100% + 12px);
+  transform: translateY(-50%);
+
+  padding: 10px 14px;
+  background: #fffdf6;
+  color: #09232e;
+  border: 2px solid #09232e;
+  border-radius: 16px;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Pointe vers le casque */
+.header__right__profil::after {
+  content: "";
+  right: calc(100% + 6px);
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+
+  background: #fffdf6;
+  border-top: 2px solid #09232e;
+  border-right: 2px solid #09232e;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Survol ou navigation au clavier */
+.header__right__profil:is(:hover, :focus-within)::before,
+.header__right__profil:is(:hover, :focus-within)::after {
+  opacity: 1;
+  visibility: visible;
 }

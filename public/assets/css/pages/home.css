@@ -5,6 +5,12 @@
     width: 600px
 }
 
+.home {
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F5F7;
+}
+
 .banner__text p {
     font-size: 14px;
     color: #bfbfbf;
@@ -93,8 +99,11 @@ body .banner__text--title {
 }
 
 /* ------body container------ */
+
 .home__bodyContainer {
-    display: flex;
+    padding: 35px;
+    background-color: #F1F5F7;
+
 }
 
 .home__bodyContainer__plannings {
@@ -148,7 +157,6 @@ body .home__bodyContainer__plannings__rdvs {
     border: 1px solid rgba(255, 255, 255, .3);
     padding: 15px;
     font-size: 15px;
-    background-color: rgb(255, 197, 25);
     color: black;
     cursor: pointer;
     border-radius: 4px;
@@ -160,17 +168,24 @@ body .home__bodyContainer__plannings__rdvs {
     font-size: 17px;
     line-height: 1.5;
     font-weight: 600;
-    background:
-        linear-gradient(135deg,
-            #ffd84d 0%,
-            #f7c617 45%,
-            #e9b200 100%);
 
 }
 
 .home__bodyContainer__left {
     display: flex;
     flex-wrap: wrap;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, .9);
+    max-width: 1550px;
+}
+
+.home__bodyContainer__left h2 .fa-layer-group {
+    padding-right: 15px;
+}
+
+.home__bodyContainer__right h2 i {
+    padding-right: 15px;
 }
 
 .home__bodyContainer__left__dayOff__dateOff {
@@ -208,11 +223,17 @@ body .home__bodyContainer__left__todayTasks__header a {
 
 }
 
-.list {
+html body .list {
     list-style: none;
-    padding: 0;
-    max-height: 300px;
-    overflow-y: auto;
+    font-family: "Inter", sans-serif;
+}
+
+html body .list span:last-child {
+    font-family: "Inter", sans-serif;
+}
+
+.home__bodyContainer__left__projets__projetsContainer ul li:last-child {
+    font-family: "Inter", sans-serif;
 }
 
 .list li {
@@ -266,10 +287,32 @@ body .home__bodyContainer__left__todayTasks__header a {
     vector-effect: non-scaling-stroke;
 }
 
-.home {
-    position: relative;
+.home__bodyContainer__left__projets__projetsContainer ul li {
+    border-bottom: 1px solid #dce4eb;
+}
+
+.home__bodyContainer__left__projets__projetsContainer ul li:last-child {
+    border-bottom: none;
+}
+
+
+#todo>li {
     width: 100%;
-    overflow: hidden;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.project-number {
+    margin-right: 60px;
+}
+
+#todo>li:not(:last-child) {
+    border-bottom: 1px solid #dce4eb;
+}
+
+#todo .project-number {
+    color: #64748b;
+    font-variant-numeric: tabular-nums;
 }
 
 .video_bg {
@@ -292,11 +335,8 @@ body .home__bodyContainer__left__todayTasks__header a {
 }
 
 .home__bodyContainer__left__projets {
-    margin: 25px;
     background-color: rgba(255, 255, 255, .9);
-    max-width: 760px;
     border-radius: 7px;
-    padding: 24px;
 }
 
 .home__bodyContainer__left__projets h2 {
@@ -336,8 +376,8 @@ body .home__bodyContainer__left__todayTasks__header a {
 }
 
 .home__bodyContainer__left__projets__projetsContainer li:hover {
-    background-color: rgb(216, 69, 138);
-    color: white;
+    background-color: #E9F3F3;
+    color: black;
 }
 
 .todaySchedule {
@@ -467,18 +507,23 @@ body .home__bodyContainer__left__todayTasks__header a {
 .home__bodyContainer__right {
     display: flex;
     flex-wrap: wrap;
-    padding-top:60px;
+    padding: 15px;
+    max-width: 1550px;
 }
 
 .home__bodyContainer__right__movies,
 .home__bodyContainer__right__findTasks {
-    margin: 25px;
     background-color: rgba(255, 255, 255, .9);
-    max-width: 760px;
     border-radius: 7px;
-    padding: 24px;
-    max-height: 400px;
-    overflow: scroll;
+}
+
+.home__bodyContainer__right__findTasks__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.home__bodyContainer__right__findTasks__header__right {
+    display: flex;
 }
 
 .home__bodyContainer__right__movies__header p,
@@ -716,25 +761,28 @@ body .home__bodyContainer__left__todayTasks__header a {
 .findTasksSearch {
     position: relative;
     flex: 1;
+    margin-right: 22px;
 }
 
 .findTasksSearchInput {
     width: 100%;
-    height: 46px;
-    padding: 0 45px 0 15px;
+    height: 32px;
+    padding: 0 15px 0 47px;
     border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    background: #fff;
+    border-radius: 7px;
+    background-color: #F5F8FA;
     color: #111827;
-    font-size: 14px;
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
 }
 
 .findTasksSearch i {
     position: absolute;
-    right: 16px;
-    top: 50%;
+    left: 16px;
+    top: 49%;
     transform: translateY(-50%);
     color: #6b7280;
+    font-size: 14px;
 }
 
 .findTasksFilters {
@@ -744,12 +792,216 @@ body .home__bodyContainer__left__todayTasks__header a {
 
 .findTasksType,
 .findTasksSort {
-    height: 46px;
+    height: 32px;
     min-width: 140px;
     padding: 0 14px;
     border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    background: #fff;
+    border-radius: 7px;
+    background-color: #F5F8FA;
     color: #111827;
     font-size: 14px;
+    margin-right: 22px;
+    font-family: "Inter", sans-serif;
+}
+
+
+/* Recherche et filtres */
+.findTasksSearchInput,
+.findTasksType,
+.findTasksSort {
+    box-sizing: border-box;
+    max-width: 100%;
+    height: 35px;
+    padding-inline-end: 12px;
+    border: 1px solid #CCD8E4;
+    border-radius: 8px;
+    background-color: #F5F8FA;
+    color: #0F172A;
+    font: inherit;
+    font-size: 14px;
+}
+
+.findTasksSearchInput {
+    width: 344px;
+}
+
+.findTasksSearchInput::placeholder {
+    color: #50627B;
+    opacity: 1;
+}
+
+.findTasksType,
+.findTasksSort {
+    padding-inline-start: 12px;
+    cursor: pointer;
+}
+
+.findTasksType {
+    width: 190px;
+}
+
+.findTasksSort {
+    width: 178px;
+}
+
+/* Grille commune à l’en-tête et aux lignes */
+.home__bodyContainer__right__findTasks__body__content {
+    --find-tasks-columns: minmax(0, 1fr) minmax(4.5rem, 16%) minmax(6.5rem, 20%) 6rem;
+    --find-tasks-border: #D6E0E9;
+
+    display: block;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.findTasks__header,
+.findTasks__task {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: var(--find-tasks-columns);
+    align-items: center;
+    column-gap: 12px;
+    min-width: 30rem;
+    padding-inline: 12px;
+    border-bottom: 1px solid var(--find-tasks-border);
+}
+
+.findTasks__header {
+    padding-block: 10px;
+    color: #50627B;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.findTasks__header> :last-child {
+    text-align: center;
+}
+
+.findTasks__task {
+    min-height: 40px;
+    padding-block: 4px;
+}
+
+.findTasks__task:last-child {
+    border-bottom: 0;
+}
+
+.findTasks__task__left {
+    min-width: 0;
+}
+
+/* Place le type, la date et les actions dans la grille de la ligne */
+.findTasks__task__right {
+    display: contents;
+}
+
+.findTasks__task__name {
+    margin: 0;
+    color: #0F172A;
+    font-size: 15px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.findTasks__task__type {
+    justify-self: start;
+    padding: 4px 12px;
+    border-radius: 6px;
+    background-color: #D4ECE8;
+    color: #086366;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.findTasks__task__date {
+    color: #50627B;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* Boutons d’action */
+.findTasks__task__actions {
+    display: flex;
+    justify-self: center;
+    gap: 8px;
+}
+
+.findTasks__task__btn {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #40556D;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.findTasks__task__btn:hover {
+    background-color: #E8EFF4;
+}
+
+.findTasksSearchInput:focus-visible,
+.findTasksType:focus-visible,
+.findTasksSort:focus-visible,
+.findTasks__task__btn:focus-visible {
+    outline: 2px solid #167A7D;
+    outline-offset: 2px;
+}
+
+.findTasks__empty {
+    margin: 0;
+    padding: 20px 12px;
+    color: #50627B;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+/* Pagination  */
+
+.findTasks__pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+}
+
+.findTasks__pagination__status {
+    color: #50627B;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.findTasks__pagination__btn {
+    min-height: 32px;
+    padding: 5px 12px;
+    border: 1px solid #CCD8E4;
+    border-radius: 8px;
+    background-color: #F5F8FA;
+    color: #40556D;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.findTasks__pagination__btn:enabled:hover {
+    background-color: #E8EFF4;
+}
+
+.findTasks__pagination__btn:focus-visible {
+    outline: 2px solid #167A7D;
+    outline-offset: 2px;
+}
+
+.findTasks__pagination__btn:disabled {
+    opacity: 0.45;
+    cursor: default;
 }

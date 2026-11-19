@@ -1,3 +1,18 @@
+@media screen and (max-width: 1540px) {
+
+    body .agenda__right__agenda {
+       width: 70vw;
+    }
+}
+
+
+@media screen and (max-width: 1142px) {
+
+    body .agenda__right__agenda {
+       width: 70vw;
+    }
+}
+
 @media screen and (max-width: 1529px) {
 
     body .agendaContent__body__left {
@@ -642,20 +657,10 @@
         display: flex;
         width: 100%;
     }
-
-    body .dayFiche {
-        width: 13.5%;
-    }
 }
 
 
-@media screen and (max-width: 1424px) {
 
-    body .agenda {
-        background-color: rgb(248, 249, 251);
-        padding: 0px;
-    }
-}
 
 
 
@@ -693,18 +698,21 @@
     }
 }
 
-@media screen and (max-width: 827px) {
+@media screen and (max-width: 1288px) {
+
     body .periodOfTheDay {
         display: none;
     }
 }
 
+
 @media screen and (max-width: 735px) {
     body .agenda__left {
         width: 0px;
     }
-    body .agenda__left__header{
-        display:none;
+
+    body .agenda__left__header {
+        display: none;
     }
 
     body .dayFiche {

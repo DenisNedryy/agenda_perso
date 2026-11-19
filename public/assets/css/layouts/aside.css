@@ -1,6 +1,6 @@
 aside {
-    background-color: rgb(0, 52, 62);
-    width: 58px;
+    background-color: #0A222E;
+    width: 55px;
     height: 100vh;
     overflow: visible;
 }
@@ -22,8 +22,8 @@ aside a {
 
 aside li {
     position: relative;
-    width: 58px;
-    height: 58px;
+    width: 55px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,15 +31,16 @@ aside li {
 }
 
 aside li:hover {
-    background-color: rgb(0, 36, 43);
+    background-color: #001519;
+    border-left: 2px solid #31BDB1;
 }
 
 .nomage_page {
     position: absolute;
-    left: 58px;
+    left: 53px;
     top: 0;
 
-    height: 58px;
+    height: 55px;
     min-width: 120px;
     padding: 0 18px;
 
@@ -66,11 +67,34 @@ aside li:hover .nomage_page {
 }
 
 .asside__top__logoContainer__left img {
+
     width: 100%;
-    padding: 5px;
-    background-color: rgb(255, 197, 25);
+    height: 100%;
+    padding: 12px;
+}
+
+.asside__top__logoContainer img {
+  transform-origin: center;
+  transition: filter 200ms ease;
+}
+
+.asside__top__logoContainer:is(:hover, :focus-within) img {
+  animation: boba-scan 650ms ease-in-out;
+  filter: drop-shadow(0 0 4px rgba(81, 190, 178, 0.5));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asside__top__logoContainer:is(:hover, :focus-within) img {
+    animation: none;
+  }
 }
 
 .asside__top__logoContainer__left {
-    height: 60px;
+    height: 55px;
+    width: 55px;
+    border: 1px solid #ffffff2b;
+}
+
+.society_title {
+    letter-spacing: 2px;
 }

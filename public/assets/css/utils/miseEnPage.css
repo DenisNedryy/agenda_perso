@@ -6,7 +6,7 @@
 
 body {
     display: flex;
-    font-family: roboto-regular;
+font-family: "Inter", sans-serif;
 }
 
 main {

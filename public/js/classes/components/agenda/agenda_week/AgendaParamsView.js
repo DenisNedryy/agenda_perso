@@ -88,7 +88,7 @@ export class AgendaParamsView {
             bankBox.appendChild(i);
         }
         const bankPara = document.createElement("p");
-        bankPara.textContent = "Bank Holidays";
+        bankPara.textContent = "Jours fériés";
         bank.appendChild(bankBox);
         bank.appendChild(bankPara);
         paramUl.appendChild(bank);
@@ -103,7 +103,7 @@ export class AgendaParamsView {
             birthBox.appendChild(i);
         }
         const birthPara = document.createElement("p");
-        birthPara.textContent = "BirthDays";
+        birthPara.textContent = "Anniversaires";
         birth.appendChild(birthBox);
         birth.appendChild(birthPara);
         paramUl.appendChild(birth);

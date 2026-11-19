@@ -1,131 +1,146 @@
+const connectionForm = {
+    id: "form-connection",
+    title: "Connexion",
+    passwordAutocomplete: "current-password",
+    submitClass: "btn-connection",
+    submitLabel: "Se connecter",
+    switchPrompt: "Pas encore de compte ?",
+    switchLabel: "Créer un compte",
+    needsMagicWord: false,
+};
+
+const registrationForm = {
+    id: "form-inscription",
+    title: "Créer un compte",
+    passwordAutocomplete: "new-password",
+    submitClass: "btn-inscription",
+    submitLabel: "Créer mon compte",
+    switchPrompt: "Déjà un compte ?",
+    switchLabel: "Se connecter",
+    needsMagicWord: true,
+};
+
 export class AuthView {
     constructor() {
         this.isConnectionPage = true;
+        this.feedbackTimeout = null;
     }
 
     render() {
-        const el = document.getElementById("root");
-        if (el) {
-            this.isConnectionPage ? this.renderConnectionPage(el) : this.renderInscriptionPage(el);
+        const root = document.getElementById("root");
+        if (!root) return;
 
+        if (this.isConnectionPage) {
+            this.renderConnectionPage(root);
+        } else {
+            this.renderInscriptionPage(root);
         }
     }
 
-    renderConnectionPage(el) {
-        if (el) {
-            el.innerHTML = `  
-            <div class="auth"> 
-            <div class="auth__left">
-              <h2>Rhodia</h2>
-                <form id="form-connection">
-                    <div class="form__header">
-                      <div>
-                      <p>Log In</p>
-                      </div>
-                      <div>
-                      <p class="authPage">to your</p>
-                      </div>
-                      <div>
-                      <p>account<span class="authPage">.</span></p>
-                      </div>
-                    </div>
-                     <div class="form__body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" placeholder="René"/>
-                        </div>
-                            <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" name="password" placeholder="123Soleil"/>
-                        </div>
-                    </div>
-                    <div class="form__footer">
-                        <button class="btn btn-connection">Log in</button>
-                        <p>Don't have an account? <span class="bold toggleSign">Sign up</span></p>
-                          <div class="form__footer__answer"></div>
-                    </div>
-                </form>
+    renderConnectionPage(root) {
+        this.renderForm(root, connectionForm);
+    }
+
+    renderInscriptionPage(root) {
+        this.renderForm(root, registrationForm);
+    }
+
+    renderForm(root, form) {
+        if (!root) return;
+
+        const magicWordField = form.needsMagicWord
+            ? `
+                <div class="form-group">
+                    <label for="auth-magic-word">Mot magique</label>
+                    <input id="auth-magic-word" type="text" name="magicWord" autocomplete="off">
                 </div>
-            </div>
-            `;
-        }
-    }
+            `
+            : "";
 
-    renderInscriptionPage(el) {
-        if (el) {
-            el.innerHTML = ` 
-            <div class="auth"> 
-                <div class="auth__left">
-                <h2>Rhodia</h2>
-                <form id="form-inscription">
+        root.innerHTML = `
+            <div class="auth auth--card">
+                <section class="auth__card" aria-labelledby="auth-title">
                     <div class="form__header">
-                        <div>
-                      <p>Create</p>
-                      </div>
-                      <div>
-                      <p class="authPage">An account</p>
-                      </div>
+                        <p class="auth__brand">NABOO</p>
+                        <h1 id="auth-title" class="auth__title">${form.title}</h1>
+                    </div>
 
-                    </div>
-                     <div class="form__body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" placeholder="René"/>
-                        </div>
+                    <form id="${form.id}" class="auth__form" method="post">
+                        <div class="form__body">
                             <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" name="password" placeholder="123Soleil"/>
-                        </div>
+                                <label for="auth-name">Identifiant</label>
+                                <input
+                                    id="auth-name"
+                                    type="text"
+                                    name="name"
+                                    autocomplete="username"
+                                    autocapitalize="none"
+                                    spellcheck="false"
+                                >
+                            </div>
+
                             <div class="form-group">
-                            <label>Magic word</label>
-                            <input type="text" name="magicWord" placeholder="magicWord"/>
+                                <label for="auth-password">Mot de passe</label>
+                                <input
+                                    id="auth-password"
+                                    type="password"
+                                    name="password"
+                                    autocomplete="${form.passwordAutocomplete}"
+                                >
+                            </div>
+
+                            ${magicWordField}
                         </div>
-                    </div>
-                    <div class="form__footer">
-                        <button class="btn btn-inscription">Sign in</button>
-                        <p>Already have an account? <span class="bold toggleSign">Log in</span></p>
-                      <div class="form__footer__answer"></div>
-                    </div>
-                </form>
-                </div>
+
+                        <div class="form__footer">
+                            <button
+                                type="submit"
+                                class="btn ${form.submitClass} auth__submit"
+                            >${form.submitLabel}</button>
+
+                            <p class="auth__switch">
+                                ${form.switchPrompt}
+                                <button
+                                    type="button"
+                                    class="bold toggleSign auth__toggle"
+                                >${form.switchLabel}</button>
+                            </p>
+
+                            <div class="form__footer__answer" aria-live="polite" aria-atomic="true"></div>
+                        </div>
+                    </form>
+                </section>
             </div>
-            `;
-        }
+        `;
     }
 
-    showSuccess(char) {
-        const el = document.querySelector(".form__footer__answer");
-        if (el) {
-            el.innerHTML = "";
-            setTimeout(() => {
-                el.classList.remove("success");
-                el.innerHTML = "";
-            }, [2000]);
-            el.classList.add("success");
-            const ico = document.createElement("i");
-            ico.className = "fa-solid fa-check";
-            const para = document.createElement("p");
-            para.textContent = char;
-            el.appendChild(ico);
-            el.appendChild(para);
-        }
+    showSuccess(message) {
+        this.showFeedback(message, "success", "fa-check");
     }
 
-    showError(char) {
-        const el = document.querySelector(".form__footer__answer");
-        if (el) {
-            el.innerHTML = "";
-            setTimeout(() => {
-                el.classList.remove("error");
-                el.innerHTML = "";
-            }, [2000]);
-            el.classList.add("error");
-            const ico = document.createElement("i");
-            ico.className = "fa-solid fa-triangle-exclamation";
-            const para = document.createElement("p");
-            para.textContent = char;
-            el.appendChild(ico);
-            el.appendChild(para);
-        }
+    showError(message) {
+        this.showFeedback(message, "error", "fa-triangle-exclamation");
     }
-} 
+
+    showFeedback(message, status, iconClass) {
+        const answer = document.querySelector("#root .auth--card .form__footer__answer");
+        if (!answer) return;
+
+        clearTimeout(this.feedbackTimeout);
+        answer.classList.remove("success", "error");
+        answer.classList.add(status);
+
+        const icon = document.createElement("i");
+        icon.className = `fa-solid ${iconClass}`;
+        icon.setAttribute("aria-hidden", "true");
+
+        const text = document.createElement("p");
+        text.textContent = message;
+        answer.replaceChildren(icon, text);
+
+        this.feedbackTimeout = setTimeout(() => {
+            answer.classList.remove(status);
+            answer.replaceChildren();
+        }, 2000);
+    }
+}

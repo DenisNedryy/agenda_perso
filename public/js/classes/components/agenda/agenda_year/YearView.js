@@ -16,21 +16,22 @@ export class YearView {
             const agendaYearConsole = document.createElement("div");
             agendaYearConsole.className = "agendaWeek__console";
             const today = document.createElement("p");
-            today.className = "agendYear__console__today btn-current";
-            today.textContent = "Today";
+            today.className = "agendYear__console__today btn-current btn";
+            today.textContent = "Aujourd'hui";
             agendaYearConsole.appendChild(today);
 
             const directions = document.createElement("div");
             directions.className = "agendaWeek__console__directions";
             const iLeft = document.createElement("i");
-            iLeft.className = "fa-solid fa-angle-left agendaYearTurnLeft";
+            iLeft.className = "fa-solid fa-angle-left agendaYearTurnLeft btn";
             const iRight = document.createElement("i");
-            iRight.className = "fa-solid fa-angle-right agendaYearTurnRight";
+            iRight.className = "fa-solid fa-angle-right agendaYearTurnRight btn";
             directions.appendChild(iLeft);
             directions.appendChild(iRight);
             agendaYearConsole.appendChild(directions);
 
             const dateText = document.createElement("p");
+            dateText.className="agendaWeek__console__Year"
             dateText.textContent = data[0].year;
             agendaYearConsole.appendChild(dateText);
 
