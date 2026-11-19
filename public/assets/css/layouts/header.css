@@ -154,15 +154,20 @@ header {
     padding: 15px;
 }
 
+/* HEADER USER NAME */
+.header__left--greetings{
+    text-transform:capitalize;
+}
+
+
+/* HEADER USER OLD THINGS */
 header .header__right__profil__text--name {
     font-size: 14px;
     text-transform: capitalize;
 }
-
 header .header__right__profil__text--role {
     font-size: 12px;
 }
-
 .header__right__profil__text--role {
     color: #bfbfbf;
     font-size: 13px;

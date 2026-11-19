@@ -504,6 +504,8 @@ html body .list span:last-child {
     white-space: nowrap;
 }
 
+
+
 .home__bodyContainer__right {
     display: flex;
     flex-wrap: wrap;
