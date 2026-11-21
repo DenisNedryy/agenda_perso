@@ -8,6 +8,7 @@ import { initAuth } from "./init/initAuth.js";
 import { initAgenda } from "./init/initAgenda.js";
 import { initProfil } from "./init/initProfil.js";
 import { initCoffre } from "./init/initCoffre.js";
+import { initRoutine } from "./init/initRoutine.js";
 
 import { HeaderEventBinder } from "./classes/eventBinders/HeaderEventBinder.js";
 import { HeaderCtrl } from "./classes/controllers/HeaderCtrl.js";
@@ -29,14 +30,15 @@ const taskModel = new TaskModel(dateModel, taskServices);
 const userServices = new UserServices();
 const authServices = new AuthServices(userServices);
 const miseAJourAuth = new MiseAJourAuth(authServices);
-const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth);
+const headerEventBinder = new HeaderEventBinder(userServices, miseAJourAuth); 
 const agendaCtrl = initAgenda(seoManager);
+const routineCtrl = initRoutine(seoManager);
 const coffreCtrl = initCoffre(seoManager);
 const headerCtrl = new HeaderCtrl(headerEventBinder, taskModel, modalView, agendaCtrl);
 headerCtrl.init();
 
 
-const routes = {
+const routes = { 
     home: initHome(seoManager, {
         goToAgendaDate: (dateSelected) => {
             agendaCtrl.show(dateSelected);
@@ -45,6 +47,7 @@ const routes = {
     auth: initAuth(seoManager),
     agenda: agendaCtrl,
     profil: initProfil(seoManager),
+    routines: initRoutine(seoManager),
     coffre: initCoffre(seoManager)
 };
 
