@@ -109,7 +109,7 @@ export class AgendaCtrl {
 
         this.addModelView.renderModel();
         this.addModelView.renderModelMobile();
-        this.seoManager.setTitle('Schedule - Agenda');
+        this.seoManager.setTitle('Naboo - Agenda');
 
         this.agendaEventBinder.addEventListeners();
         this.agendaWeekEventBinder.addEventListeners();

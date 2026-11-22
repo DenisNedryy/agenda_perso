@@ -7,7 +7,7 @@ export class CoffreCtrl {
     }
 
     async show() {
-        this.seoManager.setTitle("Schedule - Coffre");
+        this.seoManager.setTitle("Naboo - Coffre");
         const page = this.view.render();
         this.state = {
             page,

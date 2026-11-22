@@ -30,7 +30,7 @@ export class HomeCtrl {
         this.renderMoviesList();
         this.renderTasksManager(); 
 
-        this.seoManager.setTitle('Schedule - Accueil');
+        this.seoManager.setTitle('Naboo - Accueil');
         this.homeEventBinder.addEventListeners();
     }
 

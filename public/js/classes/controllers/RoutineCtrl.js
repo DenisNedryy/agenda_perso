@@ -1,16 +1,17 @@
 const EVENING_TASKS = [
     { id: "emails", name: "Vérifier les mails" },
     { id: "housekeeping", name: "Imprimer le planning de la gouvernante" },
-    { id: "cash-register", name: "Faire la caisse" },
     { id: "breakfast", name: "Dresser la table du petit-déjeuner" },
+    { id: "cake", name: "Sortir ou préparer le gâteau" },
+    { id: "fruit-salad", name: "Préparer les verrines de salade de fruits ou un plat" },
     { id: "temperatures", name: "Noter les températures" },
     { id: "honesty-bar", name: "Réapprovisionner l’honesty bar" },
-    { id: "pool", name: "Fermer la piscine" },
-    { id: "terrace", name: "Nettoyer la terrasse" },
+    { id: "pool", name: "Fermer la piscine", optional: true, },
+    { id: "terrace", name: "Nettoyer la terrasse", optional: true, },
     { id: "kitchen-glasswasher", name: "Nettoyer la cuisine et le lave-verre" },
     { id: "glasswasher", name: "Éteindre le lave-verre" },
     { id: "shutters", name: "Fermer les volets" },
-    { id: "chapel", name: "Fermer la chapelle" },
+    { id: "chapel", name: "Fermer la chapelle", optional: true, },
     { id: "supplies", name: "Noter les fournitures manquantes" },
     {
         id: "morning-handover",
@@ -18,9 +19,10 @@ const EVENING_TASKS = [
     },
     {
         id: "bakery",
-        name: "Appeler le boulanger au 06 35 17 51 85 (sauf le samedi pour le dimanche)",
+        name: "Appeler le boulanger au 06 35 17 51 85 (sauf le dimanche pour le lundi)",
         optional: true,
     },
+    { id: "cash-register", name: "Faire la caisse" },
     { id: "bins", name: "Sortir les poubelles" },
 ];
 
@@ -62,7 +64,7 @@ export class RoutineCtrl {
         this.filter = "all";
         this.tasks = this.loadTasks();
 
-        this.seoManager.setTitle("Schedule - Routines");
+        this.seoManager.setTitle("Naboo - Routines");
         this.render();
         this.routineEventBinder.addEventListeners();
     }

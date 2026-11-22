@@ -60,7 +60,12 @@ export class CoffreView {
             favorite.dataset.action = "favorite";
             favorite.dataset.id = entry.id;
             favorite.setAttribute("aria-pressed", String(Boolean(entry.is_favorite)));
-            favorite.textContent = entry.is_favorite ? "Favori" : "Ajouter aux favoris";
+            const isFavorite = Boolean(entry.is_favorite);
+
+            favorite.textContent = isFavorite ? "★" : "☆";
+            favorite.setAttribute("aria-label", "Favori");
+            favorite.setAttribute("aria-pressed", String(isFavorite));
+            favorite.title = isFavorite ? "Retirer des favoris" : "Ajouter aux favoris";
             card.append(selectEntry, favorite);
             grid.append(card);
         }

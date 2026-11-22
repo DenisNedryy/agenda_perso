@@ -15,7 +15,7 @@ export class AuthCtrl {
 
     async show() {
         this.authView.render();
-        this.seoManager.setTitle('Schedule - Auth');
+        this.seoManager.setTitle('Naboo - Auth');
         this.authEventBinder.addEventListeners();
     }
 

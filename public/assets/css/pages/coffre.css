@@ -6,7 +6,7 @@
     color: #102331;
 }
 
-.coffre > h2 {
+.coffre>h2 {
     margin: 0 0 24px;
     font-size: 26px;
 }
@@ -145,9 +145,20 @@
     background: #edf3f8;
     color: #102331;
 }
-.coffre h2 { margin: 0 0 24px; font-size: 26px; }
-.coffre__status { margin: 0 0 12px; }
-.coffre__status:empty { display: none; }
+
+.coffre h2 {
+    margin: 0 0 24px;
+    font-size: 26px;
+}
+
+.coffre__status {
+    margin: 0 0 12px;
+}
+
+.coffre__status:empty {
+    display: none;
+}
+
 .coffre__layout {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
@@ -155,15 +166,28 @@
     align-items: start;
     max-width: 1600px;
 }
-.coffre__toolbar, .coffre__pagination, .coffre__footer, .coffre__details-header {
+
+.coffre__toolbar,
+.coffre__pagination,
+.coffre__footer,
+.coffre__details-header {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
 }
-.coffre__toolbar { margin-bottom: 20px; }
-.coffre__toolbar input { flex: 1 1 170px; }
-.coffre button, .coffre input, .coffre select {
+
+.coffre__toolbar {
+    margin-bottom: 20px;
+}
+
+.coffre__toolbar input {
+    flex: 1 1 170px;
+}
+
+.coffre button,
+.coffre input,
+.coffre select {
     min-width: 0;
     padding: 8px 11px;
     border: 1px solid #c2d3e4;
@@ -172,38 +196,130 @@
     color: inherit;
     font: inherit;
 }
-.coffre button { cursor: pointer; }
-.coffre button:disabled { opacity: .5; cursor: default; }
-.coffre button:focus-visible, .coffre input:focus-visible, .coffre select:focus-visible {
+
+.coffre button {
+    cursor: pointer;
+}
+
+.coffre button:disabled {
+    opacity: .5;
+    cursor: default;
+}
+
+.coffre button:focus-visible,
+.coffre input:focus-visible,
+.coffre select:focus-visible {
     outline: 2px solid #08746d;
     outline-offset: 2px;
 }
-.coffre .coffre__primary { background: #08746d; border-color: #08746d; color: #fff; }
-.coffre__toolbar button[aria-pressed="true"] { background: #d8f0ea; border-color: #83bab4; }
-.coffre__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.coffre__card, .coffre__details {
+
+.coffre .coffre__primary {
+    background: #08746d;
+    border-color: #08746d;
+    color: #fff;
+}
+
+.coffre__toolbar button[aria-pressed="true"] {
+    background: #d8f0ea;
+    border-color: #83bab4;
+}
+
+.coffre__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.coffre__card,
+.coffre__details {
     min-width: 0;
     border: 1px solid #cbd9e5;
     border-radius: 12px;
     background: #fff;
 }
-.coffre__card { display: flex; align-items: center; min-height: 94px; padding: 6px 10px; }
+
+.coffre__card {
+    display: flex;
+    align-items: center;
+    min-height: 94px;
+    padding: 6px 10px;
+}
+
 .coffre__card:has([data-action="select"][aria-pressed="true"]) {
     border-color: #298f83;
     background: #e8f6f3;
     box-shadow: inset 4px 0 #298f83;
 }
-.coffre__card button { border: 0; background: transparent; }
-.coffre__card [data-action="select"] { flex: 1; align-self: stretch; text-align: left; }
-.coffre__card strong, .coffre__card span { display: block; overflow-wrap: anywhere; }
-.coffre__card span { margin-top: 5px; color: #526779; font-size: 14px; }
-.coffre__card [data-action="favorite"] { color: #08746d; font-size: 13px; }
-.coffre__pagination { justify-content: flex-end; margin-top: 16px; }
-.coffre__details { padding: 22px; }
-.coffre__details h3 { margin: 0; overflow-wrap: anywhere; }
-.coffre__details-header { justify-content: space-between; }
-.coffre__fields, .coffre__form { margin: 18px 0 0; }
-.coffre__fields dt, .coffre__form label { margin-bottom: 6px; color: #526779; font-size: 14px; }
+
+.coffre__card button {
+    border: 0;
+    background: transparent;
+}
+
+.coffre__card [data-action="select"] {
+    flex: 1;
+    align-self: stretch;
+    text-align: left;
+}
+
+.coffre__card strong,
+.coffre__card span {
+    display: block;
+    overflow-wrap: anywhere;
+}
+
+.coffre__card span {
+    margin-top: 5px;
+    color: #526779;
+    font-size: 14px;
+}
+
+.coffre__card [data-action="favorite"] {
+    display: grid;
+    place-items: center;
+    flex: 0 0 44px;
+    min-height: 44px;
+    padding: 0;
+    color: #526779;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.coffre__card [data-action="favorite"]:hover,
+.coffre__card [data-action="favorite"][aria-pressed="true"] {
+    color: #08746d;
+}
+
+.coffre__pagination {
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.coffre__details {
+    padding: 22px;
+}
+
+.coffre__details h3 {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.coffre__details-header {
+    justify-content: space-between;
+}
+
+.coffre__fields,
+.coffre__form {
+    margin: 18px 0 0;
+}
+
+.coffre__fields dt,
+.coffre__form label {
+    margin-bottom: 6px;
+    color: #526779;
+    font-size: 14px;
+}
+
 .coffre__fields dd {
     display: flex;
     align-items: center;
@@ -215,16 +331,49 @@
     background: #f5f8fb;
     overflow-wrap: anywhere;
 }
-.coffre__fields dd span { flex: 1; min-width: 0; }
-.coffre__fields dd button { padding: 4px; border: 0; background: transparent; color: #08746d; }
-.coffre__form { display: grid; gap: 12px; }
-.coffre__form label { display: grid; gap: 5px; }
-.coffre__footer { margin-top: 16px; }
-.coffre__footer [data-action="delete"] { color: #922f3a; }
-@media (max-width: 1050px) {
-    .coffre__layout { grid-template-columns: minmax(0, 1fr); }
+
+.coffre__fields dd span {
+    flex: 1;
+    min-width: 0;
 }
+
+.coffre__fields dd button {
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    color: #08746d;
+}
+
+.coffre__form {
+    display: grid;
+    gap: 12px;
+}
+
+.coffre__form label {
+    display: grid;
+    gap: 5px;
+}
+
+.coffre__footer {
+    margin-top: 16px;
+}
+
+.coffre__footer [data-action="delete"] {
+    color: #922f3a;
+}
+
+@media (max-width: 1050px) {
+    .coffre__layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
 @media (max-width: 650px) {
-    .coffre { padding: 20px 16px; }
-    .coffre__grid { grid-template-columns: minmax(0, 1fr); }
+    .coffre {
+        padding: 20px 16px;
+    }
+
+    .coffre__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }

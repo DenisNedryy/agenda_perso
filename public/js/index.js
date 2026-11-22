@@ -41,7 +41,7 @@ headerCtrl.init();
 const routes = { 
     home: initHome(seoManager, {
         goToAgendaDate: (dateSelected) => {
-            agendaCtrl.show(dateSelected);
+            agendaCtrl.show(dateSelected); 
         }
     }),
     auth: initAuth(seoManager),
