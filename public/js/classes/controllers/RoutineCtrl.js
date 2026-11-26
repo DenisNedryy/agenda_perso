@@ -22,6 +22,8 @@ const EVENING_TASKS = [
         name: "Appeler le boulanger au 06 35 17 51 85 (sauf le dimanche pour le lundi)",
         optional: true,
     },
+      { id: "honesty-bar-consumption", name: "Inscrire les consommations de l’honesty bar" },
+    { id: "meal-consumption", name: "Inscrire les consommations des repas" },
     { id: "cash-register", name: "Faire la caisse" },
     { id: "bins", name: "Sortir les poubelles" },
 ];
